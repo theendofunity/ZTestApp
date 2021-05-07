@@ -12,6 +12,10 @@
 		D817DAA7264556CF00A949BE /* ZTestApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D817DAA5264556CF00A949BE /* ZTestApp.xcdatamodeld */; };
 		D817DAA9264556D000A949BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D817DAA8264556D000A949BE /* Assets.xcassets */; };
 		D817DAAC264556D000A949BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D817DAAA264556D000A949BE /* LaunchScreen.storyboard */; };
+		D817DAB9264558DC00A949BE /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D817DAB8264558DC00A949BE /* TabBarController.swift */; };
+		D817DABB26455A6C00A949BE /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D817DABA26455A6C00A949BE /* ListTableViewController.swift */; };
+		D817DABD26455A8C00A949BE /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D817DABC26455A8C00A949BE /* GalleryViewController.swift */; };
+		D817DABF26455A9900A949BE /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D817DABE26455A9900A949BE /* ServiceViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		D817DAA8264556D000A949BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D817DAAB264556D000A949BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D817DAAD264556D000A949BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D817DAB8264558DC00A949BE /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		D817DABA26455A6C00A949BE /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
+		D817DABC26455A8C00A949BE /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		D817DABE26455A9900A949BE /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +62,8 @@
 		D817DA9B264556CF00A949BE /* ZTestApp */ = {
 			isa = PBXGroup;
 			children = (
-				D817DA9E264556CF00A949BE /* SceneDelegate.swift */,
 				D817DA9C264556CF00A949BE /* AppDelegate.swift */,
+				D817DA9E264556CF00A949BE /* SceneDelegate.swift */,
 				D817DAAD264556D000A949BE /* Info.plist */,
 				D817DAB7264557D000A949BE /* Sources */,
 				D817DAB52645574900A949BE /* ViewModels */,
@@ -69,6 +77,10 @@
 			isa = PBXGroup;
 			children = (
 				D817DAB62645578800A949BE /* Storyboards */,
+				D817DAB8264558DC00A949BE /* TabBarController.swift */,
+				D817DABA26455A6C00A949BE /* ListTableViewController.swift */,
+				D817DABC26455A8C00A949BE /* GalleryViewController.swift */,
+				D817DABE26455A9900A949BE /* ServiceViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -174,7 +186,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				D817DAA7264556CF00A949BE /* ZTestApp.xcdatamodeld in Sources */,
+				D817DAB9264558DC00A949BE /* TabBarController.swift in Sources */,
 				D817DA9D264556CF00A949BE /* AppDelegate.swift in Sources */,
+				D817DABD26455A8C00A949BE /* GalleryViewController.swift in Sources */,
+				D817DABF26455A9900A949BE /* ServiceViewController.swift in Sources */,
+				D817DABB26455A6C00A949BE /* ListTableViewController.swift in Sources */,
 				D817DA9F264556CF00A949BE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
