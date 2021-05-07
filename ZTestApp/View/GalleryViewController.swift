@@ -9,28 +9,27 @@ import UIKit
 
 class GalleryViewController: UIViewController {
 
-    //    MARK: - Live cycle
-    
+    // MARK: - Live cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Gallery"
         setupLayout()
     }
-    
 
-    //    MARK: - UI configuration
-    
+    // MARK: - UI configuration
+
     private func setupLayout() {
-        let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "photo")
-        imageView.frame.size = CGSize(width: 200, height: 200)
-        view.addSubview(imageView)
-        
-        NSLayoutConstraint.activate([
-            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-        ])
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(systemName: "photo")
+//        imageView.frame.size = CGSize(width: 200, height: 200)
+//        view.addSubview(imageView)
+//
+//        NSLayoutConstraint.activate([
+//            imageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+//        ])
     }
 
 }

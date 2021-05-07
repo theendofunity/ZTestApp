@@ -9,39 +9,44 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-    //    MARK: - Properties
-    
-    let listViewController = ListTableViewController()
-    let galleryViewController = GalleryViewController()
-    let serviceViewController = ServiceViewController()
-    
-    //    MARK: - Live cycle
-    
+    // MARK: - Live cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupTabBar()
     }
-    
-    //    MARK: - UI configuration
-    
+
+    // MARK: - UI configuration
+
     private func setupTabBar() {
-        let listTabBarItem = UITabBarItem()
-        listTabBarItem.title = "List"
-        listTabBarItem.image = UIImage(systemName: "list.dash")
-        listViewController.tabBarItem = listTabBarItem
-        
-        let galleryTabBarItem = UITabBarItem()
-        galleryTabBarItem.title = "Gallery"
-        galleryTabBarItem.image = UIImage(systemName: "photo")
-        galleryViewController.tabBarItem = galleryTabBarItem
-        
-        let serviceTabBarItem = UITabBarItem()
-        serviceTabBarItem.title = "Service"
-        serviceTabBarItem.image = UIImage(systemName: "questionmark.folder.fill")
-        serviceViewController.tabBarItem = serviceTabBarItem
-        
-        viewControllers = [listViewController, galleryViewController, serviceViewController]
-        selectedViewController = listViewController
+        viewControllers = [
+            createTabBarItem(title: "List",
+                             icon: UIImage(systemName: "list.dash"),
+                             viewController: ListTableViewController()),
+            createTabBarItem(title: "Gallery",
+                             icon: UIImage(systemName: "photo"),
+                             viewController: GalleryViewController()),
+            createTabBarItem(title: "Service",
+                             icon: UIImage(systemName: "questionmark.folder.fill"),
+                             viewController: ServiceViewController())
+        ]
+
+        selectedIndex = 0
+    }
+
+    private func createTabBarItem(title: String,
+                                  icon: UIImage?,
+                                  viewController: UIViewController) -> UINavigationController {
+        let navigationController = UINavigationController(rootViewController: viewController)
+
+        let tabBarItem = UITabBarItem()
+        tabBarItem.title = title
+        tabBarItem.image = icon
+        navigationController.tabBarItem = tabBarItem
+
+        viewController.title = title
+
+        return navigationController
     }
 }

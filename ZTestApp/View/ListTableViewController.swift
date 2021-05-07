@@ -11,8 +11,8 @@ class ListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "List"
+
+        navigationController?.title = "List"
     }
 
     // MARK: - Table view data source
@@ -27,5 +27,5 @@ class ListTableViewController: UITableViewController {
         return 0
     }
 
-    //    MARK: - UI configuration
+    // MARK: - UI configuration
 }

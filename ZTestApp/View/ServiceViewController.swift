@@ -9,14 +9,13 @@ import UIKit
 
 class ServiceViewController: UIViewController {
 
-    //    MARK: - Live cycle
-    
+    // MARK: - Live cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = "Service"
     }
-    
 
-    //    MARK: - UI configuration
+    // MARK: - UI configuration
 }
