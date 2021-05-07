@@ -1,0 +1,4 @@
+excluded: 
+  - ZTestApp/AppDelegate.swift
+  - ZTestApp/SceneDelegate.swift
+
