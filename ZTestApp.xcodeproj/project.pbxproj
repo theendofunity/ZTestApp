@@ -16,6 +16,7 @@
 		D817DABB26455A6C00A949BE /* ListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D817DABA26455A6C00A949BE /* ListTableViewController.swift */; };
 		D817DABD26455A8C00A949BE /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D817DABC26455A8C00A949BE /* GalleryViewController.swift */; };
 		D817DABF26455A9900A949BE /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D817DABE26455A9900A949BE /* ServiceViewController.swift */; };
+		D81B59192649882600F3AFB0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B59182649882600F3AFB0 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		D817DABA26455A6C00A949BE /* ListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewController.swift; sourceTree = "<group>"; };
 		D817DABC26455A8C00A949BE /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		D817DABE26455A9900A949BE /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
+		D81B59182649882600F3AFB0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				D817DA9B264556CF00A949BE /* ZTestApp */,
+				D81B5917264987FE00F3AFB0 /* Tools */,
 				D817DA9A264556CF00A949BE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -114,6 +117,14 @@
 				D817DAA8264556D000A949BE /* Assets.xcassets */,
 			);
 			path = Sources;
+			sourceTree = "<group>";
+		};
+		D81B5917264987FE00F3AFB0 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				D81B59182649882600F3AFB0 /* CoreDataManager.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +223,7 @@
 				D817DABD26455A8C00A949BE /* GalleryViewController.swift in Sources */,
 				D817DABF26455A9900A949BE /* ServiceViewController.swift in Sources */,
 				D817DABB26455A6C00A949BE /* ListTableViewController.swift in Sources */,
+				D81B59192649882600F3AFB0 /* CoreDataManager.swift in Sources */,
 				D817DA9F264556CF00A949BE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

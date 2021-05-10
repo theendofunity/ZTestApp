@@ -1,4 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20E232" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Bookkeeping" representedClassName="Bookkeeping" parentEntity="Person" syncable="YES" codeGenerationType="class">
+        <attribute name="type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="company" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Company" inverseName="bookkeepings" inverseEntity="Company"/>
+        <relationship name="employeeInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EmployeeInfo" inverseName="bookkeeping" inverseEntity="EmployeeInfo"/>
+    </entity>
+    <entity name="Company" representedClassName="Company" syncable="YES" codeGenerationType="class">
+        <relationship name="bookkeepings" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bookkeeping" inverseName="company" inverseEntity="Bookkeeping"/>
+        <relationship name="employees" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Employee" inverseName="company" inverseEntity="Employee"/>
+        <relationship name="leaders" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Leader" inverseName="company" inverseEntity="Leader"/>
+    </entity>
+    <entity name="Employee" representedClassName="Employee" parentEntity="Person" syncable="YES" codeGenerationType="class">
+        <relationship name="company" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Company" inverseName="employees" inverseEntity="Company"/>
+        <relationship name="employeeInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EmployeeInfo" inverseName="employee" inverseEntity="EmployeeInfo"/>
+    </entity>
+    <entity name="EmployeeInfo" representedClassName="EmployeeInfo" syncable="YES" codeGenerationType="class">
+        <attribute name="workplaceNumber" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="bookkeeping" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bookkeeping" inverseName="employeeInfo" inverseEntity="Bookkeeping"/>
+        <relationship name="dinnerTime" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Time" inverseName="employeeInfo" inverseEntity="Time"/>
+        <relationship name="employee" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Employee" inverseName="employeeInfo" inverseEntity="Employee"/>
+    </entity>
+    <entity name="Leader" representedClassName="Leader" parentEntity="Person" syncable="YES" codeGenerationType="class">
+        <relationship name="businessHours" maxCount="1" deletionRule="Deny" destinationEntity="Time" inverseName="leadership" inverseEntity="Time"/>
+        <relationship name="company" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Company" inverseName="leaders" inverseEntity="Company"/>
+    </entity>
+    <entity name="Person" representedClassName="Person" syncable="YES" codeGenerationType="class">
+        <attribute name="name" attributeType="String"/>
+        <attribute name="sallary" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="Time" representedClassName="Time" syncable="YES" codeGenerationType="class">
+        <attribute name="begin" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="end" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="employeeInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EmployeeInfo" inverseName="dinnerTime" inverseEntity="EmployeeInfo"/>
+        <relationship name="leadership" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Leader" inverseName="businessHours" inverseEntity="Leader"/>
+    </entity>
+    <elements>
+        <element name="Bookkeeping" positionX="-456.51171875" positionY="503.73046875" width="128" height="88"/>
+        <element name="Employee" positionX="-247.23828125" positionY="640.03125" width="128" height="73"/>
+        <element name="Person" positionX="-756.99609375" positionY="656.4296875" width="128" height="59"/>
+        <element name="EmployeeInfo" positionX="-129.671875" positionY="301.56640625" width="128" height="103"/>
+        <element name="Leader" positionX="-89.38671875" positionY="749.20703125" width="128" height="73"/>
+        <element name="Time" positionX="26.76953125" positionY="523.22265625" width="128" height="103"/>
+        <element name="Company" positionX="-421.39453125" positionY="188.2265625" width="128" height="74"/>
+    </elements>
 </model>
