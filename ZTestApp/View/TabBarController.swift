@@ -20,10 +20,13 @@ class TabBarController: UITabBarController {
     // MARK: - UI configuration
 
     private func setupTabBar() {
+
+        let listViewModel = ListViewModel()
+
         viewControllers = [
             createTabBarItem(title: "List",
                              icon: UIImage(systemName: "list.dash"),
-                             viewController: ListTableViewController()),
+                             viewController: ListTableViewController(viewModel: listViewModel)),
             createTabBarItem(title: "Gallery",
                              icon: UIImage(systemName: "photo"),
                              viewController: GalleryViewController()),

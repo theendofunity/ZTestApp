@@ -9,23 +9,41 @@ import UIKit
 
 class ListTableViewController: UITableViewController {
 
+// MARK: - Properties
+    var viewModel: ListViewModel
+
+// MARK: - Initialisers
+
+    init(viewModel: ListViewModel) {
+        self.viewModel = viewModel
+        super.init(style: .plain)
+        loadViewIfNeeded()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationController?.title = "List"
     }
 
-    // MARK: - Table view data source
+// MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return viewModel.numbersOfSections()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return viewModel.numbersOfRowsInSection(section: section)
     }
 
-    // MARK: - UI configuration
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return viewModel.titleForSection(section: section)
+    }
+// MARK: - UI configuration
 }

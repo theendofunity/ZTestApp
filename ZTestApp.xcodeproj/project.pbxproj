@@ -17,6 +17,7 @@
 		D817DABD26455A8C00A949BE /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D817DABC26455A8C00A949BE /* GalleryViewController.swift */; };
 		D817DABF26455A9900A949BE /* ServiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D817DABE26455A9900A949BE /* ServiceViewController.swift */; };
 		D81B59192649882600F3AFB0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B59182649882600F3AFB0 /* CoreDataManager.swift */; };
+		D81B591B264989ED00F3AFB0 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B591A264989ED00F3AFB0 /* ListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		D817DABC26455A8C00A949BE /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		D817DABE26455A9900A949BE /* ServiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewController.swift; sourceTree = "<group>"; };
 		D81B59182649882600F3AFB0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		D81B591A264989ED00F3AFB0 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 		D817DAB52645574900A949BE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				D81B591A264989ED00F3AFB0 /* ListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -222,6 +225,7 @@
 				D817DA9D264556CF00A949BE /* AppDelegate.swift in Sources */,
 				D817DABD26455A8C00A949BE /* GalleryViewController.swift in Sources */,
 				D817DABF26455A9900A949BE /* ServiceViewController.swift in Sources */,
+				D81B591B264989ED00F3AFB0 /* ListViewModel.swift in Sources */,
 				D817DABB26455A6C00A949BE /* ListTableViewController.swift in Sources */,
 				D81B59192649882600F3AFB0 /* CoreDataManager.swift in Sources */,
 				D817DA9F264556CF00A949BE /* SceneDelegate.swift in Sources */,
