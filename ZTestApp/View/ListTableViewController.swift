@@ -9,10 +9,10 @@ import UIKit
 
 class ListTableViewController: UITableViewController {
 
-// MARK: - Properties
+    // MARK: - Properties
     var viewModel: ListViewModel
 
-// MARK: - Initialisers
+    // MARK: - Initialisers
 
     init(viewModel: ListViewModel) {
         self.viewModel = viewModel
@@ -28,22 +28,44 @@ class ListTableViewController: UITableViewController {
         super.viewDidLoad()
 
         navigationController?.title = "List"
+
+        tableView.register(LeadersTableViewCell.self, forCellReuseIdentifier: LeadersTableViewCell.cellIdentifier)
     }
 
-// MARK: - Table view data source
+    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return viewModel.numbersOfSections()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return viewModel.numbersOfRowsInSection(section: section)
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.titleForSection(section: section)
     }
-// MARK: - UI configuration
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 70
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellViewModel = viewModel.cellViewModel(for: indexPath)
+
+        switch indexPath.section {
+        case 0:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: LeadersTableViewCell.cellIdentifier,
+                                                           for: indexPath) as? LeadersTableViewCell else {
+                fatalError()
+            }
+            cell.viewModel = cellViewModel
+
+        default:
+            return UITableViewCell()
+        }
+        return UITableViewCell()
+    }
+
+    // MARK: - UI configuration
 }

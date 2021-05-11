@@ -5,14 +5,22 @@
 //  Created by Дмитрий Дудкин on 10.05.2021.
 //
 
-import Foundation
+import UIKit
+import CoreData
 
 class ListViewModel {
 
 // MARK: - Properties
 
+    lazy var context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+
     var company: Company?
 
+// MARK: - Initializers
+
+    init() {
+        loadTestData()
+    }
 // MARK: - Work with core data
 
     func save() {
@@ -21,6 +29,20 @@ class ListViewModel {
 
     func load() {
 
+    }
+
+    func loadTestData() {
+        guard let context = context else {
+            return
+        }
+//        let entity = NSEntityDescription.entity(forEntityName: "Company", in: context)
+        let leader = Leader(context: context)
+        leader.name = "Leader 1"
+        leader.sallary = 1000
+
+        let newCompany = Company(context: context)
+        newCompany.leaders = [leader]
+        company = newCompany
     }
 
 // MARK: - Table view controller data
@@ -58,6 +80,21 @@ class ListViewModel {
             return "Bookkeepings"
         case 2:
             return "Employees"
+        default:
+            return nil
+        }
+    }
+
+    func cellViewModel(for indexPath: IndexPath) -> ListCellViewModel? {
+        switch indexPath.section {
+        case 0:
+            let leader = company?.leaders?.allObjects.first as? NSManagedObject
+            let cellViewModel = ListCellViewModel(with: leader)
+            return cellViewModel
+//        case 1:
+//            return "Bookkeepings"
+//        case 2:
+//            return "Employees"
         default:
             return nil
         }
