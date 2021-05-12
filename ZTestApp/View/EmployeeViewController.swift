@@ -14,14 +14,15 @@ class EmployeeViewController: UIViewController {
     let type: DetailedViewType
     let viewModel: EmployeeDetailedViewViewModelType?
 
-//    let employeeType = UISegmentedControl()
-//    let name = UILabel()
-//    let sallary = UILabel()
+    let employeeType = UISegmentedControl()
+    let name = UITextField()
+    let sallary = UITextField()
+    let beginLabel = UILabel()
     let timeBegin = UIDatePicker()
+    let endLabel = UILabel()
     let timeEnd = UIDatePicker()
-//    let name = UILabel()
-//    let name = UILabel()
-
+    let workspaceNumber = UITextField()
+    let bookkepingType = UISegmentedControl()
     // MARK: - Initializers
 
     init(viewModel: EmployeeDetailedViewViewModelType?, type: DetailedViewType) {
@@ -39,6 +40,7 @@ class EmployeeViewController: UIViewController {
     // MARK: - Live cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTitle()
 
         // Do any additional setup after loading the view.
     }
@@ -56,9 +58,10 @@ class EmployeeViewController: UIViewController {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.alignment = .fill
+        stackView.alignment = .leading
         stackView.distribution = .fillProportionally
         stackView.spacing = 10
+
         view.addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -67,36 +70,68 @@ class EmployeeViewController: UIViewController {
             stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100)
         ])
 
-        let employeeType = UISegmentedControl()
         for (num, employeeTitle) in EmployeeType.allCases.enumerated() {
             employeeType.insertSegment(withTitle: "\(employeeTitle)", at: num, animated: true)
         }
         employeeType.selectedSegmentIndex = 0
         employeeType.translatesAutoresizingMaskIntoConstraints = false
+        employeeType.addTarget(self, action: #selector(changeView), for: .valueChanged)
         stackView.addArrangedSubview(employeeType)
 
-        let name = UITextField()
         name.placeholder = "Name"
         stackView.addArrangedSubview(name)
 
-        let sallary = UITextField()
         sallary.placeholder = "Sallary"
         stackView.addArrangedSubview(sallary)
 
+        beginLabel.text = "Begin"
+        stackView.addArrangedSubview(beginLabel)
         stackView.addArrangedSubview(timeBegin)
+        endLabel.text = "End"
+        stackView.addArrangedSubview(endLabel)
         stackView.addArrangedSubview(timeEnd)
 
-        let workspaceNumber = UITextField()
         workspaceNumber.placeholder = "Workspace number"
         stackView.addArrangedSubview(workspaceNumber)
 
-        let bookkepingType = UISegmentedControl(items: ["first", "second"])
+        for (num, bookkeepingTitle) in BookkeepingType.allCases.enumerated() {
+            bookkepingType.insertSegment(withTitle: "\(bookkeepingTitle)", at: num, animated: true)
+        }
         stackView.addArrangedSubview(bookkepingType)
+
+        changeView()
     }
 
     // MARK: - Private functions
 
     @objc private func save() {
 
+    }
+
+    @objc private func changeView() {
+        switch employeeType.selectedSegmentIndex {
+        case EmployeeType.leader.rawValue:
+            beginLabel.text = "Work time"
+            workspaceNumber.isHidden = true
+            bookkepingType.isHidden = true
+        case EmployeeType.bookKeeping.rawValue:
+            workspaceNumber.isHidden = false
+            bookkepingType.isHidden = false
+            beginLabel.text = "Dinner time"
+        case EmployeeType.employee.rawValue:
+            workspaceNumber.isHidden = false
+            bookkepingType.isHidden = true
+            beginLabel.text = "Dinner time"
+        default:
+            return
+        }
+    }
+
+    private func setTitle() {
+        if type == .adding {
+            title = "Add new"
+        } else {
+            title = "Change"
+        }
     }
 }

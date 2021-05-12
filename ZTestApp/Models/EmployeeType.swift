@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum EmployeeType: CaseIterable {
-    case leader
-    case bookKeeping
-    case employee
+enum EmployeeType: Int, CaseIterable {
+    case leader = 0
+    case bookKeeping = 1
+    case employee = 2
 }
