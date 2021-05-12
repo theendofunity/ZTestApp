@@ -27,8 +27,7 @@ class ListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationController?.title = "List"
-
+        setupNavigationBar()
         tableView.register(LeadersTableViewCell.self, forCellReuseIdentifier: LeadersTableViewCell.cellIdentifier)
     }
 
@@ -67,5 +66,26 @@ class ListTableViewController: UITableViewController {
         return UITableViewCell()
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.selectCell(for: indexPath)
+
+        let detailedViewModel = viewModel.detailedViewViewModel()
+        let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .adding)
+        navigationController?.pushViewController(detailedView, animated: true)
+    }
+
     // MARK: - UI configuration
+
+    private func setupNavigationBar() {
+        title = "List"
+
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEmployee))
+        navigationItem.rightBarButtonItems = [addButton]
+    }
+
+    @objc func addEmployee() {
+//    let detailedViewModel = Emplo
+//        let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .adding)
+//        navigationController?.pushViewController(detailedView, animated: true)
+    }
 }

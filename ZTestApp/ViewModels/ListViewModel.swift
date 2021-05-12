@@ -12,37 +12,16 @@ class ListViewModel {
 
 // MARK: - Properties
 
-    lazy var context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext
+    let dataManager = CoreDataManager()
 
     var company: Company?
+
+    var selectedCell: IndexPath?
 
 // MARK: - Initializers
 
     init() {
-        loadTestData()
-    }
-// MARK: - Work with core data
-
-    func save() {
-
-    }
-
-    func load() {
-
-    }
-
-    func loadTestData() {
-        guard let context = context else {
-            return
-        }
-//        let entity = NSEntityDescription.entity(forEntityName: "Company", in: context)
-        let leader = Leader(context: context)
-        leader.name = "Leader 1"
-        leader.sallary = 1000
-
-        let newCompany = Company(context: context)
-        newCompany.leaders = [leader]
-        company = newCompany
+        company = dataManager.load()
     }
 
 // MARK: - Table view controller data
@@ -98,5 +77,28 @@ class ListViewModel {
         default:
             return nil
         }
+    }
+
+    func selectCell(for indexPath: IndexPath) {
+        selectedCell = indexPath
+    }
+
+    func detailedViewViewModel() -> EmployeeDetailedViewViewModelType? {
+        guard let indexPath = selectedCell else { return nil }
+
+        switch selectedCell?.section {
+        case 0:
+            let data = company?.leaders?.allObjects[indexPath.row] as? NSManagedObject
+            if let data  = data {
+                return EmployeeChangingViewModel(employeeType: .leader, data: data)
+            }
+        case 1:
+                return nil
+        case 2:
+            return nil
+        default:
+            return nil
+        }
+        return nil
     }
 }
