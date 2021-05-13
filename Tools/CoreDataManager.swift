@@ -33,12 +33,15 @@ class CoreDataManager {
         let leader = Leader(context: context)
         leader.name = "Leader 1"
         leader.sallary = 1000
+        leader.businessHours?.begin = Date()
+        leader.businessHours?.end = Date()
 
         let newCompany = Company(context: context)
         newCompany.leaders = [leader]
 
         let bookkeeping = Bookkeeping(context: context)
         bookkeeping.sallary = 100
+        bookkeeping.name = "Bookkeeping1"
         newCompany.bookkeepings = [bookkeeping]
 
         let employee = Employee(context: context)

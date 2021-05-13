@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol EmployeeDetailedViewViewModelType {
+protocol DetailedViewViewModelType {
     var employeeType: EmployeeType { get }
 }

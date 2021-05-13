@@ -68,6 +68,7 @@ class ListTableViewController: UITableViewController {
                                                            for: indexPath) as? BookkeepingTableViewCell else {
                 fatalError()
             }
+
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: EmployeesTableViewCell.cellIdentifier,
                                                            for: indexPath) as? EmployeesTableViewCell else {
@@ -82,7 +83,7 @@ class ListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.selectCell(for: indexPath)
 
-        let detailedViewModel = viewModel.detailedViewViewModel()
+        let detailedViewModel = viewModel.detailedViewViewModel() as? DetailedViewViewModel
         let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .adding)
         navigationController?.pushViewController(detailedView, animated: true)
     }

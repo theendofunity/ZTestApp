@@ -10,6 +10,7 @@ import UIKit
 class EmployeeBaseTableViewCell: UITableViewCell {
 
 // MARK: - Properties
+
     let mainStack = UIStackView()
 
     let name = UILabel()
@@ -18,6 +19,7 @@ class EmployeeBaseTableViewCell: UITableViewCell {
     let time = UILabel()
 
 //    MARKL - Initializers
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupLayout()

@@ -12,23 +12,28 @@ class LeadersTableViewCell: EmployeeBaseTableViewCell {
     // MARK: - Properties
     static let cellIdentifier = "LeadersTableViewCell"
 
-    var viewModel: ListCellViewModel?
-//        willSet(viewModel) {
-//            guard let viewModel = viewModel else {
-//                print("nil model")
-//                return
-//            }
-//            guard let leader = viewModel.data() as? Leader else { return }
-//            nameLabel.text = leader.name
-//        }
+    var viewModel: ListCellViewModel? {
+        willSet(viewModel) {
+            guard let viewModel = viewModel else { return }
+            guard let leader = viewModel.data() as? Leader else { return }
+            name.text = leader.name
+            sallary.text = "\(leader.sallary)"
+            timeTitle.text = "Work time"
 
-    let nameLabel = UILabel()
+            let dateFormater = DateFormatter()
+            dateFormater.dateFormat = .none
+            dateFormater.timeStyle = .short
+            let beginTime = dateFormater.string(from: (leader.businessHours?.begin) ?? Date())
+            let endTime = dateFormater.string(from: (leader.businessHours?.end) ?? Date())
+
+            time.text = beginTime + " - " + endTime
+        }
+    }
 
     // MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        setupLayout()
 
     }
 
@@ -37,23 +42,4 @@ class LeadersTableViewCell: EmployeeBaseTableViewCell {
     }
 
     // MARK: - Ui setup
-
-//    private func setupLayout() {
-//        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-//        nameLabel.adjustsFontSizeToFitWidth = true
-//        self.addSubview(nameLabel)
-//
-//        NSLayoutConstraint.activate([
-//            nameLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 10),
-//            nameLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 10),
-//            nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-//            nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-//            nameLabel.widthAnchor.constraint(equalToConstant: 50)
-//        ])
-//    }
-
-//    private func update() {
-//        guard let leader = viewModel?.data() as? Leader else { return }
-//        nameLabel.text = leader.name
-//    }
 }

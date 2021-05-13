@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class EmployeeChangingViewModel: EmployeeDetailedViewViewModelType {
+class DetailedViewViewModel: DetailedViewViewModelType {
     let employeeType: EmployeeType
     let employeeData: NSManagedObject
 

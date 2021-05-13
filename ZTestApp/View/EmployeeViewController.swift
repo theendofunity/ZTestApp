@@ -12,7 +12,7 @@ class EmployeeViewController: UIViewController {
     // MARK: - Properties
 
     let type: DetailedViewType
-    let viewModel: EmployeeDetailedViewViewModelType?
+    let viewModel: DetailedViewViewModel?
 
     let employeeType = UISegmentedControl()
     let name = UITextField()
@@ -26,12 +26,14 @@ class EmployeeViewController: UIViewController {
 
     // MARK: - Initializers
 
-    init(viewModel: EmployeeDetailedViewViewModelType?, type: DetailedViewType) {
+    init(viewModel: DetailedViewViewModel?, type: DetailedViewType) {
         self.viewModel = viewModel
         self.type = type
         super.init(nibName: nil, bundle: nil)
+
         setupToolBar()
         setupLayout()
+        fillView()
     }
 
     required init?(coder: NSCoder) {
@@ -84,7 +86,7 @@ class EmployeeViewController: UIViewController {
         for (num, employeeTitle) in EmployeeType.allCases.enumerated() {
             employeeType.insertSegment(withTitle: "\(employeeTitle)", at: num, animated: true)
         }
-        employeeType.selectedSegmentIndex = 0
+        employeeType.selectedSegmentIndex = viewModel?.employeeType.rawValue ?? 0
 
         employeeType.addTarget(self, action: #selector(changeView), for: .valueChanged)
 
@@ -152,6 +154,34 @@ class EmployeeViewController: UIViewController {
             title = "Add new"
         } else {
             title = "Change"
+        }
+    }
+
+    private func fillView() {
+        guard let viewModel = viewModel else { return }
+
+        switch viewModel.employeeType {
+        case .leader:
+            guard let leader = viewModel.employeeData as? Leader else { return }
+            name.text = leader.name
+            sallary.text = "\(leader.sallary)"
+            timeBegin.date = leader.businessHours?.begin ?? Date()
+            timeEnd.date = leader.businessHours?.end ?? Date()
+        case .bookKeeping:
+            guard let bookkeeping = viewModel.employeeData as? Bookkeeping else { return }
+            name.text = bookkeeping.name
+            sallary.text = "\(bookkeeping.sallary)"
+            timeBegin.date = bookkeeping.employeeInfo?.dinnerTime?.begin ?? Date()
+            timeEnd.date = bookkeeping.employeeInfo?.dinnerTime?.end ?? Date()
+            workspaceNumber.text = "\(String(describing: bookkeeping.employeeInfo?.workplaceNumber))"
+            bookkepingType.selectedSegmentIndex = Int(bookkeeping.type)
+        case .employee:
+            guard let employee = viewModel.employeeData as? Employee else { return }
+            name.text = employee.name
+            sallary.text = "\(employee.sallary)"
+            timeBegin.date = employee.employeeInfo?.dinnerTime?.begin ?? Date()
+            timeEnd.date = employee.employeeInfo?.dinnerTime?.end ?? Date()
+            workspaceNumber.text = "\(String(describing: employee.employeeInfo?.workplaceNumber))"
         }
     }
 }

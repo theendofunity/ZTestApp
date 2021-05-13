@@ -83,19 +83,25 @@ class ListViewModel {
         selectedCell = indexPath
     }
 
-    func detailedViewViewModel() -> EmployeeDetailedViewViewModelType? {
+    func detailedViewViewModel() -> DetailedViewViewModelType? {
         guard let indexPath = selectedCell else { return nil }
 
         switch selectedCell?.section {
         case 0:
             let data = company?.leaders?.allObjects[indexPath.row] as? NSManagedObject
             if let data  = data {
-                return EmployeeChangingViewModel(employeeType: .leader, data: data)
+                return DetailedViewViewModel(employeeType: .leader, data: data)
             }
         case 1:
-                return nil
+            let data = company?.bookkeepings?.allObjects[indexPath.row] as? NSManagedObject
+            if let data  = data {
+                return DetailedViewViewModel(employeeType: .bookKeeping, data: data)
+            }
         case 2:
-            return nil
+            let data = company?.employees?.allObjects[indexPath.row] as? NSManagedObject
+            if let data  = data {
+                return DetailedViewViewModel(employeeType: .employee, data: data)
+            }
         default:
             return nil
         }
