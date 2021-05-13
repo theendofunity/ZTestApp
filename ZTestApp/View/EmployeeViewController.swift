@@ -17,9 +17,9 @@ class EmployeeViewController: UIViewController {
     let employeeType = UISegmentedControl()
     let name = UITextField()
     let sallary = UITextField()
-    let beginLabel = UILabel()
+    let timeTitle = UILabel()
+    let timeStack = UIStackView()
     let timeBegin = UIDatePicker()
-    let endLabel = UILabel()
     let timeEnd = UIDatePicker()
     let workspaceNumber = UITextField()
     let bookkepingType = UISegmentedControl()
@@ -41,8 +41,6 @@ class EmployeeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTitle()
-
-        // Do any additional setup after loading the view.
     }
 
     // MARK: - UI setup
@@ -52,7 +50,7 @@ class EmployeeViewController: UIViewController {
         navigationItem.rightBarButtonItem = saveButton
     }
 
-    private func setupLayout() {
+    private func setupLayout() {    // Разбить на методы!!!!!
         view.backgroundColor = .white
 
         let stackView = UIStackView()
@@ -66,13 +64,20 @@ class EmployeeViewController: UIViewController {
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100)
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
         ])
-
+        NSLayoutConstraint(item: stackView,
+                           attribute: .bottom,
+                           relatedBy: .lessThanOrEqual,
+                           toItem: view.safeAreaLayoutGuide,
+                           attribute: .top,
+                           multiplier: 1,
+                           constant: -200).isActive = true
+        
         for (num, employeeTitle) in EmployeeType.allCases.enumerated() {
             employeeType.insertSegment(withTitle: "\(employeeTitle)", at: num, animated: true)
         }
+
         employeeType.selectedSegmentIndex = 0
         employeeType.translatesAutoresizingMaskIntoConstraints = false
         employeeType.addTarget(self, action: #selector(changeView), for: .valueChanged)
@@ -84,12 +89,15 @@ class EmployeeViewController: UIViewController {
         sallary.placeholder = "Sallary"
         stackView.addArrangedSubview(sallary)
 
-        beginLabel.text = "Begin"
-        stackView.addArrangedSubview(beginLabel)
-        stackView.addArrangedSubview(timeBegin)
-        endLabel.text = "End"
-        stackView.addArrangedSubview(endLabel)
-        stackView.addArrangedSubview(timeEnd)
+        stackView.addArrangedSubview(timeTitle)
+
+        timeBegin.datePickerMode = .time
+        timeEnd.datePickerMode = .time
+
+        timeStack.axis = .horizontal
+        timeStack.addArrangedSubview(timeBegin)
+        timeStack.addArrangedSubview(timeEnd)
+        stackView.addArrangedSubview(timeStack)
 
         workspaceNumber.placeholder = "Workspace number"
         stackView.addArrangedSubview(workspaceNumber)
@@ -98,6 +106,10 @@ class EmployeeViewController: UIViewController {
             bookkepingType.insertSegment(withTitle: "\(bookkeepingTitle)", at: num, animated: true)
         }
         stackView.addArrangedSubview(bookkepingType)
+
+        for element in stackView.arrangedSubviews {
+            element.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        }
 
         changeView()
     }
@@ -111,17 +123,17 @@ class EmployeeViewController: UIViewController {
     @objc private func changeView() {
         switch employeeType.selectedSegmentIndex {
         case EmployeeType.leader.rawValue:
-            beginLabel.text = "Work time"
+            timeTitle.text = "Work time"
             workspaceNumber.isHidden = true
             bookkepingType.isHidden = true
         case EmployeeType.bookKeeping.rawValue:
             workspaceNumber.isHidden = false
             bookkepingType.isHidden = false
-            beginLabel.text = "Dinner time"
+            timeTitle.text = "Dinner time"
         case EmployeeType.employee.rawValue:
             workspaceNumber.isHidden = false
             bookkepingType.isHidden = true
-            beginLabel.text = "Dinner time"
+            timeTitle.text = "Dinner time"
         default:
             return
         }
