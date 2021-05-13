@@ -7,17 +7,32 @@
 
 import UIKit
 
-class BookkeepingTableViewCell: UITableViewCell {
+class BookkeepingTableViewCell: EmployeeBaseTableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    // MARK: - Properties
+    static let cellIdentifier = "BookkeepingTableViewCell"
+
+    let workSpaceNumber = UILabel()
+    let bookkeepingType = UILabel()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
+// MARK: - UI setup
+    override func setupLayout() {
+        super.setupLayout()
+
+        let bookkeepingInfoStack = UIStackView(arrangedSubviews: [workSpaceNumber, bookkeepingType])
+        bookkeepingInfoStack.axis = .vertical
+        bookkeepingInfoStack.spacing = 5
+        workSpaceNumber.text = "45"
+        bookkeepingType.text = "payroll"
+        super.mainStack.addArrangedSubview(bookkeepingInfoStack)
+    }
 }

@@ -37,6 +37,14 @@ class CoreDataManager {
         let newCompany = Company(context: context)
         newCompany.leaders = [leader]
 
+        let bookkeeping = Bookkeeping(context: context)
+        bookkeeping.sallary = 100
+        newCompany.bookkeepings = [bookkeeping]
+
+        let employee = Employee(context: context)
+        employee.sallary = 10
+        newCompany.employees = [employee]
+
         return newCompany
     }
 }

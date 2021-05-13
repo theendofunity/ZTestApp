@@ -28,7 +28,11 @@ class ListTableViewController: UITableViewController {
         super.viewDidLoad()
 
         setupNavigationBar()
+
         tableView.register(LeadersTableViewCell.self, forCellReuseIdentifier: LeadersTableViewCell.cellIdentifier)
+        tableView.register(BookkeepingTableViewCell.self,
+                           forCellReuseIdentifier: BookkeepingTableViewCell.cellIdentifier)
+        tableView.register(EmployeesTableViewCell.self, forCellReuseIdentifier: EmployeesTableViewCell.cellIdentifier)
     }
 
     // MARK: - Table view data source
@@ -59,7 +63,16 @@ class ListTableViewController: UITableViewController {
                 fatalError()
             }
             cell.viewModel = cellViewModel
-
+        case 1:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: BookkeepingTableViewCell.cellIdentifier,
+                                                           for: indexPath) as? BookkeepingTableViewCell else {
+                fatalError()
+            }
+        case 2:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: EmployeesTableViewCell.cellIdentifier,
+                                                           for: indexPath) as? EmployeesTableViewCell else {
+                fatalError()
+            }
         default:
             return UITableViewCell()
         }

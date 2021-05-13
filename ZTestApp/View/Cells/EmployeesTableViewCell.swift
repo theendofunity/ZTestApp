@@ -7,7 +7,11 @@
 
 import UIKit
 
-class EmployeesTableViewCell: UITableViewCell {
+class EmployeesTableViewCell: EmployeeBaseTableViewCell {
+    // MARK: - Properties
+    static let cellIdentifier = "EmployeeTableViewCell"
+
+    let workSpaceNumber = UILabel()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,4 +24,14 @@ class EmployeesTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    // MARK: - UI setup
+    override func setupLayout() {
+        super.setupLayout()
+
+        let emptyLabel = UILabel()
+        emptyLabel.text = ""
+        let employeeInfoStack = UIStackView(arrangedSubviews: [workSpaceNumber, emptyLabel])
+        workSpaceNumber.text = "28"
+        super.mainStack.addArrangedSubview(employeeInfoStack)
+    }
 }

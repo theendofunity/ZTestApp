@@ -23,6 +23,7 @@
 		D81B59222649903800F3AFB0 /* EmployeesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B59212649903800F3AFB0 /* EmployeesTableViewCell.swift */; };
 		D81B5924264992F300F3AFB0 /* ListCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B5923264992F300F3AFB0 /* ListCellViewModel.swift */; };
 		D8478E0B264C55A900AC1E1C /* BookkeepingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8478E0A264C55A900AC1E1C /* BookkeepingType.swift */; };
+		D8478E0D264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8478E0C264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift */; };
 		D8A3E055264AC9DA003C94E8 /* EmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A3E054264AC9DA003C94E8 /* EmployeeViewController.swift */; };
 		D8A3E057264ACE98003C94E8 /* EmployeeChangingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A3E056264ACE98003C94E8 /* EmployeeChangingViewModel.swift */; };
 		D8A3E059264ACEC2003C94E8 /* EmployeeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A3E058264ACEC2003C94E8 /* EmployeeType.swift */; };
@@ -49,6 +50,7 @@
 		D81B59212649903800F3AFB0 /* EmployeesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesTableViewCell.swift; sourceTree = "<group>"; };
 		D81B5923264992F300F3AFB0 /* ListCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellViewModel.swift; sourceTree = "<group>"; };
 		D8478E0A264C55A900AC1E1C /* BookkeepingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookkeepingType.swift; sourceTree = "<group>"; };
+		D8478E0C264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeBaseTableViewCell.swift; sourceTree = "<group>"; };
 		D8A3E054264AC9DA003C94E8 /* EmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewController.swift; sourceTree = "<group>"; };
 		D8A3E056264ACE98003C94E8 /* EmployeeChangingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeChangingViewModel.swift; sourceTree = "<group>"; };
 		D8A3E058264ACEC2003C94E8 /* EmployeeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeType.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 		D81B591C26498FE500F3AFB0 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				D8478E0C264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift */,
 				D81B591D2649900900F3AFB0 /* LeadersTableViewCell.swift */,
 				D81B591F2649902800F3AFB0 /* BookkeepingTableViewCell.swift */,
 				D81B59212649903800F3AFB0 /* EmployeesTableViewCell.swift */,
@@ -282,6 +285,7 @@
 				D81B59202649902800F3AFB0 /* BookkeepingTableViewCell.swift in Sources */,
 				D8A3E057264ACE98003C94E8 /* EmployeeChangingViewModel.swift in Sources */,
 				D8A3E055264AC9DA003C94E8 /* EmployeeViewController.swift in Sources */,
+				D8478E0D264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift in Sources */,
 				D817DA9F264556CF00A949BE /* SceneDelegate.swift in Sources */,
 				D8A3E059264ACEC2003C94E8 /* EmployeeType.swift in Sources */,
 				D8478E0B264C55A900AC1E1C /* BookkeepingType.swift in Sources */,

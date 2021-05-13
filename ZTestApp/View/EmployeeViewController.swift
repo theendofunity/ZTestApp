@@ -23,6 +23,7 @@ class EmployeeViewController: UIViewController {
     let timeEnd = UIDatePicker()
     let workspaceNumber = UITextField()
     let bookkepingType = UISegmentedControl()
+
     // MARK: - Initializers
 
     init(viewModel: EmployeeDetailedViewViewModelType?, type: DetailedViewType) {
@@ -50,7 +51,7 @@ class EmployeeViewController: UIViewController {
         navigationItem.rightBarButtonItem = saveButton
     }
 
-    private func setupLayout() {    // Разбить на методы!!!!!
+    private func setupLayout() {
         view.backgroundColor = .white
 
         let stackView = UIStackView()
@@ -59,8 +60,53 @@ class EmployeeViewController: UIViewController {
         stackView.alignment = .leading
         stackView.distribution = .fillProportionally
         stackView.spacing = 10
-
         view.addSubview(stackView)
+
+        setupUiElements()
+
+        stackView.addArrangedSubview(employeeType)
+        stackView.addArrangedSubview(name)
+        stackView.addArrangedSubview(sallary)
+        stackView.addArrangedSubview(timeTitle)
+
+        timeStack.axis = .horizontal
+        timeStack.addArrangedSubview(timeBegin)
+        timeStack.addArrangedSubview(timeEnd)
+        stackView.addArrangedSubview(timeStack)
+        stackView.addArrangedSubview(workspaceNumber)
+        stackView.addArrangedSubview(bookkepingType)
+        setupStackViewConstraints(for: stackView)
+
+        changeView()
+    }
+
+    private func setupUiElements() {
+        for (num, employeeTitle) in EmployeeType.allCases.enumerated() {
+            employeeType.insertSegment(withTitle: "\(employeeTitle)", at: num, animated: true)
+        }
+        employeeType.selectedSegmentIndex = 0
+
+        employeeType.addTarget(self, action: #selector(changeView), for: .valueChanged)
+
+        for (num, bookkeepingTitle) in BookkeepingType.allCases.enumerated() {
+            bookkepingType.insertSegment(withTitle: "\(bookkeepingTitle)", at: num, animated: true)
+        }
+
+        bookkepingType.selectedSegmentIndex = 0
+
+        name.placeholder = "Name"
+        sallary.placeholder = "Sallary"
+        workspaceNumber.placeholder = "Workspace number"
+
+        timeBegin.datePickerMode = .time
+        timeEnd.datePickerMode = .time
+    }
+
+    private func setupStackViewConstraints(for stackView: UIStackView) {
+        for element in stackView.arrangedSubviews {
+            element.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        }
+
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -70,48 +116,10 @@ class EmployeeViewController: UIViewController {
                            attribute: .bottom,
                            relatedBy: .lessThanOrEqual,
                            toItem: view.safeAreaLayoutGuide,
-                           attribute: .top,
+                           attribute: .bottom,
                            multiplier: 1,
-                           constant: -200).isActive = true
-        
-        for (num, employeeTitle) in EmployeeType.allCases.enumerated() {
-            employeeType.insertSegment(withTitle: "\(employeeTitle)", at: num, animated: true)
-        }
+                           constant: -50).isActive = true
 
-        employeeType.selectedSegmentIndex = 0
-        employeeType.translatesAutoresizingMaskIntoConstraints = false
-        employeeType.addTarget(self, action: #selector(changeView), for: .valueChanged)
-        stackView.addArrangedSubview(employeeType)
-
-        name.placeholder = "Name"
-        stackView.addArrangedSubview(name)
-
-        sallary.placeholder = "Sallary"
-        stackView.addArrangedSubview(sallary)
-
-        stackView.addArrangedSubview(timeTitle)
-
-        timeBegin.datePickerMode = .time
-        timeEnd.datePickerMode = .time
-
-        timeStack.axis = .horizontal
-        timeStack.addArrangedSubview(timeBegin)
-        timeStack.addArrangedSubview(timeEnd)
-        stackView.addArrangedSubview(timeStack)
-
-        workspaceNumber.placeholder = "Workspace number"
-        stackView.addArrangedSubview(workspaceNumber)
-
-        for (num, bookkeepingTitle) in BookkeepingType.allCases.enumerated() {
-            bookkepingType.insertSegment(withTitle: "\(bookkeepingTitle)", at: num, animated: true)
-        }
-        stackView.addArrangedSubview(bookkepingType)
-
-        for element in stackView.arrangedSubviews {
-            element.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        }
-
-        changeView()
     }
 
     // MARK: - Private functions
