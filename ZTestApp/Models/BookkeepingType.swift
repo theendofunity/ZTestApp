@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BookkeepingType: CaseIterable {
-    case payroll
-    case accounting
+enum BookkeepingType: Int, CaseIterable {
+    case payroll = 0
+    case accounting = 1
 }

@@ -18,7 +18,7 @@ class EmployeeBaseTableViewCell: UITableViewCell {
     let timeTitle = UILabel()
     let time = UILabel()
 
-//    MARKL - Initializers
+// MARK: - Initializers
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

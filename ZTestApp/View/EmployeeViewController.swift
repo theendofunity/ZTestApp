@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class EmployeeViewController: UIViewController {
 
@@ -127,7 +128,7 @@ class EmployeeViewController: UIViewController {
     // MARK: - Private functions
 
     @objc private func save() {
-
+//        let newObject = NSManagedObject()
     }
 
     @objc private func changeView() {
@@ -160,28 +161,12 @@ class EmployeeViewController: UIViewController {
     private func fillView() {
         guard let viewModel = viewModel else { return }
 
-        switch viewModel.employeeType {
-        case .leader:
-            guard let leader = viewModel.employeeData as? Leader else { return }
-            name.text = leader.name
-            sallary.text = "\(leader.sallary)"
-            timeBegin.date = leader.businessHours?.begin ?? Date()
-            timeEnd.date = leader.businessHours?.end ?? Date()
-        case .bookKeeping:
-            guard let bookkeeping = viewModel.employeeData as? Bookkeeping else { return }
-            name.text = bookkeeping.name
-            sallary.text = "\(bookkeeping.sallary)"
-            timeBegin.date = bookkeeping.employeeInfo?.dinnerTime?.begin ?? Date()
-            timeEnd.date = bookkeeping.employeeInfo?.dinnerTime?.end ?? Date()
-            workspaceNumber.text = "\(String(describing: bookkeeping.employeeInfo?.workplaceNumber))"
-            bookkepingType.selectedSegmentIndex = Int(bookkeeping.type)
-        case .employee:
-            guard let employee = viewModel.employeeData as? Employee else { return }
-            name.text = employee.name
-            sallary.text = "\(employee.sallary)"
-            timeBegin.date = employee.employeeInfo?.dinnerTime?.begin ?? Date()
-            timeEnd.date = employee.employeeInfo?.dinnerTime?.end ?? Date()
-            workspaceNumber.text = "\(String(describing: employee.employeeInfo?.workplaceNumber))"
-        }
+        name.text = viewModel.name()
+        sallary.text = viewModel.sallary()
+        workspaceNumber.text = viewModel.workplaceNumber()
+        bookkepingType.selectedSegmentIndex = viewModel.bookkeepingType() ?? 0
+        let time = viewModel.time()
+        timeBegin.date = time.0 ?? Date()
+        timeEnd.date = time.1 ?? Date()
     }
 }

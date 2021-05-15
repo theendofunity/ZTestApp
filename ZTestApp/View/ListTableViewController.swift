@@ -68,12 +68,15 @@ class ListTableViewController: UITableViewController {
                                                            for: indexPath) as? BookkeepingTableViewCell else {
                 fatalError()
             }
+            cell.viewModel = cellViewModel
 
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: EmployeesTableViewCell.cellIdentifier,
                                                            for: indexPath) as? EmployeesTableViewCell else {
                 fatalError()
             }
+            cell.viewModel = cellViewModel
+
         default:
             return UITableViewCell()
         }
