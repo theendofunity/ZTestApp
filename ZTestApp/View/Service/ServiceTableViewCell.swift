@@ -54,7 +54,11 @@ class ServiceTableViewCell: UITableViewCell {
     }
 
 // MARK: - UI setup
+
     private func setupLayout() {
+        layer.borderWidth = 1
+        layer.borderColor = UIColor.blue.cgColor
+
         let stackView = UIStackView(arrangedSubviews: [idLabel, ratingLabel, timeLabel, descriptionLabel])
         contentView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -69,7 +73,7 @@ class ServiceTableViewCell: UITableViewCell {
         descriptionLabel.numberOfLines = 0
 
         stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8).isActive = true
-        stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 8).isActive = true
+        stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8).isActive = true
         stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
         NSLayoutConstraint(item: stackView,
                            attribute: .bottom,
@@ -77,6 +81,6 @@ class ServiceTableViewCell: UITableViewCell {
                            toItem: contentView,
                            attribute: .bottom,
                            multiplier: 1,
-                           constant: 8).isActive = true
+                           constant: -8).isActive = true
     }
 }
