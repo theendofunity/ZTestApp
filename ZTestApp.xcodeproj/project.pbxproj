@@ -127,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				D817DAB8264558DC00A949BE /* TabBarController.swift */,
+				D89E1A522652F7490005AE6E /* Gallery */,
 				D8AB94242652C55000964E78 /* Service */,
 				D8AB941D2652BD2D00964E78 /* List */,
 				D817DAB62645578800A949BE /* Storyboards */,
@@ -190,6 +191,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		D89E1A522652F7490005AE6E /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				D817DABC26455A8C00A949BE /* GalleryViewController.swift */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
 		D8A3E05C264ADB78003C94E8 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,7 +236,6 @@
 			children = (
 				D81B591C26498FE500F3AFB0 /* Cells */,
 				D817DABA26455A6C00A949BE /* ListTableViewController.swift */,
-				D817DABC26455A8C00A949BE /* GalleryViewController.swift */,
 				D8A3E054264AC9DA003C94E8 /* EmployeeViewController.swift */,
 			);
 			path = List;
