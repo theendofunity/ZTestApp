@@ -13,11 +13,17 @@ class ServiceTableViewCell: UITableViewCell {
     static let cellIdentifier = "ServiceCellIdentifier"
 
     let idLabel = UILabel()
+    let timeLabel = UILabel()
+    let ratingLabel = UILabel()
+    let descriptionLabel = UILabel()
 
     var viewModel: ServiceCellViewModel? {
         willSet(viewModel) {
             guard let viewModel = viewModel else { return }
-            idLabel.text = viewModel.quoteId()
+            idLabel.text = "ID: \(viewModel.quoteId())"
+            timeLabel.text = "Time: \(viewModel.time())"
+            ratingLabel.text = "Rating: \(viewModel.rating())"
+            descriptionLabel.text = viewModel.description()
         }
     }
 
@@ -34,14 +40,28 @@ class ServiceTableViewCell: UITableViewCell {
 
 // MARK: - UI setup
     private func setupLayout() {
-        idLabel.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(idLabel)
+        let stackView = UIStackView(arrangedSubviews: [idLabel, ratingLabel, timeLabel, descriptionLabel])
+        contentView.addSubview(stackView)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 5
 
-        NSLayoutConstraint.activate([
-            idLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor),
-            idLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor),
-            idLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            idLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
+        idLabel.translatesAutoresizingMaskIntoConstraints = false
+        ratingLabel.translatesAutoresizingMaskIntoConstraints = false
+        timeLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
+        descriptionLabel.numberOfLines = 0
+
+        stackView.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8).isActive = true
+        stackView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: 8).isActive = true
+        stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8).isActive = true
+        NSLayoutConstraint(item: stackView,
+                           attribute: .bottom,
+                           relatedBy: .lessThanOrEqual,
+                           toItem: contentView,
+                           attribute: .bottom,
+                           multiplier: 1,
+                           constant: 8).isActive = true
     }
 }
