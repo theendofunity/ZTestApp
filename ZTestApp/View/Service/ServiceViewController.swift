@@ -11,6 +11,7 @@ class ServiceViewController: UITableViewController {
 
     // MARK: - Properties
     var viewModel: ServiceViewViewModel
+    let activityIndicator = UIActivityIndicatorView()
 
     // MARK: - Initialisers
 
@@ -29,9 +30,17 @@ class ServiceViewController: UITableViewController {
 
         tableView.register(ServiceTableViewCell.self, forCellReuseIdentifier: ServiceTableViewCell.cellIdentifier)
 
-        viewModel.fetchData {
-            DispatchQueue.main.async { [weak self] in
-                self?.tableView.reloadData()
+        setupActivityIndicator()
+
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        if viewModel.quotes.count == 0 {
+            viewModel.fetchData {
+                DispatchQueue.main.async { [weak self] in
+                    self?.tableView.reloadData()
+                    self?.activityIndicator.stopAnimating()
+                }
             }
         }
     }
@@ -56,5 +65,16 @@ class ServiceViewController: UITableViewController {
 
         cell.viewModel = cellViewModel
         return cell
+    }
+
+    private func setupActivityIndicator() {
+        activityIndicator.style = .large
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(activityIndicator)
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        activityIndicator.startAnimating()
     }
 }
