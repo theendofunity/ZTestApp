@@ -22,7 +22,7 @@ class TabBarController: UITabBarController {
     private func setupTabBar() {
 
         let listViewModel = ListViewModel()
-
+        let serviceViewModel = ServiceViewViewModel()
         viewControllers = [
             createTabBarItem(title: "List",
                              icon: UIImage(systemName: "list.dash"),
@@ -32,7 +32,7 @@ class TabBarController: UITabBarController {
                              viewController: GalleryViewController()),
             createTabBarItem(title: "Service",
                              icon: UIImage(systemName: "questionmark.folder.fill"),
-                             viewController: ServiceViewController())
+                             viewController: ServiceViewController(viewModel: serviceViewModel))
         ]
 
         selectedIndex = 0

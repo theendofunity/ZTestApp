@@ -30,6 +30,9 @@
 		D8A3E05E264ADBA4003C94E8 /* DetailedViewViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A3E05D264ADBA4003C94E8 /* DetailedViewViewModelType.swift */; };
 		D8AB94202652BD4E00964E78 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB941F2652BD4E00964E78 /* ApiService.swift */; };
 		D8AB94232652BEAE00964E78 /* ApiData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB94222652BEAE00964E78 /* ApiData.swift */; };
+		D8AB94272652CA8700964E78 /* ServiceViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB94262652CA8700964E78 /* ServiceViewViewModel.swift */; };
+		D8AB94292652CDF500964E78 /* ServiceCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB94282652CDF500964E78 /* ServiceCellViewModel.swift */; };
+		D8AB942B2652CF3700964E78 /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB942A2652CF3700964E78 /* ServiceTableViewCell.swift */; };
 		D8FD1255265156050036BAAE /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FD1254265156050036BAAE /* Formatter.swift */; };
 		D8FD125726515B680036BAAE /* ListCellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FD125626515B680036BAAE /* ListCellViewModelType.swift */; };
 		D8FD125926515BAC0036BAAE /* LeaderCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FD125826515BAC0036BAAE /* LeaderCellViewModel.swift */; };
@@ -64,6 +67,9 @@
 		D8A3E05D264ADBA4003C94E8 /* DetailedViewViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewViewModelType.swift; sourceTree = "<group>"; };
 		D8AB941F2652BD4E00964E78 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		D8AB94222652BEAE00964E78 /* ApiData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiData.swift; sourceTree = "<group>"; };
+		D8AB94262652CA8700964E78 /* ServiceViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceViewViewModel.swift; sourceTree = "<group>"; };
+		D8AB94282652CDF500964E78 /* ServiceCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCellViewModel.swift; sourceTree = "<group>"; };
+		D8AB942A2652CF3700964E78 /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
 		D8FD1254265156050036BAAE /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		D8FD125626515B680036BAAE /* ListCellViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellViewModelType.swift; sourceTree = "<group>"; };
 		D8FD125826515BAC0036BAAE /* LeaderCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderCellViewModel.swift; sourceTree = "<group>"; };
@@ -138,6 +144,7 @@
 		D817DAB52645574900A949BE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				D8AB94252652CA6F00964E78 /* Service */,
 				D8AB941B2652BD1200964E78 /* List */,
 			);
 			path = ViewModels;
@@ -244,6 +251,16 @@
 			isa = PBXGroup;
 			children = (
 				D817DABE26455A9900A949BE /* ServiceViewController.swift */,
+				D8AB942A2652CF3700964E78 /* ServiceTableViewCell.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		D8AB94252652CA6F00964E78 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				D8AB94262652CA8700964E78 /* ServiceViewViewModel.swift */,
+				D8AB94282652CDF500964E78 /* ServiceCellViewModel.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -345,6 +362,7 @@
 				D8FD1255265156050036BAAE /* Formatter.swift in Sources */,
 				D81B59222649903800F3AFB0 /* EmployeesTableViewCell.swift in Sources */,
 				D817DAB9264558DC00A949BE /* TabBarController.swift in Sources */,
+				D8AB942B2652CF3700964E78 /* ServiceTableViewCell.swift in Sources */,
 				D81B591E2649900900F3AFB0 /* LeadersTableViewCell.swift in Sources */,
 				D8FD125F265174A20036BAAE /* Company.swift in Sources */,
 				D817DA9D264556CF00A949BE /* AppDelegate.swift in Sources */,
@@ -356,6 +374,7 @@
 				D81B591B264989ED00F3AFB0 /* ListViewModel.swift in Sources */,
 				D817DABB26455A6C00A949BE /* ListTableViewController.swift in Sources */,
 				D81B59192649882600F3AFB0 /* CoreDataManager.swift in Sources */,
+				D8AB94292652CDF500964E78 /* ServiceCellViewModel.swift in Sources */,
 				D81B59202649902800F3AFB0 /* BookkeepingTableViewCell.swift in Sources */,
 				D8A3E057264ACE98003C94E8 /* DetailedViewViewModel.swift in Sources */,
 				D8A3E055264AC9DA003C94E8 /* EmployeeViewController.swift in Sources */,
@@ -363,6 +382,7 @@
 				D8478E0D264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift in Sources */,
 				D8FD125726515B680036BAAE /* ListCellViewModelType.swift in Sources */,
 				D817DA9F264556CF00A949BE /* SceneDelegate.swift in Sources */,
+				D8AB94272652CA8700964E78 /* ServiceViewViewModel.swift in Sources */,
 				D8A3E059264ACEC2003C94E8 /* EmployeeType.swift in Sources */,
 				D8478E0B264C55A900AC1E1C /* BookkeepingType.swift in Sources */,
 			);
