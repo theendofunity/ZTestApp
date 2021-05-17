@@ -9,8 +9,8 @@ import Foundation
 import CoreData
 
 class DetailedViewViewModel: DetailedViewViewModelType {
-    let employeeType: EmployeeType
-    let employeeData: NSManagedObject
+    var employeeType: EmployeeType
+    var employeeData: NSManagedObject
 
     init?(employeeType: EmployeeType, data: NSManagedObject) {
         self.employeeType = employeeType
@@ -64,17 +64,7 @@ class DetailedViewViewModel: DetailedViewViewModelType {
         return Int(type)
     }
 
-    // MARK: - Private functions
-
-    private func timeInterval(begin: Date, end: Date) -> String {
-        let dateFormater = DateFormatter()
-        dateFormater.dateFormat = .none
-        dateFormater.timeStyle = .short
-        let beginTime = dateFormater.string(from: begin)
-        let endTime = dateFormater.string(from: end)
-
-        let timeInterval = beginTime + " - " + endTime
-
-        return timeInterval
+    func save() {
+        employeeData = NSManagedObject()
     }
 }

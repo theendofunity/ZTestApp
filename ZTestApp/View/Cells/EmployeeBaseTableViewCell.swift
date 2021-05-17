@@ -48,11 +48,6 @@ class EmployeeBaseTableViewCell: UITableViewCell {
         timeStack.spacing = 5
         mainStack.addArrangedSubview(timeStack)
 
-        name.text = "dasdasdalksdlajsdhkajsd"
-        sallary.text = "100000"
-        timeTitle.text = "Time title"
-        time.text = "00:00 - 00:00"
-
         setupConstraits()
     }
 

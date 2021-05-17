@@ -12,21 +12,13 @@ class LeadersTableViewCell: EmployeeBaseTableViewCell {
     // MARK: - Properties
     static let cellIdentifier = "LeadersTableViewCell"
 
-    var viewModel: ListCellViewModel? {
+    var viewModel: LeaderCellViewModel? {
         willSet(viewModel) {
             guard let viewModel = viewModel else { return }
-            guard let leader = viewModel.data() as? Leader else { return }
-            name.text = leader.name
-            sallary.text = "\(leader.sallary)"
+            name.text = viewModel.name()
+            sallary.text = viewModel.sallary()
             timeTitle.text = "Work time"
-
-            let dateFormater = DateFormatter()
-            dateFormater.dateFormat = .none
-            dateFormater.timeStyle = .short
-            let beginTime = dateFormater.string(from: (leader.businessHours?.begin) ?? Date())
-            let endTime = dateFormater.string(from: (leader.businessHours?.end) ?? Date())
-
-            time.text = beginTime + " - " + endTime
+            time.text = viewModel.workTime()
         }
     }
 

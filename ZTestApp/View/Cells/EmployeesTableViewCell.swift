@@ -11,24 +11,16 @@ class EmployeesTableViewCell: EmployeeBaseTableViewCell {
     // MARK: - Properties
     static let cellIdentifier = "EmployeeTableViewCell"
 
-    var viewModel: ListCellViewModel? {
+    var viewModel: EmployeeCellViewModel? {
         willSet(viewModel) {
-//            guard let viewModel = viewModel else { return }
-//            guard let leader = viewModel.data() as? Leader else { return }
-//            name.text = leader.name
-//            sallary.text = "\(leader.sallary)"
-//            timeTitle.text = "Work time"
-//
-//            let dateFormater = DateFormatter()
-//            dateFormater.dateFormat = .none
-//            dateFormater.timeStyle = .short
-//            let beginTime = dateFormater.string(from: (leader.businessHours?.begin) ?? Date())
-//            let endTime = dateFormater.string(from: (leader.businessHours?.end) ?? Date())
-//
-//            time.text = beginTime + " - " + endTime
+            guard let viewModel = viewModel else { return }
+            name.text = viewModel.name()
+            sallary.text = viewModel.sallary()
+            timeTitle.text = "Dinner time"
+            time.text = viewModel.dinnerTime()
+            workSpaceNumber.text = viewModel.workplaceNumber()
         }
     }
-
     let workSpaceNumber = UILabel()
 
     override func awakeFromNib() {

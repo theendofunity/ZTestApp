@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ListTableViewController: UITableViewController {
 
@@ -62,20 +63,20 @@ class ListTableViewController: UITableViewController {
                                                            for: indexPath) as? LeadersTableViewCell else {
                 fatalError()
             }
-            cell.viewModel = cellViewModel
+            cell.viewModel = (cellViewModel as? LeaderCellViewModel)
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BookkeepingTableViewCell.cellIdentifier,
                                                            for: indexPath) as? BookkeepingTableViewCell else {
                 fatalError()
             }
-            cell.viewModel = cellViewModel
+            cell.viewModel = (cellViewModel as? BookkeepingCellViewModel)
 
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: EmployeesTableViewCell.cellIdentifier,
                                                            for: indexPath) as? EmployeesTableViewCell else {
                 fatalError()
             }
-            cell.viewModel = cellViewModel
+            cell.viewModel = (cellViewModel as? EmployeeCellViewModel)
 
         default:
             return UITableViewCell()
@@ -87,7 +88,7 @@ class ListTableViewController: UITableViewController {
         viewModel.selectCell(for: indexPath)
 
         let detailedViewModel = viewModel.detailedViewViewModel() as? DetailedViewViewModel
-        let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .adding)
+        let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .changing)
         navigationController?.pushViewController(detailedView, animated: true)
     }
 
@@ -101,8 +102,11 @@ class ListTableViewController: UITableViewController {
     }
 
     @objc func addEmployee() {
-//    let detailedViewModel = Emplo
-//        let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .adding)
-//        navigationController?.pushViewController(detailedView, animated: true)
+
+        let detailedViewModel = DetailedViewViewModel(employeeType: .leader, data: lead)
+        let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .adding)
+        navigationController?.pushViewController(detailedView, animated: true)
+
+        viewModel.company?.leaders.append(detailedViewModel?.employeeData as? Leader ?? Leader())
     }
 }

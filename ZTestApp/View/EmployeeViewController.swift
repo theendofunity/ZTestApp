@@ -13,7 +13,7 @@ class EmployeeViewController: UIViewController {
     // MARK: - Properties
 
     let type: DetailedViewType
-    let viewModel: DetailedViewViewModel?
+    var viewModel: DetailedViewViewModel?
 
     let employeeType = UISegmentedControl()
     let name = UITextField()
@@ -34,7 +34,15 @@ class EmployeeViewController: UIViewController {
 
         setupToolBar()
         setupLayout()
-        fillView()
+//        fillView()
+    }
+
+    init(type: DetailedViewType) {
+        self.type = type
+        super.init(nibName: nil, bundle: nil)
+
+        setupToolBar()
+        setupLayout()
     }
 
     required init?(coder: NSCoder) {
@@ -128,7 +136,14 @@ class EmployeeViewController: UIViewController {
     // MARK: - Private functions
 
     @objc private func save() {
-//        let newObject = NSManagedObject()
+        print(viewModel)
+        guard let viewModel = viewModel else { return }
+        viewModel.save()
+//        guard let type = EmployeeType(rawValue: employeeType.selectedSegmentIndex) else { return }
+//        viewModel.employeeType = type
+//        viewModel.employeeData.setValue(name.text, forKey: "name")
+//        viewModel.employeeData.setValue(Int64(sallary.text!) ?? 0, forKey: "sallary")
+        dismiss(animated: true, completion: nil)
     }
 
     @objc private func changeView() {

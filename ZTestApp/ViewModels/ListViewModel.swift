@@ -35,11 +35,11 @@ class ListViewModel {
 
         switch section {
         case 0:
-            numberOfRows = company.leaders?.count ?? 0
+            numberOfRows = company.leaders.count
         case 1:
-            numberOfRows = company.bookkeepings?.count ?? 0
+            numberOfRows = company.bookkeepings.count
         case 2:
-            numberOfRows = company.employees?.count ?? 0
+            numberOfRows = company.employees.count
         default:
             return 0
         }
@@ -64,16 +64,18 @@ class ListViewModel {
         }
     }
 
-    func cellViewModel(for indexPath: IndexPath) -> ListCellViewModel? {
+    func cellViewModel(for indexPath: IndexPath) -> ListCellViewModelType? {
+
         switch indexPath.section {
         case 0:
-            let leader = company?.leaders?.allObjects.first as? NSManagedObject
-            let cellViewModel = ListCellViewModel(with: leader)
-            return cellViewModel
-//        case 1:
-//            return "Bookkeepings"
-//        case 2:
-//            return "Employees"
+            guard let leader = company?.leaders[indexPath.row] else { return nil }
+            return LeaderCellViewModel(leader: leader)
+        case 1:
+            guard let bookkeeping = company?.bookkeepings[indexPath.row]  else { return nil }
+            return BookkeepingCellViewModel(bookkeeping: bookkeeping)
+        case 2:
+            guard let employee = company?.employees[indexPath.row] else { return nil }
+            return EmployeeCellViewModel(employee: employee)
         default:
             return nil
         }
@@ -88,17 +90,17 @@ class ListViewModel {
 
         switch selectedCell?.section {
         case 0:
-            let data = company?.leaders?.allObjects[indexPath.row] as? NSManagedObject
+            let data = company?.leaders[indexPath.row]
             if let data  = data {
                 return DetailedViewViewModel(employeeType: .leader, data: data)
             }
         case 1:
-            let data = company?.bookkeepings?.allObjects[indexPath.row] as? NSManagedObject
+            let data = company?.bookkeepings[indexPath.row]
             if let data  = data {
                 return DetailedViewViewModel(employeeType: .bookKeeping, data: data)
             }
         case 2:
-            let data = company?.employees?.allObjects[indexPath.row] as? NSManagedObject
+            let data = company?.employees[indexPath.row]
             if let data  = data {
                 return DetailedViewViewModel(employeeType: .employee, data: data)
             }
@@ -106,5 +108,11 @@ class ListViewModel {
             return nil
         }
         return nil
+    }
+
+    func save(object: NSManagedObject, type: EmployeeType) {
+        if type == .leader {
+
+        }
     }
 }
