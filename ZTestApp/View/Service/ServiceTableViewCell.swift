@@ -7,6 +7,20 @@
 
 import UIKit
 
+// extension String {
+//    func htmlAttributedString() -> NSAttributedString? {
+//        guard let data = self.data(using: .iso2022JP) else {
+//            return nil
+//        }
+//
+//        return try? NSAttributedString(
+//            data: data,
+//            options: [.documentType: NSAttributedString.DocumentType.html],
+//            documentAttributes: nil
+//        )
+//    }
+// }
+
 class ServiceTableViewCell: UITableViewCell {
 
 // MARK: - Properties
@@ -23,7 +37,8 @@ class ServiceTableViewCell: UITableViewCell {
             idLabel.text = "ID: \(viewModel.quoteId())"
             timeLabel.text = "Time: \(viewModel.time())"
             ratingLabel.text = "Rating: \(viewModel.rating())"
-            descriptionLabel.text = viewModel.description()
+
+            descriptionLabel.attributedText = htmlAttributeString(from: viewModel.description())
         }
     }
 
