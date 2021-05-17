@@ -136,7 +136,6 @@ class EmployeeViewController: UIViewController {
     // MARK: - Private functions
 
     @objc private func save() {
-        print(viewModel)
         guard let viewModel = viewModel else { return }
         viewModel.save()
 //        guard let type = EmployeeType(rawValue: employeeType.selectedSegmentIndex) else { return }

@@ -103,10 +103,10 @@ class ListTableViewController: UITableViewController {
 
     @objc func addEmployee() {
 
-        let detailedViewModel = DetailedViewViewModel(employeeType: .leader, data: lead)
-        let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .adding)
-        navigationController?.pushViewController(detailedView, animated: true)
-
-        viewModel.company?.leaders.append(detailedViewModel?.employeeData as? Leader ?? Leader())
+//        let detailedViewModel = DetailedViewViewModel(employeeType: .leader, data: lead)
+//        let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .adding)
+//        navigationController?.pushViewController(detailedView, animated: true)
+//
+//        viewModel.company?.leaders.append(detailedViewModel?.employeeData as? Leader ?? Leader())
     }
 }
