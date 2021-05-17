@@ -15,6 +15,16 @@ class ServiceViewController: UIViewController {
         super.viewDidLoad()
 
         title = "Service"
+
+        let apiService = ApiService()
+        apiService.fetchData { [weak self] result in
+            switch result {
+            case .success(let apiData):
+                print(apiData.quotes.count)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 
     // MARK: - UI configuration
