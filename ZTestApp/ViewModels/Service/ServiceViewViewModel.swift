@@ -17,7 +17,9 @@ class ServiceViewViewModel {
     func fetchData(completion: @escaping (() -> Void)) {
         let apiService = ApiService()
 
-        apiService.fetchData { result in
+        let urlString = "http://quotes.zennex.ru/api/v3/bash/quotes?sort=time"
+
+        apiService.fetchData(from: urlString) { (result: Result<ApiData, Error>) in
             switch result {
             case .success(let data):
                 self.quotes = data.quotes

@@ -12,10 +12,9 @@ enum Errors: Error {
     case emptyData
     case decodeError
 }
-class ApiService {
-    let urlString = "http://quotes.zennex.ru/api/v3/bash/quotes?sort=time"
 
-    func fetchData(completion: @escaping ((Result<ApiData, Error>) -> Void)) {
+class ApiService {
+    func fetchData<T>(from urlString: String, completion: @escaping ((Result<T, Error>) -> Void)) where T: Decodable {
         guard let url = URL(string: urlString) else {
             completion(.failure(Errors.incorrectUrl))
             return
@@ -30,7 +29,7 @@ class ApiService {
                 completion(.failure(Errors.emptyData))
                 return
             }
-            if let apiData = try? JSONDecoder().decode(ApiData.self, from: data) {
+            if let apiData = try? JSONDecoder().decode(T.self, from: data) {
             completion(.success(apiData))
             } else {
                 completion(.failure(Errors.decodeError))
