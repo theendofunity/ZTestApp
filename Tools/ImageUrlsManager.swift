@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class ImageDownloader {
+class ImageUrlsManager {
 // MARK: - Properties
 
     var imageUrls = [String]()
@@ -17,12 +17,11 @@ class ImageDownloader {
 // MARK: - Initializer
 
     init() {
-//        self.setupCache()
-
         if imageUrls.isEmpty {
             self.fetchImageUrls()
         }
     }
+    
 // MARK: - Image download
 
     func nextUrl() -> URL? {
@@ -39,7 +38,6 @@ class ImageDownloader {
             let urlString = imageUrls[currentIndex]
             let url = URL(string: urlString)
             return url
-//            let image = KingfisherManager.shared.retrieveImage(with: url, options: nil, completionHandler: nil)
         }
         return nil
     }
