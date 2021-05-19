@@ -12,10 +12,19 @@ class GalleryViewController: UIViewController {
 
 // MARK: - Properties
 
-    let imageView = UIImageView()
-    let downloader = ImageDownloader()
+    var imageView: ImageViewWithDownloads?
 
-// MARK: - Live cycle
+    init() {
+        super.init(nibName: nil, bundle: nil)
+
+        imageView = ImageViewWithDownloads(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Live cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,18 +32,15 @@ class GalleryViewController: UIViewController {
         title = "Gallery"
         setupLayout()
         setupToolBar()
-        setupCache()
-
-        let url = downloader.currentUrl()
-        imageView.kf.indicatorType = .activity
-        imageView.kf.setImage(with: url)
+        imageView?.setImage()
     }
 
     // MARK: - UI configuration
 
     private func setupLayout() {
+        guard let imageView = imageView else { return }
+
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(systemName: "photo")
         imageView.contentMode = .scaleAspectFit
         view.addSubview(imageView)
 
@@ -44,19 +50,6 @@ class GalleryViewController: UIViewController {
             imageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50),
             imageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -50)
         ])
-    }
-
-    @objc private func nextImage() {
-        let url = downloader.nextUrl()
-        imageView.kf.setImage(with: url)
-
-        let num = ImageCache.default.memoryStorage.config.countLimit
-        print(num)
-    }
-
-    @objc private func previousImage() {
-        let url = downloader.previousUrl()
-        imageView.kf.setImage(with: url)
     }
 
     private func setupToolBar() {
@@ -73,8 +66,11 @@ class GalleryViewController: UIViewController {
         navigationItem.leftBarButtonItem = previousBtn
     }
 
-    private func setupCache() {
-        let cashe = ImageCache.default
-        cashe.memoryStorage.config.countLimit = 3
+    @objc private func nextImage() {
+        imageView?.nextImage()
+    }
+
+    @objc private func previousImage() {
+        imageView?.previousImage()
     }
 }

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 class ImageUrlsManager {
 // MARK: - Properties
@@ -17,12 +16,10 @@ class ImageUrlsManager {
 // MARK: - Initializer
 
     init() {
-        if imageUrls.isEmpty {
-            self.fetchImageUrls()
-        }
+        self.fetchImageUrls()
     }
-    
-// MARK: - Image download
+
+// MARK: - urls getters
 
     func nextUrl() -> URL? {
         currentIndex += 1
@@ -43,7 +40,7 @@ class ImageUrlsManager {
     }
 
     private func fetchImageUrls() {
-        let url = "https://api.unsplash.com/photos/?page=1&client_id=6862y-t05CfED7j_Uc-mwsGfRs8noWxH2Qx3Jhyc_pw"
+        let url = "https://api.unsplash.com/photos/?page=1&client_id=\(imageApiKey)"
         let apiService = ApiService()
         apiService.fetchData(from: url) {(result: Result<[ImagesData], Error>) in
             switch result {
