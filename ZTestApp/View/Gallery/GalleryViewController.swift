@@ -17,7 +17,7 @@ class GalleryViewController: UIViewController {
     init() {
         super.init(nibName: nil, bundle: nil)
 
-        imageView = ImageViewWithDownloads(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+//        imageView = ImageViewWithDownloads(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
     }
 
     required init?(coder: NSCoder) {
@@ -29,10 +29,11 @@ class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        imageView = ImageViewWithDownloads(frame: view.bounds)
+
         title = "Gallery"
         setupLayout()
         setupToolBar()
-        imageView?.setImage()
     }
 
     // MARK: - UI configuration
@@ -47,8 +48,8 @@ class GalleryViewController: UIViewController {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
-            imageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50),
-            imageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -50)
+            imageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            imageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20)
         ])
     }
 

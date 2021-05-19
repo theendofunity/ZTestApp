@@ -19,6 +19,12 @@ class ImageViewWithDownloads: UIImageView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupCache()
+
+        downloader.fetchImageUrls { [weak self] in
+            DispatchQueue.main.async {
+                self?.setImage()
+            }
+        }
     }
 
     required init?(coder: NSCoder) {
