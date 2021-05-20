@@ -10,7 +10,8 @@ import UIKit
 class ImageScrollView: UIScrollView, UIScrollViewDelegate {
 
     var imageView: ImageViewWithDownloads
-    lazy var completion: (() -> Void) = { [weak self] in
+
+    lazy var configurationCompletion: (() -> Void) = { [weak self] in
         DispatchQueue.main.async {
             self?.configurate()
         }
@@ -21,16 +22,12 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         super.init(frame: frame)
         self.delegate = self
 
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        self.contentMode = .scaleAspectFit
-        showsVerticalScrollIndicator = false
-        showsHorizontalScrollIndicator = false
-
-        self.addSubview(imageView)
+        setupUi()
+        setupGesture()
 
         imageView.downloader.fetchImageUrls { [weak self] in
             DispatchQueue.main.async {
-                self?.imageView.setCurrentImage(completion: self?.completion)
+                self?.imageView.setCurrentImage(completion: self?.configurationCompletion)
             }
         }
     }
@@ -39,7 +36,24 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configurate() {
+    // MARK: - Image changing
+
+    func nextImage() {
+        imageView.nextImage(completion: configurationCompletion)
+    }
+
+    func previousImage() {
+        imageView.previousImage(completion: configurationCompletion)
+    }
+
+    // MARK: - Zoom settings
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        centerImage()
+    }
+
+    private func configurate() {
         guard let imageSize = imageView.image?.size else { return }
         contentSize = imageSize
         setupZoomScale(for: imageSize)
@@ -47,12 +61,7 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
 
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        centerImage()
-    }
-
-    func setupZoomScale(for imageSize: CGSize) {
+    private func setupZoomScale(for imageSize: CGSize) {
         let boundsSize = self.bounds.size
 
         let xScale = boundsSize.width / imageSize.width
@@ -72,12 +81,9 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
 
         self.minimumZoomScale = minScale
         self.maximumZoomScale = maxScale
-
-        print(boundsSize)
-        print(imageSize)
     }
 
-    func centerImage() {
+    private func centerImage() {
         let boundsSize = self.bounds.size
         var frameToCenter = imageView.frame
 
@@ -96,15 +102,43 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         imageView.frame = frameToCenter
     }
 
-    func nextImage() {
-        imageView.nextImage(completion: completion)
+    // MARK: - UISetup
+
+    private func setupUi() {
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentMode = .scaleAspectFit
+        showsVerticalScrollIndicator = false
+        showsHorizontalScrollIndicator = false
+
+        self.addSubview(imageView)
     }
 
-    func previousImage() {
-        imageView.previousImage(completion: completion)
+    // MARK: - Gestures
+
+    private func setupGesture() {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture(gesture:)))
+        swipeRight.direction = .right
+        addGestureRecognizer(swipeRight)
+
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture(gesture:)))
+        swipeLeft.direction = .left
+        addGestureRecognizer(swipeLeft)
     }
 
-// MARK: - UIScrollViewDelegate
+    @objc private func swipeGesture(gesture: UIGestureRecognizer) {
+        guard let gesture = gesture as? UISwipeGestureRecognizer else { return }
+
+        switch gesture.direction {
+        case .left:
+            nextImage()
+        case .right:
+            previousImage()
+        default:
+            return
+        }
+    }
+
+    // MARK: - UIScrollViewDelegate
 
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
