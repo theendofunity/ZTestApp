@@ -24,6 +24,7 @@
 		D8478E0B264C55A900AC1E1C /* BookkeepingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8478E0A264C55A900AC1E1C /* BookkeepingType.swift */; };
 		D8478E0D264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8478E0C264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift */; };
 		D880C6F3265574530008CB3A /* ImageViewWithDownloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = D880C6F2265574530008CB3A /* ImageViewWithDownloads.swift */; };
+		D880C6F5265584F70008CB3A /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D880C6F4265584F70008CB3A /* ImageScrollView.swift */; };
 		D8A3E055264AC9DA003C94E8 /* EmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A3E054264AC9DA003C94E8 /* EmployeeViewController.swift */; };
 		D8A3E057264ACE98003C94E8 /* DetailedViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A3E056264ACE98003C94E8 /* DetailedViewViewModel.swift */; };
 		D8A3E059264ACEC2003C94E8 /* EmployeeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A3E058264ACEC2003C94E8 /* EmployeeType.swift */; };
@@ -67,6 +68,7 @@
 		D8478E0A264C55A900AC1E1C /* BookkeepingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookkeepingType.swift; sourceTree = "<group>"; };
 		D8478E0C264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeBaseTableViewCell.swift; sourceTree = "<group>"; };
 		D880C6F2265574530008CB3A /* ImageViewWithDownloads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewWithDownloads.swift; sourceTree = "<group>"; };
+		D880C6F4265584F70008CB3A /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		D8A3E054264AC9DA003C94E8 /* EmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewController.swift; sourceTree = "<group>"; };
 		D8A3E056264ACE98003C94E8 /* DetailedViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewViewModel.swift; sourceTree = "<group>"; };
 		D8A3E058264ACEC2003C94E8 /* EmployeeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeType.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				D817DABC26455A8C00A949BE /* GalleryViewController.swift */,
+				D880C6F4265584F70008CB3A /* ImageScrollView.swift */,
 				D880C6F2265574530008CB3A /* ImageViewWithDownloads.swift */,
 			);
 			path = Gallery;
@@ -423,6 +426,7 @@
 				D8FD125D26515F3C0036BAAE /* EmployeeCellViewModel.swift in Sources */,
 				D817DABF26455A9900A949BE /* ServiceViewController.swift in Sources */,
 				D8FD125B26515CEF0036BAAE /* BookkeepingCellViewModel.swift in Sources */,
+				D880C6F5265584F70008CB3A /* ImageScrollView.swift in Sources */,
 				D81B591B264989ED00F3AFB0 /* ListViewModel.swift in Sources */,
 				D817DABB26455A6C00A949BE /* ListTableViewController.swift in Sources */,
 				D81B59192649882600F3AFB0 /* CoreDataManager.swift in Sources */,

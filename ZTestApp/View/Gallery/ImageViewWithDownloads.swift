@@ -19,12 +19,7 @@ class ImageViewWithDownloads: UIImageView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setupCache()
-
-        downloader.fetchImageUrls { [weak self] in
-            DispatchQueue.main.async {
-                self?.setImage()
-            }
-        }
+        self.contentMode = .scaleAspectFit
     }
 
     required init?(coder: NSCoder) {
@@ -33,23 +28,31 @@ class ImageViewWithDownloads: UIImageView {
 
 // MARK: - image setup
 
-    func setImage() {
+    func setCurrentImage(completion: (() -> Void)?) {
         let url = downloader.currentUrl()
-        self.kf.indicatorType = .activity
-        self.kf.setImage(with: url)
+        setImage(with: url, completion: completion)
     }
 
-    func nextImage() {
+    func nextImage(completion: (() -> Void)?) {
         let url = downloader.nextUrl()
-        kf.setImage(with: url)
+        setImage(with: url, completion: completion)
     }
 
-    func previousImage() {
+    func previousImage(completion: (() -> Void)?) {
         let url = downloader.previousUrl()
-        kf.setImage(with: url)
+        setImage(with: url, completion: completion)
     }
 
 // MARK: - Private functions
+
+    private func setImage(with url: URL?, completion: (() -> Void)?) {
+        self.kf.indicatorType = .activity
+        self.kf.setImage(with: url) { _ in
+            if completion != nil {
+                completion!()
+            }
+        }
+    }
 
     private func setupCache() {
         let cashe = ImageCache.default

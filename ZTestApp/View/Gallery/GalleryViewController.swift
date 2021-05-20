@@ -12,24 +12,14 @@ class GalleryViewController: UIViewController {
 
 // MARK: - Properties
 
-    var imageView: ImageViewWithDownloads?
-
-    init() {
-        super.init(nibName: nil, bundle: nil)
-
-//        imageView = ImageViewWithDownloads(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var scrollView: ImageScrollView?
 
     // MARK: - Live cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        imageView = ImageViewWithDownloads(frame: view.bounds)
+        scrollView = ImageScrollView(frame: view.bounds)
 
         title = "Gallery"
         setupLayout()
@@ -39,17 +29,17 @@ class GalleryViewController: UIViewController {
     // MARK: - UI configuration
 
     private func setupLayout() {
-        guard let imageView = imageView else { return }
+        guard let scrollView = scrollView else { return }
 
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        view.addSubview(imageView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+//        scrollView.contentMode = .scaleAspectFit
+        view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
-            imageView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            imageView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20)
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8),
+            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8)
         ])
     }
 
@@ -68,10 +58,10 @@ class GalleryViewController: UIViewController {
     }
 
     @objc private func nextImage() {
-        imageView?.nextImage()
+        scrollView?.nextImage()
     }
 
     @objc private func previousImage() {
-        imageView?.previousImage()
+        scrollView?.previousImage()
     }
 }
