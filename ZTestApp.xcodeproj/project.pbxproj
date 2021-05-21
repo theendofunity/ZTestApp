@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,8 @@
 		D81B59222649903800F3AFB0 /* EmployeesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B59212649903800F3AFB0 /* EmployeesTableViewCell.swift */; };
 		D8478E0B264C55A900AC1E1C /* BookkeepingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8478E0A264C55A900AC1E1C /* BookkeepingType.swift */; };
 		D8478E0D264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8478E0C264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift */; };
+		D880C6F3265574530008CB3A /* ImageViewWithDownloads.swift in Sources */ = {isa = PBXBuildFile; fileRef = D880C6F2265574530008CB3A /* ImageViewWithDownloads.swift */; };
+		D880C6F5265584F70008CB3A /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D880C6F4265584F70008CB3A /* ImageScrollView.swift */; };
 		D8A3E055264AC9DA003C94E8 /* EmployeeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A3E054264AC9DA003C94E8 /* EmployeeViewController.swift */; };
 		D8A3E057264ACE98003C94E8 /* DetailedViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A3E056264ACE98003C94E8 /* DetailedViewViewModel.swift */; };
 		D8A3E059264ACEC2003C94E8 /* EmployeeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A3E058264ACEC2003C94E8 /* EmployeeType.swift */; };
@@ -34,6 +36,10 @@
 		D8AB94292652CDF500964E78 /* ServiceCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB94282652CDF500964E78 /* ServiceCellViewModel.swift */; };
 		D8AB942B2652CF3700964E78 /* ServiceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB942A2652CF3700964E78 /* ServiceTableViewCell.swift */; };
 		D8AB942D2652D92500964E78 /* StringConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AB942C2652D92500964E78 /* StringConverter.swift */; };
+		D8EC4C672654062F0055D5F3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D8EC4C662654062F0055D5F3 /* Kingfisher */; };
+		D8EC4C6926540F760055D5F3 /* ImageUrlsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EC4C6826540F760055D5F3 /* ImageUrlsManager.swift */; };
+		D8EC4C6C26540FFD0055D5F3 /* ImageApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EC4C6B26540FFD0055D5F3 /* ImageApiKey.swift */; };
+		D8EC4C6F265411280055D5F3 /* ImagesData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EC4C6E265411280055D5F3 /* ImagesData.swift */; };
 		D8FD1255265156050036BAAE /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FD1254265156050036BAAE /* Formatter.swift */; };
 		D8FD125726515B680036BAAE /* ListCellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FD125626515B680036BAAE /* ListCellViewModelType.swift */; };
 		D8FD125926515BAC0036BAAE /* LeaderCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FD125826515BAC0036BAAE /* LeaderCellViewModel.swift */; };
@@ -61,6 +67,8 @@
 		D81B59212649903800F3AFB0 /* EmployeesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesTableViewCell.swift; sourceTree = "<group>"; };
 		D8478E0A264C55A900AC1E1C /* BookkeepingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookkeepingType.swift; sourceTree = "<group>"; };
 		D8478E0C264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeBaseTableViewCell.swift; sourceTree = "<group>"; };
+		D880C6F2265574530008CB3A /* ImageViewWithDownloads.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewWithDownloads.swift; sourceTree = "<group>"; };
+		D880C6F4265584F70008CB3A /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 		D8A3E054264AC9DA003C94E8 /* EmployeeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeViewController.swift; sourceTree = "<group>"; };
 		D8A3E056264ACE98003C94E8 /* DetailedViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewViewModel.swift; sourceTree = "<group>"; };
 		D8A3E058264ACEC2003C94E8 /* EmployeeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeType.swift; sourceTree = "<group>"; };
@@ -72,6 +80,9 @@
 		D8AB94282652CDF500964E78 /* ServiceCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceCellViewModel.swift; sourceTree = "<group>"; };
 		D8AB942A2652CF3700964E78 /* ServiceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTableViewCell.swift; sourceTree = "<group>"; };
 		D8AB942C2652D92500964E78 /* StringConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConverter.swift; sourceTree = "<group>"; };
+		D8EC4C6826540F760055D5F3 /* ImageUrlsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUrlsManager.swift; sourceTree = "<group>"; };
+		D8EC4C6B26540FFD0055D5F3 /* ImageApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageApiKey.swift; sourceTree = "<group>"; };
+		D8EC4C6E265411280055D5F3 /* ImagesData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesData.swift; sourceTree = "<group>"; };
 		D8FD1254265156050036BAAE /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		D8FD125626515B680036BAAE /* ListCellViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellViewModelType.swift; sourceTree = "<group>"; };
 		D8FD125826515BAC0036BAAE /* LeaderCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderCellViewModel.swift; sourceTree = "<group>"; };
@@ -85,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8EC4C672654062F0055D5F3 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +109,7 @@
 				D817DA9B264556CF00A949BE /* ZTestApp */,
 				D8A3E05C264ADB78003C94E8 /* Protocols */,
 				D81B5917264987FE00F3AFB0 /* Tools */,
+				D8EC4C6A26540FC30055D5F3 /* Constants */,
 				D817DA9A264556CF00A949BE /* Products */,
 			);
 			sourceTree = "<group>";
@@ -127,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				D817DAB8264558DC00A949BE /* TabBarController.swift */,
+				D89E1A522652F7490005AE6E /* Gallery */,
 				D8AB94242652C55000964E78 /* Service */,
 				D8AB941D2652BD2D00964E78 /* List */,
 				D817DAB62645578800A949BE /* Storyboards */,
@@ -137,6 +151,7 @@
 		D817DAB42645574100A949BE /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D8EC4C6D265411150055D5F3 /* Gallery */,
 				D8AB94212652BE6200964E78 /* Service */,
 				D8AB941C2652BD1D00964E78 /* List */,
 			);
@@ -175,6 +190,7 @@
 				D8FD1254265156050036BAAE /* Formatter.swift */,
 				D8AB941F2652BD4E00964E78 /* ApiService.swift */,
 				D8AB942C2652D92500964E78 /* StringConverter.swift */,
+				D8EC4C6826540F760055D5F3 /* ImageUrlsManager.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -188,6 +204,16 @@
 				D81B59212649903800F3AFB0 /* EmployeesTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		D89E1A522652F7490005AE6E /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				D817DABC26455A8C00A949BE /* GalleryViewController.swift */,
+				D880C6F4265584F70008CB3A /* ImageScrollView.swift */,
+				D880C6F2265574530008CB3A /* ImageViewWithDownloads.swift */,
+			);
+			path = Gallery;
 			sourceTree = "<group>";
 		};
 		D8A3E05C264ADB78003C94E8 /* Protocols */ = {
@@ -227,7 +253,6 @@
 			children = (
 				D81B591C26498FE500F3AFB0 /* Cells */,
 				D817DABA26455A6C00A949BE /* ListTableViewController.swift */,
-				D817DABC26455A8C00A949BE /* GalleryViewController.swift */,
 				D8A3E054264AC9DA003C94E8 /* EmployeeViewController.swift */,
 			);
 			path = List;
@@ -268,6 +293,22 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		D8EC4C6A26540FC30055D5F3 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				D8EC4C6B26540FFD0055D5F3 /* ImageApiKey.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		D8EC4C6D265411150055D5F3 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				D8EC4C6E265411280055D5F3 /* ImagesData.swift */,
+			);
+			path = Gallery;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -285,6 +326,9 @@
 			dependencies = (
 			);
 			name = ZTestApp;
+			packageProductDependencies = (
+				D8EC4C662654062F0055D5F3 /* Kingfisher */,
+			);
 			productName = ZTestApp;
 			productReference = D817DA99264556CF00A949BE /* ZTestApp.app */;
 			productType = "com.apple.product-type.application";
@@ -312,6 +356,9 @@
 				Base,
 			);
 			mainGroup = D817DA90264556CF00A949BE;
+			packageReferences = (
+				D8EC4C652654062F0055D5F3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = D817DA9A264556CF00A949BE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -360,7 +407,10 @@
 			files = (
 				D8A3E05B264AD32D003C94E8 /* DetailedViewType.swift in Sources */,
 				D817DAA7264556CF00A949BE /* ZTestApp.xcdatamodeld in Sources */,
+				D8EC4C6926540F760055D5F3 /* ImageUrlsManager.swift in Sources */,
+				D880C6F3265574530008CB3A /* ImageViewWithDownloads.swift in Sources */,
 				D8A3E05E264ADBA4003C94E8 /* DetailedViewViewModelType.swift in Sources */,
+				D8EC4C6C26540FFD0055D5F3 /* ImageApiKey.swift in Sources */,
 				D8FD125926515BAC0036BAAE /* LeaderCellViewModel.swift in Sources */,
 				D8AB942D2652D92500964E78 /* StringConverter.swift in Sources */,
 				D8FD1255265156050036BAAE /* Formatter.swift in Sources */,
@@ -369,12 +419,14 @@
 				D8AB942B2652CF3700964E78 /* ServiceTableViewCell.swift in Sources */,
 				D81B591E2649900900F3AFB0 /* LeadersTableViewCell.swift in Sources */,
 				D8FD125F265174A20036BAAE /* Company.swift in Sources */,
+				D8EC4C6F265411280055D5F3 /* ImagesData.swift in Sources */,
 				D817DA9D264556CF00A949BE /* AppDelegate.swift in Sources */,
 				D817DABD26455A8C00A949BE /* GalleryViewController.swift in Sources */,
 				D8AB94232652BEAE00964E78 /* ApiData.swift in Sources */,
 				D8FD125D26515F3C0036BAAE /* EmployeeCellViewModel.swift in Sources */,
 				D817DABF26455A9900A949BE /* ServiceViewController.swift in Sources */,
 				D8FD125B26515CEF0036BAAE /* BookkeepingCellViewModel.swift in Sources */,
+				D880C6F5265584F70008CB3A /* ImageScrollView.swift in Sources */,
 				D81B591B264989ED00F3AFB0 /* ListViewModel.swift in Sources */,
 				D817DABB26455A6C00A949BE /* ListTableViewController.swift in Sources */,
 				D81B59192649882600F3AFB0 /* CoreDataManager.swift in Sources */,
@@ -580,6 +632,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D8EC4C652654062F0055D5F3 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D8EC4C662654062F0055D5F3 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8EC4C652654062F0055D5F3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		D817DAA5264556CF00A949BE /* ZTestApp.xcdatamodeld */ = {
