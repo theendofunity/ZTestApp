@@ -32,7 +32,6 @@ class GalleryViewController: UIViewController {
         guard let scrollView = scrollView else { return }
 
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-//        scrollView.contentMode = .scaleAspectFit
         view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([
@@ -55,13 +54,33 @@ class GalleryViewController: UIViewController {
                                           target: self,
                                           action: #selector(previousImage))
         navigationItem.leftBarButtonItem = previousBtn
+
+        changeToolbarButtonsState()
     }
 
     @objc private func nextImage() {
         scrollView?.nextImage()
+        changeToolbarButtonsState()
     }
 
     @objc private func previousImage() {
         scrollView?.previousImage()
+        changeToolbarButtonsState()
+    }
+
+    private func changeToolbarButtonsState() {
+        guard let scrollView = scrollView else { return }
+
+        navigationItem.rightBarButtonItem?.isEnabled = true
+        navigationItem.leftBarButtonItem?.isEnabled = true
+
+        if scrollView.isFirstImage() {
+            navigationItem.leftBarButtonItem?.isEnabled = false
+        }
+
+        if scrollView.isLastImage() {
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        }
+
     }
 }

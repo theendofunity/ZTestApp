@@ -46,6 +46,14 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         imageView.previousImage(completion: configurationCompletion)
     }
 
+    func isFirstImage() -> Bool {
+        return imageView.isFirstImage()
+    }
+
+    func isLastImage() -> Bool {
+        return imageView.isLastImage()
+    }
+
     // MARK: - Zoom settings
 
     override func layoutSubviews() {

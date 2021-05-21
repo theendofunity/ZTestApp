@@ -17,24 +17,35 @@ class ImageUrlsManager {
 
     func nextUrl() -> URL? {
         currentIndex += 1
+        if currentIndex == imageUrls.count {
+            currentIndex -= 1
+        }
         return currentUrl()
     }
     func previousUrl() -> URL? {
         currentIndex -= 1
+        if currentIndex < 0 {
+            currentIndex = 0
+        }
         return currentUrl()
     }
 
     func currentUrl() -> URL? {
-        if currentIndex < imageUrls.count {
-            let urlString = imageUrls[currentIndex]
-            let url = URL(string: urlString)
-            return url
-        }
-        return nil
+        let urlString = imageUrls[currentIndex]
+        let url = URL(string: urlString)
+        return url
+    }
+
+    func isFirstUrl() -> Bool {
+        return currentIndex == 0
+    }
+
+    func isLastUrl() -> Bool {
+        return currentIndex == (imageUrls.count - 1)
     }
 
     func fetchImageUrls(completion: @escaping (() -> Void)) {
-        let url = "https://api.unsplash.com/photos/?page=1&client_id=\(imageApiKey)"
+        let url = "https://api.unsplash.com/photos/?page=1&per_page=15&client_id=\(imageApiKey)"
         let apiService = ApiService()
         apiService.fetchData(from: url) {(result: Result<[ImagesData], Error>) in
             switch result {

@@ -18,7 +18,7 @@ class ImageViewWithDownloads: UIImageView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setupCache()
+        self.setupCacheSize()
         self.contentMode = .scaleAspectFit
     }
 
@@ -43,9 +43,19 @@ class ImageViewWithDownloads: UIImageView {
         setImage(with: url, completion: completion)
     }
 
+    func isFirstImage() -> Bool {
+        return downloader.isFirstUrl()
+    }
+
+    func isLastImage() -> Bool {
+        return downloader.isLastUrl()
+    }
+
 // MARK: - Private functions
 
     private func setImage(with url: URL?, completion: (() -> Void)?) {
+        guard let url = url else { return }
+
         self.kf.indicatorType = .activity
         self.kf.setImage(with: url) { _ in
             if completion != nil {
@@ -54,7 +64,7 @@ class ImageViewWithDownloads: UIImageView {
         }
     }
 
-    private func setupCache() {
+    private func setupCacheSize() {
         let cashe = ImageCache.default
         cashe.memoryStorage.config.countLimit = 3
     }
