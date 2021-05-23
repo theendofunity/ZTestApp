@@ -6,13 +6,11 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class ListViewModel {
 
 // MARK: - Properties
-
-    let dataManager = CoreDataManager()
 
     var company: Company?
 
@@ -21,7 +19,8 @@ class ListViewModel {
 // MARK: - Initializers
 
     init() {
-        company = dataManager.load()
+        company = Company()
+//        company = dataManager.load()
     }
 
 // MARK: - Table view controller data
@@ -88,31 +87,45 @@ class ListViewModel {
     func detailedViewViewModel() -> DetailedViewViewModelType? {
         guard let indexPath = selectedCell else { return nil }
 
+        var detailedViewModel: DetailedViewViewModel?
+
         switch selectedCell?.section {
         case 0:
             let data = company?.leaders[indexPath.row]
             if let data  = data {
-                return DetailedViewViewModel(employeeType: .leader, data: data)
+                detailedViewModel = DetailedViewViewModel(employeeType: .leader, data: data)
             }
         case 1:
             let data = company?.bookkeepings[indexPath.row]
             if let data  = data {
-                return DetailedViewViewModel(employeeType: .bookKeeping, data: data)
+                detailedViewModel = DetailedViewViewModel(employeeType: .bookKeeping, data: data)
             }
         case 2:
             let data = company?.employees[indexPath.row]
             if let data  = data {
-                return DetailedViewViewModel(employeeType: .employee, data: data)
+                detailedViewModel = DetailedViewViewModel(employeeType: .employee, data: data)
             }
         default:
-            return nil
+            detailedViewModel = nil
         }
-        return nil
+
+        detailedViewModel?.savingCompletion = { [weak self] (object, type) in
+            self?.save(data: object, type: type)
+        }
+        return detailedViewModel
     }
 
-    func save(object: NSManagedObject, type: EmployeeType) {
-        if type == .leader {
-
+    func save(data: Object?, type: EmployeeType) {
+        switch type {
+        case .leader:
+            guard let leader = data as? Leader else { return }
+            company?.leaders.append(leader)
+        case .bookKeeping:
+            guard let bookkeeper = data as? Bookkeeper else { return }
+            company?.bookkeepings.append(bookkeeper)
+        case .employee:
+            guard let employee = data as? Employee else { return }
+            company?.employees.append(employee)
         }
     }
 }

@@ -11,37 +11,36 @@ class BookkeepingCellViewModel: ListCellViewModelType {
 
     // MARK: - Properties
 
-    let bookkeeping: Bookkeeping
+    let bookkeeper: Bookkeeper
 
     // MARK: - Functions
 
-    init(bookkeeping: Bookkeeping) {
-        self.bookkeeping = bookkeeping
+    init(bookkeeping: Bookkeeper) {
+        self.bookkeeper = bookkeeping
     }
 
     func name() -> String? {
-        return bookkeeping.name
+        return bookkeeper.baseInfo.name
     }
 
     func sallary() -> String? {
-        return "\(bookkeeping.sallary)"
+        return "\(bookkeeper.baseInfo.sallary)"
     }
 
     func dinnerTime() -> String? {
-        guard let begin = bookkeeping.employeeInfo?.dinnerTime?.begin,
-              let end = bookkeeping.employeeInfo?.dinnerTime?.end
-        else { return nil }
+        let begin = bookkeeper.dinnerTime.begin
+        let end = bookkeeper.dinnerTime.end
 
         return timeInterval(begin: begin, end: end)
     }
 
     func workplaceNumber() -> String? {
-        guard let number = bookkeeping.employeeInfo?.workplaceNumber else { return nil }
+        let number = bookkeeper.workplaceNumber
         return "\(number)"
     }
 
     func type() -> String? {
-        let bookkeepingType = bookkeeping.type
+        let bookkeepingType = bookkeeper.type
 
         for title in BookkeepingType.allCases where title.rawValue == bookkeepingType {
             return "\(title)"

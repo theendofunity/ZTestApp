@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreData
 
 class EmployeeViewController: UIViewController {
 
@@ -34,7 +33,7 @@ class EmployeeViewController: UIViewController {
 
         setupToolBar()
         setupLayout()
-//        fillView()
+        fillView()
     }
 
     init(type: DetailedViewType) {
@@ -137,12 +136,23 @@ class EmployeeViewController: UIViewController {
 
     @objc private func save() {
         guard let viewModel = viewModel else { return }
+
+        guard let type = EmployeeType(rawValue: employeeType.selectedSegmentIndex) else { return }
+
+        viewModel.setType(employeeType: type)
+        viewModel.setName(name: name.text)
+        viewModel.setSallary(sallary: sallary.text)
+        viewModel.setTime(begin: timeBegin.date, end: timeEnd.date)
+
+        if type == .bookKeeping {
+            viewModel.setBookkeeperType(type: bookkepingType.selectedSegmentIndex)
+        }
+        if type == .bookKeeping || type == .employee {
+            viewModel.setWorkplaceNumber(number: workspaceNumber.text)
+        }
+
         viewModel.save()
-//        guard let type = EmployeeType(rawValue: employeeType.selectedSegmentIndex) else { return }
-//        viewModel.employeeType = type
-//        viewModel.employeeData.setValue(name.text, forKey: "name")
-//        viewModel.employeeData.setValue(Int64(sallary.text!) ?? 0, forKey: "sallary")
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 
     @objc private func changeView() {

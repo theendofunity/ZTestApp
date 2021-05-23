@@ -9,6 +9,6 @@ import Foundation
 
 struct Company {
     var leaders = [Leader]()
-    var bookkeepings = [Bookkeeping]()
+    var bookkeepings = [Bookkeeper]()
     var employees = [Employee]()
 }

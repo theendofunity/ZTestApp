@@ -19,23 +19,21 @@ class EmployeeCellViewModel: ListCellViewModelType {
     }
 
     func name() -> String? {
-        return employee.name
+        return employee.baseInfo.name
     }
 
     func sallary() -> String? {
-        return "\(employee.sallary)"
+        return "\(employee.baseInfo.sallary)"
     }
 
     func dinnerTime() -> String? {
-        guard let begin = employee.employeeInfo?.dinnerTime?.begin,
-              let end = employee.employeeInfo?.dinnerTime?.end
-        else { return nil }
+        let begin = employee.dinnerTime.begin
+        let end = employee.dinnerTime.end
 
         return timeInterval(begin: begin, end: end)
     }
 
     func workplaceNumber() -> String? {
-        guard let number = employee.employeeInfo?.workplaceNumber else { return nil }
-        return "\(number)"
+        return "\(employee.workplaceNumber)"
     }
 }
