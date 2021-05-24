@@ -27,6 +27,9 @@ class ListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 600
+
         setupNavigationBar()
 
         tableView.register(LeadersTableViewCell.self, forCellReuseIdentifier: LeadersTableViewCell.cellIdentifier)
@@ -47,10 +50,6 @@ class ListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.titleForSection(section: section)
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -90,7 +89,6 @@ class ListTableViewController: UITableViewController {
 
         let detailedViewModel = viewModel.detailedViewViewModel() as? DetailedViewViewModel
         detailedViewModel?.savingCompletion = { [weak self] (_, _) in
-//            self?.viewModel.update(data: object, type: type, indexPath: indexPath)
             self?.tableView.reloadData()
         }
         let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .changing)
@@ -137,8 +135,6 @@ class ListTableViewController: UITableViewController {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEmployee))
 
         navigationItem.rightBarButtonItems = [addButton, sortButton]
-
-//        editButtonItem
         navigationItem.leftBarButtonItem = editButtonItem
     }
 

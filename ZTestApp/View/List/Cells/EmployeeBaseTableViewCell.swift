@@ -13,6 +13,7 @@ class EmployeeBaseTableViewCell: UITableViewCell {
 
     let mainStack = UIStackView()
 
+    let photo =  UIImageView()
     let name = UILabel()
     let sallary = UILabel()
     let timeTitle = UILabel()
@@ -34,17 +35,17 @@ class EmployeeBaseTableViewCell: UITableViewCell {
      func setupLayout() {
         mainStack.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(mainStack)
-        mainStack.axis = .horizontal
+        mainStack.axis = .vertical
         mainStack.spacing = 5
         mainStack.distribution = .fillEqually
 
-        let baseDataStack = UIStackView(arrangedSubviews: [name, sallary])
-        baseDataStack.axis = .vertical
-        baseDataStack.spacing = 5
-        mainStack.addArrangedSubview(baseDataStack)
+        photo.image = UIImage(named: "person")
+        let titleStack = UIStackView(arrangedSubviews: [photo, name])
+        titleStack.axis = .horizontal
+        mainStack.addArrangedSubview(titleStack)
 
         let timeStack = UIStackView(arrangedSubviews: [timeTitle, time])
-        timeStack.axis = .vertical
+        timeStack.axis = .horizontal
         timeStack.spacing = 5
         mainStack.addArrangedSubview(timeStack)
 
@@ -56,6 +57,10 @@ class EmployeeBaseTableViewCell: UITableViewCell {
         mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8).isActive = true
         mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
         mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
+
+        photo.translatesAutoresizingMaskIntoConstraints = false
+        photo.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        photo.widthAnchor.constraint(equalToConstant: 30).isActive = true
     }
 
 }

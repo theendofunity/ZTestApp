@@ -15,10 +15,10 @@ class EmployeesTableViewCell: EmployeeBaseTableViewCell {
         willSet(viewModel) {
             guard let viewModel = viewModel else { return }
             name.text = viewModel.name()
-            sallary.text = viewModel.sallary()
+            sallary.text = "Sallary: \(viewModel.sallary() ?? "")"
             timeTitle.text = "Dinner time"
             time.text = viewModel.dinnerTime()
-            workSpaceNumber.text = viewModel.workplaceNumber()
+            workSpaceNumber.text = "Workplace number: \(viewModel.workplaceNumber() ?? "")"
         }
     }
     let workSpaceNumber = UILabel()
@@ -38,10 +38,6 @@ class EmployeesTableViewCell: EmployeeBaseTableViewCell {
     override func setupLayout() {
         super.setupLayout()
 
-        let emptyLabel = UILabel()
-        emptyLabel.text = ""
-        let employeeInfoStack = UIStackView(arrangedSubviews: [workSpaceNumber, emptyLabel])
-        workSpaceNumber.text = "28"
-        super.mainStack.addArrangedSubview(employeeInfoStack)
+        super.mainStack.addArrangedSubview(workSpaceNumber)
     }
 }

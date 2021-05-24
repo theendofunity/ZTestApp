@@ -7,20 +7,6 @@
 
 import UIKit
 
-// extension String {
-//    func htmlAttributedString() -> NSAttributedString? {
-//        guard let data = self.data(using: .iso2022JP) else {
-//            return nil
-//        }
-//
-//        return try? NSAttributedString(
-//            data: data,
-//            options: [.documentType: NSAttributedString.DocumentType.html],
-//            documentAttributes: nil
-//        )
-//    }
-// }
-
 class ServiceTableViewCell: UITableViewCell {
 
 // MARK: - Properties
@@ -57,7 +43,7 @@ class ServiceTableViewCell: UITableViewCell {
 
     private func setupLayout() {
         layer.borderWidth = 1
-        layer.borderColor = UIColor.blue.cgColor
+        layer.borderColor = UIColor.gray.cgColor
 
         let stackView = UIStackView(arrangedSubviews: [idLabel, ratingLabel, timeLabel, descriptionLabel])
         contentView.addSubview(stackView)

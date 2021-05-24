@@ -16,7 +16,7 @@ class LeadersTableViewCell: EmployeeBaseTableViewCell {
         willSet(viewModel) {
             guard let viewModel = viewModel else { return }
             name.text = viewModel.name()
-            sallary.text = viewModel.sallary()
+            sallary.text = "Sallary: \(viewModel.sallary() ?? "")"
             timeTitle.text = "Work time"
             time.text = viewModel.workTime()
         }

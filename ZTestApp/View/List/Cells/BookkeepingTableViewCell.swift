@@ -16,11 +16,11 @@ class BookkeepingTableViewCell: EmployeeBaseTableViewCell {
         willSet(viewModel) {
             guard let viewModel = viewModel else { return }
             name.text = viewModel.name()
-            sallary.text = viewModel.sallary()
+            sallary.text = "Sallary \(viewModel.sallary() ?? "")"
             timeTitle.text = "Dinner time"
             time.text = viewModel.dinnerTime()
-            workSpaceNumber.text = viewModel.workplaceNumber()
-            bookkeepingType.text = viewModel.type()
+            workSpaceNumber.text = "Workplace number: \(viewModel.workplaceNumber() ?? "")"
+            bookkeepingType.text = "Type: \(viewModel.type() ?? "")"
         }
     }
 
@@ -40,11 +40,7 @@ class BookkeepingTableViewCell: EmployeeBaseTableViewCell {
     override func setupLayout() {
         super.setupLayout()
 
-        let bookkeepingInfoStack = UIStackView(arrangedSubviews: [workSpaceNumber, bookkeepingType])
-        bookkeepingInfoStack.axis = .vertical
-        bookkeepingInfoStack.spacing = 5
-        workSpaceNumber.text = "45"
-        bookkeepingType.text = "payroll"
-        super.mainStack.addArrangedSubview(bookkeepingInfoStack)
+        super.mainStack.addArrangedSubview(workSpaceNumber)
+        super.mainStack.addArrangedSubview(bookkeepingType)
     }
 }
