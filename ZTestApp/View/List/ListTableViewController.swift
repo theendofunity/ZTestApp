@@ -97,7 +97,20 @@ class ListTableViewController: UITableViewController {
         navigationController?.pushViewController(detailedView, animated: true)
     }
 
-    // MARK: - UI configuration
+// MARK: - TableViewDelegate
+
+    override func tableView(_ tableView: UITableView,
+                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+                            -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
+            self.viewModel.remove(from: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        let action = UISwipeActionsConfiguration(actions: [deleteAction])
+        return action
+    }
+
+// MARK: - UI configuration
 
     private func setupNavigationBar() {
         title = "List"

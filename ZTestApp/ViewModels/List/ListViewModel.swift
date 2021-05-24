@@ -82,37 +82,15 @@ class ListViewModel {
     func detailedViewViewModel() -> DetailedViewViewModelType? {
         guard let indexPath = selectedCell else { return nil }
 
-        var detailedViewModel: DetailedViewViewModel?
+        guard let object = company.object(for: indexPath) else { return nil }
+        guard let type = EmployeeType(rawValue: indexPath.section) else { return nil }
 
-        switch selectedCell?.section {
-        case 0:
-            let data = company.leaders[indexPath.row]
-            detailedViewModel = DetailedViewViewModel(employeeType: .leader, data: data)
-        case 1:
-            let data = company.bookkeepings[indexPath.row]
-            detailedViewModel = DetailedViewViewModel(employeeType: .bookKeeping, data: data)
-        case 2:
-            let data = company.employees[indexPath.row]
-            detailedViewModel = DetailedViewViewModel(employeeType: .employee, data: data)
-        default:
-            detailedViewModel = nil
-        }
+        let detailedViewModel = DetailedViewViewModel(employeeType: type, data: object)
 
         return detailedViewModel
     }
 
     func save(data: Object?, type: EmployeeType) {
-//        switch type {
-//        case .leader:
-//            guard let leader = data as? Leader else { return }
-//            company.leaders. append(leader)
-//        case .bookKeeping:
-//            guard let bookkeeper = data as? Bookkeeper else { return }
-//            company.bookkeepings.append(bookkeeper)
-//        case .employee:
-//            guard let employee = data as? Employee else { return }
-//            company.employees.append(employee)
-//        }
         guard let data = data else { return }
         RealmManager.saveObject(object: data)
     }
@@ -147,16 +125,8 @@ class ListViewModel {
 //        }
     }
 
-    private func remove(from indexPath: IndexPath) {
-//        switch indexPath.section {
-//        case 0:
-//            company.leaders.remove(at: indexPath.row)
-//        case 1:
-//            company.bookkeepings.remove(at: indexPath.row)
-//        case 2:
-//            company.employees.remove(at: indexPath.row)
-//        default:
-//            return
-//        }
+    func remove(from indexPath: IndexPath) {
+        guard let object = company.object(for: indexPath) else { return }
+        RealmManager.deleteObject(object: object)
     }
 }
