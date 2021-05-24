@@ -90,41 +90,6 @@ class ListViewModel {
         return detailedViewModel
     }
 
-    func save(data: Object?, type: EmployeeType) {
-        guard let data = data else { return }
-        RealmManager.saveObject(object: data)
-    }
-
-    func update(data: Object?, type: EmployeeType, indexPath: IndexPath?) {
-//        guard let indexPath = indexPath else { return }
-//
-//        remove(from: indexPath)
-//
-//        switch type {
-//        case .leader:
-//            guard let leader = data as? Leader else { return }
-//            if indexPath.row >= company.leaders.count {
-//                company.leaders.append(leader)
-//            } else {
-//                company.leaders.insert(leader, at: indexPath.row)
-//            }
-//        case .bookKeeping:
-//            guard let bookkeeper = data as? Bookkeeper else { return }
-//            if indexPath.row >= company.bookkeepings.count {
-//                company.bookkeepings.append(bookkeeper)
-//            } else {
-//                company.bookkeepings.insert(bookkeeper, at: indexPath.row)
-//            }
-//        case .employee:
-//            guard let employee = data as? Employee else { return }
-//            if indexPath.row >= company.employees.count {
-//                company.employees.append(employee)
-//            } else {
-//                company.employees.insert(employee, at: indexPath.row)
-//            }
-//        }
-    }
-
     func remove(from indexPath: IndexPath) {
         guard let object = company.object(for: indexPath) else { return }
         RealmManager.deleteObject(object: object)

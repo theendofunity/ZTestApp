@@ -20,6 +20,20 @@ class RealmManager {
         }
     }
 
+    static func write(completion: () -> Void) {
+        guard let realm = realm else { return }
+        try? realm.write {
+            completion()
+        }
+    }
+
+    static func setName(object: Object, name: String) {
+        guard let realm = realm else { return }
+        try? realm.write {
+            object.setValue(name, forKeyPath: "baseInfo.name")
+        }
+    }
+
     static func saveObject<T: Object>(object: T) {
         guard let realm = realm else { return }
         try? realm.write({
@@ -39,6 +53,7 @@ class RealmManager {
 
         guard let realm = realm else { return company}
 
+//        TODO: catch exceptions
         company.leaders = try? realm.objects(Leader.self)
         company.bookkeepings = try? realm.objects(Bookkeeper.self)
         company.employees = try? realm.objects(Employee.self)

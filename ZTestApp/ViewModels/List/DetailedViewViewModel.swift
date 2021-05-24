@@ -41,7 +41,7 @@ class DetailedViewViewModel: DetailedViewViewModelType {
             endTime = employeeData?.value(forKeyPath: "dinnerTime.end") as? Date
         }
 
-       return (beginTime, endTime)
+        return (beginTime, endTime)
     }
 
     func workplaceNumber() -> String? {
@@ -65,7 +65,7 @@ class DetailedViewViewModel: DetailedViewViewModelType {
         return Int(type)
     }
 
-    func setType(employeeType: EmployeeType) {
+    func createObject(employeeType: EmployeeType) {
         self.employeeType = employeeType
 
         switch employeeType {
@@ -85,39 +85,68 @@ class DetailedViewViewModel: DetailedViewViewModelType {
             data.dinnerTime = EmployeeTime()
             employeeData = data
         }
+
+        save()
     }
 
     func setName(name: String?) {
-        employeeData?.setValue(name, forKeyPath: "baseInfo.name")
+        RealmManager.write {
+            employeeData?.setValue(name, forKeyPath: "baseInfo.name")
+        }
     }
 
     func setSallary(sallary: String?) {
-        employeeData?.setValue(Int(sallary ?? "0"), forKeyPath: "baseInfo.sallary")
+        RealmManager.write {
+            employeeData?.setValue(Int(sallary ?? "0"), forKeyPath: "baseInfo.sallary")
+        }
     }
 
     func setTime(begin: Date?, end: Date?) {
-        if employeeType == .leader {
-            employeeData?.setValue(begin, forKeyPath: "workTime.begin")
-            employeeData?.setValue(end, forKeyPath: "workTime.end")
-        } else if employeeType == .bookKeeping || employeeType == .employee {
-            employeeData?.setValue(begin, forKeyPath: "dinnerTime.begin")
-            employeeData?.setValue(end, forKeyPath: "dinnerTime.end")
+        RealmManager.write {
+            if employeeType == .leader {
+                employeeData?.setValue(begin, forKeyPath: "workTime.begin")
+                employeeData?.setValue(end, forKeyPath: "workTime.end")
+            } else if employeeType == .bookKeeping || employeeType == .employee {
+                employeeData?.setValue(begin, forKeyPath: "dinnerTime.begin")
+                employeeData?.setValue(end, forKeyPath: "dinnerTime.end")
+            }
         }
     }
 
     func setWorkplaceNumber(number: String?) {
-        if employeeType == .bookKeeping || employeeType == .employee {
-            employeeData?.setValue(Int(number ?? "0"), forKeyPath: "workplaceNumber")
+        RealmManager.write {
+            if employeeType == .bookKeeping || employeeType == .employee {
+                employeeData?.setValue(Int(number ?? "0"), forKeyPath: "workplaceNumber")
+            }
         }
     }
 
     func setBookkeeperType(type: Int?) {
-        if employeeType == .bookKeeping {
-            employeeData?.setValue(type, forKeyPath: "type")
+        RealmManager.write {
+            if employeeType == .bookKeeping {
+                employeeData?.setValue(type, forKeyPath: "type")
+            }
         }
     }
 
+    func changeType(type: EmployeeType) {
+        delete()
+        employeeData = nil
+        employeeType = type
+        createObject(employeeType: type)
+    }
+
     func save() {
+        guard let data = employeeData else { return }
+        RealmManager.saveObject(object: data)
+    }
+
+    func update() {
         savingCompletion?(employeeData, employeeType)
+    }
+
+    func delete() {
+        guard let data = employeeData else { return }
+        RealmManager.deleteObject(object: data)
     }
 }

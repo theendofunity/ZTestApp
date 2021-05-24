@@ -35,7 +35,7 @@ class ListTableViewController: UITableViewController {
         tableView.register(EmployeesTableViewCell.self, forCellReuseIdentifier: EmployeesTableViewCell.cellIdentifier)
     }
 
-    // MARK: - Table view data source
+    // MARK: - TableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numbersOfSections()
@@ -89,8 +89,8 @@ class ListTableViewController: UITableViewController {
         viewModel.selectCell(for: indexPath)
 
         let detailedViewModel = viewModel.detailedViewViewModel() as? DetailedViewViewModel
-        detailedViewModel?.savingCompletion = { [weak self] (object, type) in
-            self?.viewModel.update(data: object, type: type, indexPath: indexPath)
+        detailedViewModel?.savingCompletion = { [weak self] (_, _) in
+//            self?.viewModel.update(data: object, type: type, indexPath: indexPath)
             self?.tableView.reloadData()
         }
         let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .changing)
@@ -121,8 +121,7 @@ class ListTableViewController: UITableViewController {
 
     @objc func addEmployee() {
         let detailedViewModel = DetailedViewViewModel(employeeType: .leader, data: nil)
-        detailedViewModel?.savingCompletion = { [weak self] data, type in
-            self?.viewModel.save(data: data, type: type)
+        detailedViewModel?.savingCompletion = { [weak self] _, _ in
             self?.tableView.reloadData()
         }
         let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .adding)
