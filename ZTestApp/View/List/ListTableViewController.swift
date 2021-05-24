@@ -27,6 +27,9 @@ class ListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 600
+
         setupNavigationBar()
 
         tableView.register(LeadersTableViewCell.self, forCellReuseIdentifier: LeadersTableViewCell.cellIdentifier)
@@ -47,19 +50,6 @@ class ListTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.titleForSection(section: section)
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return 80
-        case 1:
-            return 120
-        case 2:
-            return 110
-        default:
-            return 0
-        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
