@@ -50,7 +50,16 @@ class ListTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
+        switch indexPath.section {
+        case 0:
+            return 80
+        case 1:
+            return 120
+        case 2:
+            return 110
+        default:
+            return 0
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -90,7 +99,6 @@ class ListTableViewController: UITableViewController {
 
         let detailedViewModel = viewModel.detailedViewViewModel() as? DetailedViewViewModel
         detailedViewModel?.savingCompletion = { [weak self] (_, _) in
-//            self?.viewModel.update(data: object, type: type, indexPath: indexPath)
             self?.tableView.reloadData()
         }
         let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .changing)
@@ -137,8 +145,6 @@ class ListTableViewController: UITableViewController {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEmployee))
 
         navigationItem.rightBarButtonItems = [addButton, sortButton]
-
-//        editButtonItem
         navigationItem.leftBarButtonItem = editButtonItem
     }
 

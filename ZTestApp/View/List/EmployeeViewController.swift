@@ -15,13 +15,13 @@ class EmployeeViewController: UIViewController {
     var viewModel: DetailedViewViewModel?
 
     let employeeType = UISegmentedControl()
-    let name = UITextField()
-    let sallary = UITextField()
+    let name = TextFieldWithTitle()
+    let sallary = TextFieldWithTitle()
     let timeTitle = UILabel()
     let timeStack = UIStackView()
     let timeBegin = UIDatePicker()
     let timeEnd = UIDatePicker()
-    let workspaceNumber = UITextField()
+    let workspaceNumber = TextFieldWithTitle()
     let bookkepingType = UISegmentedControl()
 
     // MARK: - Initializers
@@ -34,6 +34,7 @@ class EmployeeViewController: UIViewController {
         setupToolBar()
         setupLayout()
         fillView()
+        changeSaveButtonState()
     }
 
     required init?(coder: NSCoder) {
@@ -73,7 +74,12 @@ class EmployeeViewController: UIViewController {
 
         timeStack.axis = .horizontal
         timeStack.addArrangedSubview(timeBegin)
+        let timeLabel = UILabel()
+        timeLabel.text = "-"
+        timeLabel.font = timeLabel.font.withSize(20)
+        timeStack.addArrangedSubview(timeLabel)
         timeStack.addArrangedSubview(timeEnd)
+        timeStack.spacing = 5
         stackView.addArrangedSubview(timeStack)
         stackView.addArrangedSubview(workspaceNumber)
         stackView.addArrangedSubview(bookkepingType)
@@ -96,9 +102,12 @@ class EmployeeViewController: UIViewController {
 
         bookkepingType.selectedSegmentIndex = 0
 
-        name.placeholder = "Name"
-        sallary.placeholder = "Sallary"
-        workspaceNumber.placeholder = "Workspace number"
+        name.title = "Name"
+        name.addTarget(self, action: #selector(changeSaveButtonState), for: .valueChanged)
+        sallary.title = "Sallary"
+        sallary.addTarget(self, action: #selector(changeSaveButtonState), for: .valueChanged)
+        workspaceNumber.title = "Workspace number"
+        workspaceNumber.addTarget(self, action: #selector(changeSaveButtonState), for: .valueChanged)
 
         timeBegin.datePickerMode = .time
         timeEnd.datePickerMode = .time
@@ -106,7 +115,7 @@ class EmployeeViewController: UIViewController {
 
     private func setupStackViewConstraints(for stackView: UIStackView) {
         for element in stackView.arrangedSubviews {
-            element.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            element.heightAnchor.constraint(equalToConstant: 40).isActive = true
         }
 
         NSLayoutConstraint.activate([
@@ -137,7 +146,6 @@ class EmployeeViewController: UIViewController {
             if type != viewModel.employeeType {
                 viewModel.changeType(type: type)
             }
-
         }
 
         viewModel.setName(name: name.text)
@@ -172,6 +180,27 @@ class EmployeeViewController: UIViewController {
         default:
             return
         }
+    }
+
+    @objc private func changeSaveButtonState() {
+        navigationItem.rightBarButtonItem?.isEnabled = false
+
+        guard let type = EmployeeType(rawValue: employeeType.selectedSegmentIndex) else { return }
+
+        if name.isEmpty() || sallary.isEmpty() {
+            navigationItem.rightBarButtonItem?.isEnabled = false
+        } else {
+            navigationItem.rightBarButtonItem?.isEnabled = true
+
+        }
+
+//        if type == .bookKeeping || type == .employee {
+//            if workspaceNumber.isEmpty() {
+//                navigationItem.rightBarButtonItem?.isEnabled = false
+//            }
+//        } else {
+//            navigationItem.rightBarButtonItem?.isEnabled = true
+//        }
     }
 
     private func setTitle() {
