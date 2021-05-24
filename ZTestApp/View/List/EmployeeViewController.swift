@@ -36,14 +36,6 @@ class EmployeeViewController: UIViewController {
         fillView()
     }
 
-    init(type: DetailedViewType) {
-        self.type = type
-        super.init(nibName: nil, bundle: nil)
-
-        setupToolBar()
-        setupLayout()
-    }
-
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

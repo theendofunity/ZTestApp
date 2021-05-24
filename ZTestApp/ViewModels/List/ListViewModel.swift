@@ -10,27 +10,23 @@ import RealmSwift
 
 class ListViewModel {
 
-// MARK: - Properties
+    // MARK: - Properties
 
-    var company: Company?
+    var company = Company()
 
     var selectedCell: IndexPath?
 
-// MARK: - Initializers
+    // MARK: - Initializers
 
     init() {
         company = Company()
-//        company = dataManager.load()
+        //        company = dataManager.load()
     }
 
-// MARK: - Table view controller data
+    // MARK: - Table view controller data
 
     func numbersOfRowsInSection(section: Int) -> Int {
         var numberOfRows = 0
-
-        guard let company = company else {
-            return 0
-        }
 
         switch section {
         case 0:
@@ -67,13 +63,13 @@ class ListViewModel {
 
         switch indexPath.section {
         case 0:
-            guard let leader = company?.leaders[indexPath.row] else { return nil }
+            let leader = company.leaders[indexPath.row]
             return LeaderCellViewModel(leader: leader)
         case 1:
-            guard let bookkeeping = company?.bookkeepings[indexPath.row]  else { return nil }
+            let bookkeeping = company.bookkeepings[indexPath.row]
             return BookkeepingCellViewModel(bookkeeping: bookkeeping)
         case 2:
-            guard let employee = company?.employees[indexPath.row] else { return nil }
+            let employee = company.employees[indexPath.row]
             return EmployeeCellViewModel(employee: employee)
         default:
             return nil
@@ -91,27 +87,18 @@ class ListViewModel {
 
         switch selectedCell?.section {
         case 0:
-            let data = company?.leaders[indexPath.row]
-            if let data  = data {
-                detailedViewModel = DetailedViewViewModel(employeeType: .leader, data: data)
-            }
+            let data = company.leaders[indexPath.row]
+            detailedViewModel = DetailedViewViewModel(employeeType: .leader, data: data)
         case 1:
-            let data = company?.bookkeepings[indexPath.row]
-            if let data  = data {
-                detailedViewModel = DetailedViewViewModel(employeeType: .bookKeeping, data: data)
-            }
+            let data = company.bookkeepings[indexPath.row]
+            detailedViewModel = DetailedViewViewModel(employeeType: .bookKeeping, data: data)
         case 2:
-            let data = company?.employees[indexPath.row]
-            if let data  = data {
-                detailedViewModel = DetailedViewViewModel(employeeType: .employee, data: data)
-            }
+            let data = company.employees[indexPath.row]
+            detailedViewModel = DetailedViewViewModel(employeeType: .employee, data: data)
         default:
             detailedViewModel = nil
         }
 
-        detailedViewModel?.savingCompletion = { [weak self] (object, type) in
-            self?.save(data: object, type: type)
-        }
         return detailedViewModel
     }
 
@@ -119,13 +106,56 @@ class ListViewModel {
         switch type {
         case .leader:
             guard let leader = data as? Leader else { return }
-            company?.leaders.append(leader)
+            company.leaders.append(leader)
         case .bookKeeping:
             guard let bookkeeper = data as? Bookkeeper else { return }
-            company?.bookkeepings.append(bookkeeper)
+            company.bookkeepings.append(bookkeeper)
         case .employee:
             guard let employee = data as? Employee else { return }
-            company?.employees.append(employee)
+            company.employees.append(employee)
+        }
+    }
+
+    func update(data: Object?, type: EmployeeType, indexPath: IndexPath?) {
+        guard let indexPath = indexPath else { return }
+
+        remove(from: indexPath)
+
+        switch type {
+        case .leader:
+            guard let leader = data as? Leader else { return }
+            if indexPath.row >= company.leaders.count {
+                company.leaders.append(leader)
+            } else {
+                company.leaders.insert(leader, at: indexPath.row)
+            }
+        case .bookKeeping:
+            guard let bookkeeper = data as? Bookkeeper else { return }
+            if indexPath.row >= company.bookkeepings.count {
+                company.bookkeepings.append(bookkeeper)
+            } else {
+                company.bookkeepings.insert(bookkeeper, at: indexPath.row)
+            }
+        case .employee:
+            guard let employee = data as? Employee else { return }
+            if indexPath.row >= company.employees.count {
+                company.employees.append(employee)
+            } else {
+                company.employees.insert(employee, at: indexPath.row)
+            }
+        }
+    }
+
+    private func remove(from indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            company.leaders.remove(at: indexPath.row)
+        case 1:
+            company.bookkeepings.remove(at: indexPath.row)
+        case 2:
+            company.employees.remove(at: indexPath.row)
+        default:
+            return
         }
     }
 }

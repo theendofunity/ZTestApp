@@ -63,12 +63,14 @@ class ListTableViewController: UITableViewController {
                 fatalError()
             }
             cell.viewModel = (cellViewModel as? LeaderCellViewModel)
+            return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BookkeepingTableViewCell.cellIdentifier,
                                                            for: indexPath) as? BookkeepingTableViewCell else {
                 fatalError()
             }
             cell.viewModel = (cellViewModel as? BookkeepingCellViewModel)
+            return cell
 
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: EmployeesTableViewCell.cellIdentifier,
@@ -76,17 +78,21 @@ class ListTableViewController: UITableViewController {
                 fatalError()
             }
             cell.viewModel = (cellViewModel as? EmployeeCellViewModel)
+            return cell
 
         default:
             return UITableViewCell()
         }
-        return UITableViewCell()
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.selectCell(for: indexPath)
 
         let detailedViewModel = viewModel.detailedViewViewModel() as? DetailedViewViewModel
+        detailedViewModel?.savingCompletion = { [weak self] (object, type) in
+            self?.viewModel.update(data: object, type: type, indexPath: indexPath)
+            self?.tableView.reloadData()
+        }
         let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .changing)
         navigationController?.pushViewController(detailedView, animated: true)
     }

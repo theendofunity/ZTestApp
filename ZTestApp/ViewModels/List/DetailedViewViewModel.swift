@@ -37,8 +37,8 @@ class DetailedViewViewModel: DetailedViewViewModelType {
             beginTime = employeeData?.value(forKeyPath: "workTime.begin") as? Date
             endTime = employeeData?.value(forKeyPath: "workTime.end") as? Date
         case .bookKeeping, .employee:
-            beginTime = employeeData?.value(forKeyPath: "employeeInfo.dinnerTime.begin") as? Date
-            endTime = employeeData?.value(forKeyPath: "employeeInfo.dinnerTime.end") as? Date
+            beginTime = employeeData?.value(forKeyPath: "dinnerTime.begin") as? Date
+            endTime = employeeData?.value(forKeyPath: "dinnerTime.end") as? Date
         }
 
        return (beginTime, endTime)
@@ -46,7 +46,7 @@ class DetailedViewViewModel: DetailedViewViewModelType {
 
     func workplaceNumber() -> String? {
         if employeeType == .bookKeeping || employeeType == .employee {
-            guard let number = employeeData?.value(forKeyPath: "employeeInfo.workplaceNumber") as? Int16 else {
+            guard let number = employeeData?.value(forKeyPath: "workplaceNumber") as? Int16 else {
                 return nil
             }
 
