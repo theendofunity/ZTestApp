@@ -5,10 +5,10 @@
 //  Created by Дмитрий Дудкин on 16.05.2021.
 //
 
-import Foundation
+import RealmSwift
 
-struct Company {
-    var leaders = [Leader]()
-    var bookkeepings = [Bookkeeper]()
-    var employees = [Employee]()
+class Company {
+    var leaders: Results<Leader>!
+    var bookkeepings: Results<Bookkeeper>!
+    var employees: Results<Employee>!
 }

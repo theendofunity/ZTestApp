@@ -19,8 +19,7 @@ class ListViewModel {
     // MARK: - Initializers
 
     init() {
-        company = Company()
-        //        company = dataManager.load()
+        company = RealmManager.load()
     }
 
     // MARK: - Table view controller data
@@ -103,59 +102,61 @@ class ListViewModel {
     }
 
     func save(data: Object?, type: EmployeeType) {
-        switch type {
-        case .leader:
-            guard let leader = data as? Leader else { return }
-            company.leaders.append(leader)
-        case .bookKeeping:
-            guard let bookkeeper = data as? Bookkeeper else { return }
-            company.bookkeepings.append(bookkeeper)
-        case .employee:
-            guard let employee = data as? Employee else { return }
-            company.employees.append(employee)
-        }
+//        switch type {
+//        case .leader:
+//            guard let leader = data as? Leader else { return }
+//            company.leaders. append(leader)
+//        case .bookKeeping:
+//            guard let bookkeeper = data as? Bookkeeper else { return }
+//            company.bookkeepings.append(bookkeeper)
+//        case .employee:
+//            guard let employee = data as? Employee else { return }
+//            company.employees.append(employee)
+//        }
+        guard let data = data else { return }
+        RealmManager.saveObject(object: data)
     }
 
     func update(data: Object?, type: EmployeeType, indexPath: IndexPath?) {
-        guard let indexPath = indexPath else { return }
-
-        remove(from: indexPath)
-
-        switch type {
-        case .leader:
-            guard let leader = data as? Leader else { return }
-            if indexPath.row >= company.leaders.count {
-                company.leaders.append(leader)
-            } else {
-                company.leaders.insert(leader, at: indexPath.row)
-            }
-        case .bookKeeping:
-            guard let bookkeeper = data as? Bookkeeper else { return }
-            if indexPath.row >= company.bookkeepings.count {
-                company.bookkeepings.append(bookkeeper)
-            } else {
-                company.bookkeepings.insert(bookkeeper, at: indexPath.row)
-            }
-        case .employee:
-            guard let employee = data as? Employee else { return }
-            if indexPath.row >= company.employees.count {
-                company.employees.append(employee)
-            } else {
-                company.employees.insert(employee, at: indexPath.row)
-            }
-        }
+//        guard let indexPath = indexPath else { return }
+//
+//        remove(from: indexPath)
+//
+//        switch type {
+//        case .leader:
+//            guard let leader = data as? Leader else { return }
+//            if indexPath.row >= company.leaders.count {
+//                company.leaders.append(leader)
+//            } else {
+//                company.leaders.insert(leader, at: indexPath.row)
+//            }
+//        case .bookKeeping:
+//            guard let bookkeeper = data as? Bookkeeper else { return }
+//            if indexPath.row >= company.bookkeepings.count {
+//                company.bookkeepings.append(bookkeeper)
+//            } else {
+//                company.bookkeepings.insert(bookkeeper, at: indexPath.row)
+//            }
+//        case .employee:
+//            guard let employee = data as? Employee else { return }
+//            if indexPath.row >= company.employees.count {
+//                company.employees.append(employee)
+//            } else {
+//                company.employees.insert(employee, at: indexPath.row)
+//            }
+//        }
     }
 
     private func remove(from indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            company.leaders.remove(at: indexPath.row)
-        case 1:
-            company.bookkeepings.remove(at: indexPath.row)
-        case 2:
-            company.employees.remove(at: indexPath.row)
-        default:
-            return
-        }
+//        switch indexPath.section {
+//        case 0:
+//            company.leaders.remove(at: indexPath.row)
+//        case 1:
+//            company.bookkeepings.remove(at: indexPath.row)
+//        case 2:
+//            company.employees.remove(at: indexPath.row)
+//        default:
+//            return
+//        }
     }
 }
