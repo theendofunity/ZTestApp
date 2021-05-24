@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CoreData
 
 class ListTableViewController: UITableViewController {
 
@@ -36,7 +35,7 @@ class ListTableViewController: UITableViewController {
         tableView.register(EmployeesTableViewCell.self, forCellReuseIdentifier: EmployeesTableViewCell.cellIdentifier)
     }
 
-    // MARK: - Table view data source
+    // MARK: - TableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numbersOfSections()
@@ -64,12 +63,14 @@ class ListTableViewController: UITableViewController {
                 fatalError()
             }
             cell.viewModel = (cellViewModel as? LeaderCellViewModel)
+            return cell
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: BookkeepingTableViewCell.cellIdentifier,
                                                            for: indexPath) as? BookkeepingTableViewCell else {
                 fatalError()
             }
             cell.viewModel = (cellViewModel as? BookkeepingCellViewModel)
+            return cell
 
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: EmployeesTableViewCell.cellIdentifier,
@@ -77,36 +78,81 @@ class ListTableViewController: UITableViewController {
                 fatalError()
             }
             cell.viewModel = (cellViewModel as? EmployeeCellViewModel)
+            return cell
 
         default:
             return UITableViewCell()
         }
-        return UITableViewCell()
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.selectCell(for: indexPath)
 
         let detailedViewModel = viewModel.detailedViewViewModel() as? DetailedViewViewModel
+        detailedViewModel?.savingCompletion = { [weak self] (_, _) in
+//            self?.viewModel.update(data: object, type: type, indexPath: indexPath)
+            self?.tableView.reloadData()
+        }
         let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .changing)
         navigationController?.pushViewController(detailedView, animated: true)
     }
 
-    // MARK: - UI configuration
+// MARK: - TableViewDelegate
+
+    override func tableView(_ tableView: UITableView,
+                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+                            -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
+            self.viewModel.remove(from: indexPath)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        let action = UISwipeActionsConfiguration(actions: [deleteAction])
+        return action
+    }
+
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(_ tableView: UITableView,
+                            moveRowAt sourceIndexPath: IndexPath,
+                            to destinationIndexPath: IndexPath) {
+
+    }
+
+    override func tableView(_ tableView: UITableView,
+                            targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath,
+                            toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        return sourceIndexPath.section  == proposedDestinationIndexPath.section
+            ? proposedDestinationIndexPath
+            : sourceIndexPath
+    }
+
+// MARK: - UI configuration
 
     private func setupNavigationBar() {
         title = "List"
 
+        let sortButton = UIBarButtonItem(image: #imageLiteral(resourceName: "sort"), style: .plain, target: self, action: #selector(sort))
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEmployee))
-        navigationItem.rightBarButtonItems = [addButton]
+
+        navigationItem.rightBarButtonItems = [addButton, sortButton]
+
+//        editButtonItem
+        navigationItem.leftBarButtonItem = editButtonItem
     }
 
-    @objc func addEmployee() {
+    @objc private func addEmployee() {
+        let detailedViewModel = DetailedViewViewModel(employeeType: .leader, data: nil)
+        detailedViewModel?.savingCompletion = { [weak self] _, _ in
+            self?.tableView.reloadData()
+        }
+        let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .adding)
+        navigationController?.pushViewController(detailedView, animated: true)
+    }
 
-//        let detailedViewModel = DetailedViewViewModel(employeeType: .leader, data: lead)
-//        let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .adding)
-//        navigationController?.pushViewController(detailedView, animated: true)
-//
-//        viewModel.company?.leaders.append(detailedViewModel?.employeeData as? Leader ?? Leader())
+    @objc private func sort() {
+        viewModel.sort()
+        tableView.reloadData()
     }
 }

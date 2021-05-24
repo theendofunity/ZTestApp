@@ -6,13 +6,12 @@
 //
 
 import UIKit
-import CoreData
 
 class EmployeeViewController: UIViewController {
 
     // MARK: - Properties
 
-    let type: DetailedViewType
+    let viewType: DetailedViewType
     var viewModel: DetailedViewViewModel?
 
     let employeeType = UISegmentedControl()
@@ -29,20 +28,12 @@ class EmployeeViewController: UIViewController {
 
     init(viewModel: DetailedViewViewModel?, type: DetailedViewType) {
         self.viewModel = viewModel
-        self.type = type
+        self.viewType = type
         super.init(nibName: nil, bundle: nil)
 
         setupToolBar()
         setupLayout()
-//        fillView()
-    }
-
-    init(type: DetailedViewType) {
-        self.type = type
-        super.init(nibName: nil, bundle: nil)
-
-        setupToolBar()
-        setupLayout()
+        fillView()
     }
 
     required init?(coder: NSCoder) {
@@ -137,12 +128,31 @@ class EmployeeViewController: UIViewController {
 
     @objc private func save() {
         guard let viewModel = viewModel else { return }
-        viewModel.save()
-//        guard let type = EmployeeType(rawValue: employeeType.selectedSegmentIndex) else { return }
-//        viewModel.employeeType = type
-//        viewModel.employeeData.setValue(name.text, forKey: "name")
-//        viewModel.employeeData.setValue(Int64(sallary.text!) ?? 0, forKey: "sallary")
-        dismiss(animated: true, completion: nil)
+
+        guard let type = EmployeeType(rawValue: employeeType.selectedSegmentIndex) else { return }
+
+        if viewType == .adding {
+            viewModel.createObject(employeeType: type)
+        } else if viewType == .changing {
+            if type != viewModel.employeeType {
+                viewModel.changeType(type: type)
+            }
+
+        }
+
+        viewModel.setName(name: name.text)
+        viewModel.setSallary(sallary: sallary.text)
+        viewModel.setTime(begin: timeBegin.date, end: timeEnd.date)
+
+        if type == .bookKeeping {
+            viewModel.setBookkeeperType(type: bookkepingType.selectedSegmentIndex)
+        }
+        if type == .bookKeeping || type == .employee {
+            viewModel.setWorkplaceNumber(number: workspaceNumber.text)
+        }
+
+        viewModel.update()
+        navigationController?.popViewController(animated: true)
     }
 
     @objc private func changeView() {
@@ -165,7 +175,7 @@ class EmployeeViewController: UIViewController {
     }
 
     private func setTitle() {
-        if type == .adding {
+        if viewType == .adding {
             title = "Add new"
         } else {
             title = "Change"
@@ -175,12 +185,14 @@ class EmployeeViewController: UIViewController {
     private func fillView() {
         guard let viewModel = viewModel else { return }
 
-        name.text = viewModel.name()
-        sallary.text = viewModel.sallary()
-        workspaceNumber.text = viewModel.workplaceNumber()
-        bookkepingType.selectedSegmentIndex = viewModel.bookkeepingType() ?? 0
-        let time = viewModel.time()
-        timeBegin.date = time.0 ?? Date()
-        timeEnd.date = time.1 ?? Date()
+        if viewModel.employeeData != nil {
+            name.text = viewModel.name()
+            sallary.text = viewModel.sallary()
+            workspaceNumber.text = viewModel.workplaceNumber()
+            bookkepingType.selectedSegmentIndex = viewModel.bookkeepingType() ?? 0
+            let time = viewModel.time()
+            timeBegin.date = time.0 ?? Date()
+            timeEnd.date = time.1 ?? Date()
+        }
     }
 }

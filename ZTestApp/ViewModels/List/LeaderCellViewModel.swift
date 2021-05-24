@@ -19,16 +19,16 @@ class LeaderCellViewModel: ListCellViewModelType {
     }
 
     func name() -> String? {
-        return leader.name
+        return leader.baseInfo.name
     }
 
     func sallary() -> String? {
-        return "\(leader.sallary)"
+        return "\(leader.baseInfo.sallary)"
     }
 
     func workTime() -> String? {
-        guard let begin = leader.businessHours?.begin,
-              let end = leader.businessHours?.end else { return nil }
+        let begin = leader.workTime.begin
+        let end = leader.workTime.end
 
         return timeInterval(begin: begin, end: end)
     }

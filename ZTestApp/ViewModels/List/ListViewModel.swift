@@ -6,32 +6,26 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class ListViewModel {
 
-// MARK: - Properties
+    // MARK: - Properties
 
-    let dataManager = CoreDataManager()
-
-    var company: Company?
+    var company = Company()
 
     var selectedCell: IndexPath?
 
-// MARK: - Initializers
+    // MARK: - Initializers
 
     init() {
-        company = dataManager.load()
+        company = RealmManager.load()
     }
 
-// MARK: - Table view controller data
+    // MARK: - Table view controller data
 
     func numbersOfRowsInSection(section: Int) -> Int {
         var numberOfRows = 0
-
-        guard let company = company else {
-            return 0
-        }
 
         switch section {
         case 0:
@@ -68,13 +62,13 @@ class ListViewModel {
 
         switch indexPath.section {
         case 0:
-            guard let leader = company?.leaders[indexPath.row] else { return nil }
+            let leader = company.leaders[indexPath.row]
             return LeaderCellViewModel(leader: leader)
         case 1:
-            guard let bookkeeping = company?.bookkeepings[indexPath.row]  else { return nil }
+            let bookkeeping = company.bookkeepings[indexPath.row]
             return BookkeepingCellViewModel(bookkeeping: bookkeeping)
         case 2:
-            guard let employee = company?.employees[indexPath.row] else { return nil }
+            let employee = company.employees[indexPath.row]
             return EmployeeCellViewModel(employee: employee)
         default:
             return nil
@@ -88,31 +82,24 @@ class ListViewModel {
     func detailedViewViewModel() -> DetailedViewViewModelType? {
         guard let indexPath = selectedCell else { return nil }
 
-        switch selectedCell?.section {
-        case 0:
-            let data = company?.leaders[indexPath.row]
-            if let data  = data {
-                return DetailedViewViewModel(employeeType: .leader, data: data)
-            }
-        case 1:
-            let data = company?.bookkeepings[indexPath.row]
-            if let data  = data {
-                return DetailedViewViewModel(employeeType: .bookKeeping, data: data)
-            }
-        case 2:
-            let data = company?.employees[indexPath.row]
-            if let data  = data {
-                return DetailedViewViewModel(employeeType: .employee, data: data)
-            }
-        default:
-            return nil
-        }
-        return nil
+        guard let object = company.object(for: indexPath) else { return nil }
+        guard let type = EmployeeType(rawValue: indexPath.section) else { return nil }
+
+        let detailedViewModel = DetailedViewViewModel(employeeType: type, data: object)
+
+        return detailedViewModel
     }
 
-    func save(object: NSManagedObject, type: EmployeeType) {
-        if type == .leader {
+// MARK: - Data base
 
-        }
+    func remove(from indexPath: IndexPath) {
+        guard let object = company.object(for: indexPath) else { return }
+        RealmManager.deleteObject(object: object)
+    }
+
+    func sort() {
+        company.leaders = company.leaders.sorted(byKeyPath: "baseInfo.name")
+        company.bookkeepings = company.bookkeepings.sorted(byKeyPath: "baseInfo.name")
+        company.employees = company.employees.sorted(byKeyPath: "baseInfo.name")
     }
 }
