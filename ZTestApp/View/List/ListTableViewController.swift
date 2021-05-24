@@ -110,21 +110,49 @@ class ListTableViewController: UITableViewController {
         return action
     }
 
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    override func tableView(_ tableView: UITableView,
+                            moveRowAt sourceIndexPath: IndexPath,
+                            to destinationIndexPath: IndexPath) {
+
+    }
+
+    override func tableView(_ tableView: UITableView,
+                            targetIndexPathForMoveFromRowAt sourceIndexPath: IndexPath,
+                            toProposedIndexPath proposedDestinationIndexPath: IndexPath) -> IndexPath {
+        return sourceIndexPath.section  == proposedDestinationIndexPath.section
+            ? proposedDestinationIndexPath
+            : sourceIndexPath
+    }
+
 // MARK: - UI configuration
 
     private func setupNavigationBar() {
         title = "List"
 
+        let sortButton = UIBarButtonItem(image: #imageLiteral(resourceName: "sort"), style: .plain, target: self, action: #selector(sort))
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEmployee))
-        navigationItem.rightBarButtonItems = [addButton]
+
+        navigationItem.rightBarButtonItems = [addButton, sortButton]
+
+//        editButtonItem
+        navigationItem.leftBarButtonItem = editButtonItem
     }
 
-    @objc func addEmployee() {
+    @objc private func addEmployee() {
         let detailedViewModel = DetailedViewViewModel(employeeType: .leader, data: nil)
         detailedViewModel?.savingCompletion = { [weak self] _, _ in
             self?.tableView.reloadData()
         }
         let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .adding)
         navigationController?.pushViewController(detailedView, animated: true)
+    }
+
+    @objc private func sort() {
+        viewModel.sort()
+        tableView.reloadData()
     }
 }

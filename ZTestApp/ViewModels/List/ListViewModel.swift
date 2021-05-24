@@ -90,8 +90,16 @@ class ListViewModel {
         return detailedViewModel
     }
 
+// MARK: - Data base
+
     func remove(from indexPath: IndexPath) {
         guard let object = company.object(for: indexPath) else { return }
         RealmManager.deleteObject(object: object)
+    }
+
+    func sort() {
+        company.leaders = company.leaders.sorted(byKeyPath: "baseInfo.name")
+        company.bookkeepings = company.bookkeepings.sorted(byKeyPath: "baseInfo.name")
+        company.employees = company.employees.sorted(byKeyPath: "baseInfo.name")
     }
 }
