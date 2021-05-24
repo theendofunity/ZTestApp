@@ -42,9 +42,6 @@ class EmployeeBaseTableViewCell: UITableViewCell {
         photo.image = UIImage(named: "person")
         let titleStack = UIStackView(arrangedSubviews: [photo, name])
         titleStack.axis = .horizontal
-        photo.translatesAutoresizingMaskIntoConstraints = false
-        photo.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        photo.widthAnchor.constraint(equalToConstant: 30).isActive = true
         mainStack.addArrangedSubview(titleStack)
 
         let timeStack = UIStackView(arrangedSubviews: [timeTitle, time])
@@ -60,6 +57,10 @@ class EmployeeBaseTableViewCell: UITableViewCell {
         mainStack.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8).isActive = true
         mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8).isActive = true
         mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8).isActive = true
+
+        photo.translatesAutoresizingMaskIntoConstraints = false
+        photo.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        photo.widthAnchor.constraint(equalToConstant: 30).isActive = true
     }
 
 }

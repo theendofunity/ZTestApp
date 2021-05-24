@@ -103,11 +103,11 @@ class EmployeeViewController: UIViewController {
         bookkepingType.selectedSegmentIndex = 0
 
         name.title = "Name"
-        name.addTarget(self, action: #selector(changeSaveButtonState), for: .valueChanged)
+        name.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingDidBegin)
         sallary.title = "Sallary"
-        sallary.addTarget(self, action: #selector(changeSaveButtonState), for: .valueChanged)
+        sallary.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingDidBegin)
         workspaceNumber.title = "Workspace number"
-        workspaceNumber.addTarget(self, action: #selector(changeSaveButtonState), for: .valueChanged)
+        workspaceNumber.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingDidBegin)
 
         timeBegin.datePickerMode = .time
         timeEnd.datePickerMode = .time
@@ -189,39 +189,34 @@ class EmployeeViewController: UIViewController {
 
         if name.isEmpty() || sallary.isEmpty() {
             navigationItem.rightBarButtonItem?.isEnabled = false
+        } else if type == .bookKeeping || type == .employee {
+            if !workspaceNumber.isEmpty() {
+                navigationItem.rightBarButtonItem?.isEnabled = true
+            }
         } else {
             navigationItem.rightBarButtonItem?.isEnabled = true
-
-        }
-
-//        if type == .bookKeeping || type == .employee {
-//            if workspaceNumber.isEmpty() {
-//                navigationItem.rightBarButtonItem?.isEnabled = false
-//            }
-//        } else {
-//            navigationItem.rightBarButtonItem?.isEnabled = true
-//        }
-    }
-
-    private func setTitle() {
-        if viewType == .adding {
-            title = "Add new"
-        } else {
-            title = "Change"
         }
     }
 
-    private func fillView() {
-        guard let viewModel = viewModel else { return }
-
-        if viewModel.employeeData != nil {
-            name.text = viewModel.name()
-            sallary.text = viewModel.sallary()
-            workspaceNumber.text = viewModel.workplaceNumber()
-            bookkepingType.selectedSegmentIndex = viewModel.bookkeepingType() ?? 0
-            let time = viewModel.time()
-            timeBegin.date = time.0 ?? Date()
-            timeEnd.date = time.1 ?? Date()
-        }
+private func setTitle() {
+    if viewType == .adding {
+        title = "Add new"
+    } else {
+        title = "Change"
     }
+}
+
+private func fillView() {
+    guard let viewModel = viewModel else { return }
+
+    if viewModel.employeeData != nil {
+        name.text = viewModel.name()
+        sallary.text = viewModel.sallary()
+        workspaceNumber.text = viewModel.workplaceNumber()
+        bookkepingType.selectedSegmentIndex = viewModel.bookkeepingType() ?? 0
+        let time = viewModel.time()
+        timeBegin.date = time.0 ?? Date()
+        timeEnd.date = time.1 ?? Date()
+    }
+}
 }
