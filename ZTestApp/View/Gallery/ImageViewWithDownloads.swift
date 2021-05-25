@@ -12,7 +12,7 @@ class ImageViewWithDownloads: UIImageView {
 
 // MARK: - Properties
 
-    let downloader = ImageUrlsManager()
+    let urls = ImageUrlsManager()
 
 // MARK: - Initializers
 
@@ -29,26 +29,26 @@ class ImageViewWithDownloads: UIImageView {
 // MARK: - image setup
 
     func setCurrentImage(completion: (() -> Void)?) {
-        let url = downloader.currentUrl()
+        let url = urls.currentUrl()
         setImage(with: url, completion: completion)
     }
 
     func nextImage(completion: (() -> Void)?) {
-        let url = downloader.nextUrl()
+        let url = urls.nextUrl()
         setImage(with: url, completion: completion)
     }
 
     func previousImage(completion: (() -> Void)?) {
-        let url = downloader.previousUrl()
+        let url = urls.previousUrl()
         setImage(with: url, completion: completion)
     }
 
     func isFirstImage() -> Bool {
-        return downloader.isFirstUrl()
+        return urls.isFirstUrl()
     }
 
     func isLastImage() -> Bool {
-        return downloader.isLastUrl()
+        return urls.isLastUrl()
     }
 
 // MARK: - Private functions

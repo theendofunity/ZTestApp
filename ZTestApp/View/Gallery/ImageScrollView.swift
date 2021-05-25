@@ -23,9 +23,8 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         self.delegate = self
 
         setupUi()
-        setupGesture()
 
-        imageView.downloader.fetchImageUrls { [weak self] in
+        imageView.urls.fetchImageUrls { [weak self] in
             DispatchQueue.main.async {
                 self?.imageView.setCurrentImage(completion: self?.configurationCompletion)
             }
@@ -119,31 +118,6 @@ class ImageScrollView: UIScrollView, UIScrollViewDelegate {
         showsHorizontalScrollIndicator = false
 
         self.addSubview(imageView)
-    }
-
-    // MARK: - Gestures
-
-    private func setupGesture() {
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture(gesture:)))
-        swipeRight.direction = .right
-        addGestureRecognizer(swipeRight)
-
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture(gesture:)))
-        swipeLeft.direction = .left
-        addGestureRecognizer(swipeLeft)
-    }
-
-    @objc private func swipeGesture(gesture: UIGestureRecognizer) {
-        guard let gesture = gesture as? UISwipeGestureRecognizer else { return }
-
-        switch gesture.direction {
-        case .left:
-            nextImage()
-        case .right:
-            previousImage()
-        default:
-            return
-        }
     }
 
     // MARK: - UIScrollViewDelegate

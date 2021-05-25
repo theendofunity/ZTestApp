@@ -24,6 +24,7 @@ class GalleryViewController: UIViewController {
         title = NSLocalizedString("Gallery", comment: "")
         setupLayout()
         setupToolBar()
+        setupGesture()
     }
 
     // MARK: - UI configuration
@@ -35,8 +36,8 @@ class GalleryViewController: UIViewController {
         view.addSubview(scrollView)
 
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8),
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8)
         ])
@@ -73,6 +74,32 @@ class GalleryViewController: UIViewController {
     @objc private func previousImage() {
         scrollView?.previousImage()
         changeToolbarButtonsState()
+    }
+
+    // MARK: - Gestures
+
+    private func setupGesture() {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture(gesture:)))
+        swipeRight.direction = .right
+
+        view.addGestureRecognizer(swipeRight)
+
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(swipeGesture(gesture:)))
+        swipeLeft.direction = .left
+        view.addGestureRecognizer(swipeLeft)
+    }
+
+    @objc private func swipeGesture(gesture: UIGestureRecognizer) {
+        guard let gesture = gesture as? UISwipeGestureRecognizer else { return }
+
+        switch gesture.direction {
+        case .left:
+            nextImage()
+        case .right:
+            previousImage()
+        default:
+            return
+        }
     }
 
     private func changeToolbarButtonsState() {

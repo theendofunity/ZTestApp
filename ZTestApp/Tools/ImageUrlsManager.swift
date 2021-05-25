@@ -16,16 +16,14 @@ class ImageUrlsManager {
 // MARK: - urls getters
 
     func nextUrl() -> URL? {
-        currentIndex += 1
-        if currentIndex == imageUrls.count {
-            currentIndex -= 1
+        if currentIndex < (imageUrls.count - 1) {
+            currentIndex += 1
         }
         return currentUrl()
     }
     func previousUrl() -> URL? {
-        currentIndex -= 1
-        if currentIndex < 0 {
-            currentIndex = 0
+        if currentIndex != 0 {
+            currentIndex -= 1
         }
         return currentUrl()
     }
