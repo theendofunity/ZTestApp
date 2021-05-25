@@ -43,6 +43,13 @@ class GalleryViewController: UIViewController {
     }
 
     private func setupToolBar() {
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.isTranslucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clear
+        self.navigationController?.navigationBar.titleTextAttributes =
+            [NSAttributedString.Key.foregroundColor: UIColor.white]
+
         let nextBtn = UIBarButtonItem(title: NSLocalizedString("Next", comment: ""),
                                       style: .plain,
                                       target: self,
