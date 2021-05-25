@@ -131,4 +131,23 @@ class ListViewModel {
 //        company.bookkeepings = company.bookkeepings.sorted(byKeyPath: "baseInfo.name")
 //        company.employees = company.employees.sorted(byKeyPath: "baseInfo.name")
     }
+
+    func move(from source: IndexPath, to destination: IndexPath) {
+        switch source.section {
+        case 0:
+            RealmManager.write {
+                company?.leaders.move(from: source.row, to: destination.row)
+            }
+        case 1:
+            RealmManager.write {
+                company?.bookkeepings.move(from: source.row, to: destination.row)
+            }
+        case 2:
+            RealmManager.write {
+                company?.bookkeepings.move(from: source.row, to: destination.row)
+            }
+        default:
+            return
+        }
+    }
 }

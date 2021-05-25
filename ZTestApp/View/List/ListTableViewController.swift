@@ -119,7 +119,7 @@ class ListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             moveRowAt sourceIndexPath: IndexPath,
                             to destinationIndexPath: IndexPath) {
-
+        viewModel.move(from: sourceIndexPath, to: destinationIndexPath)
     }
 
     override func tableView(_ tableView: UITableView,
