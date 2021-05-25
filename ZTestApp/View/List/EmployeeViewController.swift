@@ -107,11 +107,11 @@ class EmployeeViewController: UIViewController {
         bookkepingType.selectedSegmentIndex = 0
 
         name.title = "Name"
-        name.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingDidBegin)
+        name.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingChanged)
         sallary.title = "Sallary"
-        sallary.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingDidBegin)
+        sallary.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingChanged)
         workspaceNumber.title = "Workplace number"
-        workspaceNumber.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingDidBegin)
+        workspaceNumber.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingChanged)
 
         timeBegin.datePickerMode = .time
         timeEnd.datePickerMode = .time
