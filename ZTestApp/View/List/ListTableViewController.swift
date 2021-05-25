@@ -145,6 +145,7 @@ class ListTableViewController: UITableViewController {
     @objc private func addEmployee() {
         let detailedViewModel = DetailedViewViewModel(employeeType: .leaders, data: nil)
         detailedViewModel?.savingCompletion = { [weak self] object, type, isDataCreated in
+            print(isDataCreated)
             if isDataCreated {
                 self?.viewModel.save(object: object, type: type)
             }

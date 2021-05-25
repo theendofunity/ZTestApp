@@ -12,27 +12,22 @@ class ListViewModel {
 
     // MARK: - Properties
 
-    var company: Company?
-
+    var company = Company()
+    var sorting = SortTypes.none
     var selectedCell: IndexPath?
 
     // MARK: - Initializers
 
     init() {
-        let loadedData = RealmManager.load()
-        if loadedData != nil {
-            self.company = loadedData!
-        } else {
-            self.company = Company()
-        }
+        guard let data = RealmManager.load() else {
+            return }
+        self.company = data
     }
 
     // MARK: - Table view controller data
 
     func numbersOfRowsInSection(section: Int) -> Int {
         var numberOfRows = 0
-
-        guard let company = company else { return 0 }
 
         switch section {
         case 0:
@@ -66,9 +61,6 @@ class ListViewModel {
     }
 
     func cellViewModel(for indexPath: IndexPath) -> ListCellViewModelType? {
-
-        guard let company = company else { return nil }
-
         switch indexPath.section {
         case 0:
             let leader = company.leaders[indexPath.row]
@@ -89,7 +81,6 @@ class ListViewModel {
     }
 
     func detailedViewViewModel() -> DetailedViewViewModelType? {
-        guard let company = company else { return nil }
         guard let indexPath = selectedCell else { return nil }
 
         guard let object = company.object(for: indexPath) else { return nil }
@@ -103,8 +94,6 @@ class ListViewModel {
 // MARK: - Data base
 
     func remove(from indexPath: IndexPath) {
-        guard let company = company else { return }
-
         guard let object = company.object(for: indexPath) else { return }
         RealmManager.deleteObject(object: object)
     }
@@ -114,37 +103,36 @@ class ListViewModel {
             switch type {
             case .leaders:
                 guard let leader = object as? Leader else { return }
-                company?.leaders.append(leader)
+                company.leaders.append(leader)
             case .bookkeepings:
                 guard let bookkeeper = object as? Bookkeeper else { return }
-                company?.bookkeepings.append(bookkeeper)
+                company.bookkeepings.append(bookkeeper)
             case .employees:
                 guard let employee = object as? Employee else { return }
-                company?.employees.append(employee)
-
+                company.employees.append(employee)
             }
         }
+        RealmManager.saveObject(object: company)
+
     }
 
     func sort() {
-//        company.leaders = company.leaders.sorted(byKeyPath: "baseInfo.name")
-//        company.bookkeepings = company.bookkeepings.sorted(byKeyPath: "baseInfo.name")
-//        company.employees = company.employees.sorted(byKeyPath: "baseInfo.name")
+        sorting = .byName
     }
 
     func move(from source: IndexPath, to destination: IndexPath) {
         switch source.section {
         case 0:
             RealmManager.write {
-                company?.leaders.move(from: source.row, to: destination.row)
+                company.leaders.move(from: source.row, to: destination.row)
             }
         case 1:
             RealmManager.write {
-                company?.bookkeepings.move(from: source.row, to: destination.row)
+                company.bookkeepings.move(from: source.row, to: destination.row)
             }
         case 2:
             RealmManager.write {
-                company?.bookkeepings.move(from: source.row, to: destination.row)
+                company.bookkeepings.move(from: source.row, to: destination.row)
             }
         default:
             return

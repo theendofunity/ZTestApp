@@ -25,4 +25,16 @@ class Company: Object {
             return nil
         }
     }
+
+    func sortedLeaders() -> Results<Leader> {
+        return leaders.sorted(byKeyPath: SortTypes.byName.rawValue)
+    }
+
+    func sortedBookkeepings() -> Results<Bookkeeper> {
+        return bookkeepings.sorted(byKeyPath: SortTypes.byName.rawValue)
+    }
+
+    func sortedEmployees() -> Results<Employee> {
+        return employees.sorted(byKeyPath: SortTypes.byName.rawValue)
+    }
 }

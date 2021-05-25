@@ -11,14 +11,6 @@ import RealmSwift
 let realm = try? Realm()
 
 class RealmManager {
-    static func save(company: Company) {
-        guard let realm = realm else { return }
-        try? realm.write {
-            realm.add(company.leaders)
-            realm.add(company.employees)
-            realm.add(company.leaders)
-        }
-    }
 
     static func write(completion: () -> Void) {
         guard let realm = realm else { return }
@@ -51,6 +43,12 @@ class RealmManager {
     static func load() -> Company? {
         guard let realm = realm else { return nil}
         let company = try? realm.objects(Company.self)
+        return company?.first
+    }
+
+    static func loadSorted(sortingType: SortTypes) -> Company? {
+        guard let realm = realm else { return nil}
+        let company = try? realm.objects(Company.self).sorted(byKeyPath: sortingType.rawValue)
         return company?.first
     }
 }

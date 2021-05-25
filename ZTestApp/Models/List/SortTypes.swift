@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+enum SortTypes: String {
+    case none
+    case byName = "baseInfo.name"
+    case byOrder = "baseInfo.order"
+}
