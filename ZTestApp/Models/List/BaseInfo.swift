@@ -11,4 +11,5 @@ import RealmSwift
 class BaseInfo: Object {
     @objc dynamic var name = ""
     @objc dynamic var sallary = 0
+    @objc dynamic var order = 0
 }

@@ -48,15 +48,9 @@ class RealmManager {
         })
     }
 
-    static func load() -> Company {
-        let company = Company()
-
-        guard let realm = realm else { return company}
-
-//        TODO: catch exceptions
-        company.leaders = try? realm.objects(Leader.self)
-        company.bookkeepings = try? realm.objects(Bookkeeper.self)
-        company.employees = try? realm.objects(Employee.self)
-        return company
+    static func load() -> Company? {
+        guard let realm = realm else { return nil}
+        let company = try? realm.objects(Company.self)
+        return company?.first
     }
 }

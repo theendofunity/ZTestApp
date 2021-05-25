@@ -88,7 +88,10 @@ class ListTableViewController: UITableViewController {
         viewModel.selectCell(for: indexPath)
 
         let detailedViewModel = viewModel.detailedViewViewModel() as? DetailedViewViewModel
-        detailedViewModel?.savingCompletion = { [weak self] (_, _) in
+        detailedViewModel?.savingCompletion = { [weak self] (object, type, isDataCreated) in
+            if isDataCreated {
+                self?.viewModel.save(object: object, type: type)
+            }
             self?.tableView.reloadData()
         }
         let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .changing)
@@ -103,7 +106,7 @@ class ListTableViewController: UITableViewController {
         let deleteTitle = NSLocalizedString("Delete", comment: "")
         let deleteAction = UIContextualAction(style: .destructive, title: deleteTitle) { _, _, _ in
             self.viewModel.remove(from: indexPath)
-            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.tableView.reloadData()
         }
         let action = UISwipeActionsConfiguration(actions: [deleteAction])
         return action
@@ -141,7 +144,10 @@ class ListTableViewController: UITableViewController {
 
     @objc private func addEmployee() {
         let detailedViewModel = DetailedViewViewModel(employeeType: .leaders, data: nil)
-        detailedViewModel?.savingCompletion = { [weak self] _, _ in
+        detailedViewModel?.savingCompletion = { [weak self] object, type, isDataCreated in
+            if isDataCreated {
+                self?.viewModel.save(object: object, type: type)
+            }
             self?.tableView.reloadData()
         }
         let detailedView = EmployeeViewController(viewModel: detailedViewModel, type: .adding)

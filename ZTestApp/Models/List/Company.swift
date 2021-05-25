@@ -8,10 +8,10 @@
 import RealmSwift
 import UIKit
 
-class Company {
-    var leaders: Results<Leader>!
-    var bookkeepings: Results<Bookkeeper>!
-    var employees: Results<Employee>!
+class Company: Object {
+    var leaders = List<Leader>()
+    var bookkeepings = List<Bookkeeper>()
+    var employees = List<Employee>()
 
     func object(for indexPath: IndexPath) -> Object? {
         switch indexPath.section {

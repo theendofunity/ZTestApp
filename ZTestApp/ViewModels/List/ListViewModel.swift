@@ -12,20 +12,27 @@ class ListViewModel {
 
     // MARK: - Properties
 
-    var company = Company()
+    var company: Company?
 
     var selectedCell: IndexPath?
 
     // MARK: - Initializers
 
     init() {
-        company = RealmManager.load()
+        let loadedData = RealmManager.load()
+        if loadedData != nil {
+            self.company = loadedData!
+        } else {
+            self.company = Company()
+        }
     }
 
     // MARK: - Table view controller data
 
     func numbersOfRowsInSection(section: Int) -> Int {
         var numberOfRows = 0
+
+        guard let company = company else { return 0 }
 
         switch section {
         case 0:
@@ -60,6 +67,8 @@ class ListViewModel {
 
     func cellViewModel(for indexPath: IndexPath) -> ListCellViewModelType? {
 
+        guard let company = company else { return nil }
+
         switch indexPath.section {
         case 0:
             let leader = company.leaders[indexPath.row]
@@ -80,6 +89,7 @@ class ListViewModel {
     }
 
     func detailedViewViewModel() -> DetailedViewViewModelType? {
+        guard let company = company else { return nil }
         guard let indexPath = selectedCell else { return nil }
 
         guard let object = company.object(for: indexPath) else { return nil }
@@ -93,13 +103,32 @@ class ListViewModel {
 // MARK: - Data base
 
     func remove(from indexPath: IndexPath) {
+        guard let company = company else { return }
+
         guard let object = company.object(for: indexPath) else { return }
         RealmManager.deleteObject(object: object)
     }
 
+    func save(object: Object?, type: EmployeeType) {
+        RealmManager.write {
+            switch type {
+            case .leaders:
+                guard let leader = object as? Leader else { return }
+                company?.leaders.append(leader)
+            case .bookkeepings:
+                guard let bookkeeper = object as? Bookkeeper else { return }
+                company?.bookkeepings.append(bookkeeper)
+            case .employees:
+                guard let employee = object as? Employee else { return }
+                company?.employees.append(employee)
+
+            }
+        }
+    }
+
     func sort() {
-        company.leaders = company.leaders.sorted(byKeyPath: "baseInfo.name")
-        company.bookkeepings = company.bookkeepings.sorted(byKeyPath: "baseInfo.name")
-        company.employees = company.employees.sorted(byKeyPath: "baseInfo.name")
+//        company.leaders = company.leaders.sorted(byKeyPath: "baseInfo.name")
+//        company.bookkeepings = company.bookkeepings.sorted(byKeyPath: "baseInfo.name")
+//        company.employees = company.employees.sorted(byKeyPath: "baseInfo.name")
     }
 }
