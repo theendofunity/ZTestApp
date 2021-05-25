@@ -15,10 +15,12 @@ class EmployeesTableViewCell: EmployeeBaseTableViewCell {
         willSet(viewModel) {
             guard let viewModel = viewModel else { return }
             name.text = viewModel.name()
-            sallary.text = "Sallary: \(viewModel.sallary() ?? "")"
-            timeTitle.text = "Dinner time"
+            let sallaryTitle = NSLocalizedString("Sallary", comment: "")
+            sallary.text = sallaryTitle + ": " + "\(viewModel.sallary() ?? "")"
+            timeTitle.text = NSLocalizedString("Dinner time", comment: "")
             time.text = viewModel.dinnerTime()
-            workSpaceNumber.text = "Workplace number: \(viewModel.workplaceNumber() ?? "")"
+            let workplaceTitle = NSLocalizedString("Workplace number", comment: "")
+            workSpaceNumber.text = workplaceTitle + ": " + "\(viewModel.workplaceNumber() ?? "")"
         }
     }
     let workSpaceNumber = UILabel()

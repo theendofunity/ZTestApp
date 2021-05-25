@@ -1,0 +1,33 @@
+/* 
+  Localizable.strings
+  ZTestApp
+
+  Created by Дмитрий Дудкин on 25.05.2021.
+  
+*/
+
+"List" = "Список";
+"Gallery" = "Галерея";
+"Service" = "Сервис";
+
+"Next" = "Дальше";
+"Previous" = "Назад";
+"Time" = "Время";
+"Rating:" = "Рейтинг";
+
+"Leaders" = "Руководители";
+"Bookkeepings" = "Бухгалтерия";
+"Employees" = "Сотрудники";
+
+"Name" = "ФИО";
+"Sallary" = "Зарплата";
+"Work time" = "Рабочее время";
+"Dinner time" = "Обед";
+"Workplace number" = "Рабочее место";
+"Type" = "Тип";
+"Payroll" = "Начисление ЗП";
+"Accounting" = "Учет материалов";
+
+"Delete" = "Удалить";
+"Add new" = "Создать";
+"Change" = "Изменить";

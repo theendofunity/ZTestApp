@@ -16,8 +16,9 @@ class LeadersTableViewCell: EmployeeBaseTableViewCell {
         willSet(viewModel) {
             guard let viewModel = viewModel else { return }
             name.text = viewModel.name()
-            sallary.text = "Sallary: \(viewModel.sallary() ?? "")"
-            timeTitle.text = "Work time"
+            let sallaryTitle = NSLocalizedString("Sallary", comment: "")
+            sallary.text = sallaryTitle + ": " + "\(viewModel.sallary() ?? "")"
+            timeTitle.text = NSLocalizedString("Work time", comment: "")
             time.text = viewModel.workTime()
         }
     }

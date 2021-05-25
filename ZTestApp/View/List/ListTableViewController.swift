@@ -100,7 +100,8 @@ class ListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView,
                             trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
                             -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _, _, _ in
+        let deleteTitle = NSLocalizedString("Delete", comment: "")
+        let deleteAction = UIContextualAction(style: .destructive, title: deleteTitle) { _, _, _ in
             self.viewModel.remove(from: indexPath)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
         }
@@ -129,7 +130,7 @@ class ListTableViewController: UITableViewController {
 // MARK: - UI configuration
 
     private func setupNavigationBar() {
-        title = "List"
+        title = NSLocalizedString("List", comment: "")
 
         let sortButton = UIBarButtonItem(image: #imageLiteral(resourceName: "sort"), style: .plain, target: self, action: #selector(sort))
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addEmployee))
@@ -139,7 +140,7 @@ class ListTableViewController: UITableViewController {
     }
 
     @objc private func addEmployee() {
-        let detailedViewModel = DetailedViewViewModel(employeeType: .leader, data: nil)
+        let detailedViewModel = DetailedViewViewModel(employeeType: .leaders, data: nil)
         detailedViewModel?.savingCompletion = { [weak self] _, _ in
             self?.tableView.reloadData()
         }

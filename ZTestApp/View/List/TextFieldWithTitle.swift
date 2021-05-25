@@ -18,7 +18,8 @@ class TextFieldWithTitle: UIControl {
             return label.text
         }
         set {
-            label.text = newValue
+            let localizedTitle = NSLocalizedString(newValue ?? "", comment: "")
+            label.text = localizedTitle
         }
     }
 

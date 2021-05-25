@@ -24,13 +24,13 @@ class TabBarController: UITabBarController {
         let listViewModel = ListViewModel()
         let serviceViewModel = ServiceViewViewModel()
         viewControllers = [
-            createTabBarItem(title: "List",
+            createTabBarItem(title: NSLocalizedString("List", comment: ""),
                              icon: UIImage(systemName: "list.dash"),
                              viewController: ListTableViewController(viewModel: listViewModel)),
-            createTabBarItem(title: "Gallery",
+            createTabBarItem(title: NSLocalizedString("Gallery", comment: ""),
                              icon: UIImage(systemName: "photo"),
                              viewController: GalleryViewController()),
-            createTabBarItem(title: "Service",
+            createTabBarItem(title: NSLocalizedString("Service", comment: ""),
                              icon: UIImage(systemName: "questionmark.folder.fill"),
                              viewController: ServiceViewController(viewModel: serviceViewModel))
         ]

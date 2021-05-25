@@ -1,0 +1,33 @@
+/* 
+  Localizable.strings
+  ZTestApp
+
+  Created by Дмитрий Дудкин on 25.05.2021.
+  
+*/
+
+"List" = "List";
+"Gallery" = "Gallery";
+"Service" = "Service";
+
+"Next" = "Next";
+"Previous" = "Previous";
+"Time" = "Time";
+"Rating:" = "Rating";
+
+"Leaders" = "Leaders";
+"Bookkeepings" = "Bookkeepings";
+"Employees" = "Employees";
+
+"Name" = "Name";
+"Sallary" = "Sallary";
+"Work time" = "Work time";
+"Dinner time" = "Dinner time";
+"Workplace number" = "Workplace number";
+"Type" = "Type";
+"Payroll" = "Payroll";
+"Accounting" = "Accounting";
+
+"Delete" = "Delete";
+"Add new" = "Add new";
+"Change" = "Change";

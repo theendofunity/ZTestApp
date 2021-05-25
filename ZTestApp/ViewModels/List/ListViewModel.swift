@@ -48,11 +48,11 @@ class ListViewModel {
     func titleForSection(section: Int) -> String? {
         switch section {
         case 0:
-            return "Leaders"
+            return NSLocalizedString("Leaders", comment: "")
         case 1:
-            return "Bookkeepings"
+            return NSLocalizedString("Bookkeepings", comment: "")
         case 2:
-            return "Employees"
+            return NSLocalizedString("Employees", comment: "")
         default:
             return nil
         }

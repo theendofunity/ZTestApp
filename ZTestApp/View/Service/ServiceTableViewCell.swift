@@ -21,8 +21,10 @@ class ServiceTableViewCell: UITableViewCell {
         willSet(viewModel) {
             guard let viewModel = viewModel else { return }
             idLabel.text = "ID: \(viewModel.quoteId())"
-            timeLabel.text = "Time: \(viewModel.time())"
-            ratingLabel.text = "Rating: \(viewModel.rating())"
+            let time = NSLocalizedString("Time", comment: "")
+            timeLabel.text = time + ": " + "\(viewModel.time())"
+            let rating = NSLocalizedString("Rating", comment: "")
+            ratingLabel.text = rating + ": " + "\(viewModel.rating())"
 
             descriptionLabel.attributedText = htmlAttributeString(from: viewModel.description())
         }

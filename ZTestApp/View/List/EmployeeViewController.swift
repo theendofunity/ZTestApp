@@ -90,14 +90,18 @@ class EmployeeViewController: UIViewController {
 
     private func setupUiElements() {
         for (num, employeeTitle) in EmployeeType.allCases.enumerated() {
-            employeeType.insertSegment(withTitle: "\(employeeTitle)", at: num, animated: true)
+            let title = "\(employeeTitle)".capitalizingFirstLetter()
+            let localizedTitle = NSLocalizedString(title, comment: "")
+            employeeType.insertSegment(withTitle: localizedTitle, at: num, animated: true)
         }
         employeeType.selectedSegmentIndex = viewModel?.employeeType.rawValue ?? 0
 
         employeeType.addTarget(self, action: #selector(changeView), for: .valueChanged)
 
         for (num, bookkeepingTitle) in BookkeepingType.allCases.enumerated() {
-            bookkepingType.insertSegment(withTitle: "\(bookkeepingTitle)", at: num, animated: true)
+            let title = "\(bookkeepingTitle)".capitalizingFirstLetter()
+            let localizedTitle = NSLocalizedString(title, comment: "")
+            bookkepingType.insertSegment(withTitle: localizedTitle, at: num, animated: true)
         }
 
         bookkepingType.selectedSegmentIndex = 0
@@ -106,7 +110,7 @@ class EmployeeViewController: UIViewController {
         name.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingDidBegin)
         sallary.title = "Sallary"
         sallary.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingDidBegin)
-        workspaceNumber.title = "Workspace number"
+        workspaceNumber.title = "Workplace number"
         workspaceNumber.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingDidBegin)
 
         timeBegin.datePickerMode = .time
@@ -152,10 +156,10 @@ class EmployeeViewController: UIViewController {
         viewModel.setSallary(sallary: sallary.text)
         viewModel.setTime(begin: timeBegin.date, end: timeEnd.date)
 
-        if type == .bookKeeping {
+        if type == .bookkeepings {
             viewModel.setBookkeeperType(type: bookkepingType.selectedSegmentIndex)
         }
-        if type == .bookKeeping || type == .employee {
+        if type == .bookkeepings || type == .employees {
             viewModel.setWorkplaceNumber(number: workspaceNumber.text)
         }
 
@@ -165,18 +169,18 @@ class EmployeeViewController: UIViewController {
 
     @objc private func changeView() {
         switch employeeType.selectedSegmentIndex {
-        case EmployeeType.leader.rawValue:
-            timeTitle.text = "Work time"
+        case EmployeeType.leaders.rawValue:
+            timeTitle.text = NSLocalizedString("Work time", comment: "")
             workspaceNumber.isHidden = true
             bookkepingType.isHidden = true
-        case EmployeeType.bookKeeping.rawValue:
+        case EmployeeType.bookkeepings.rawValue:
             workspaceNumber.isHidden = false
             bookkepingType.isHidden = false
-            timeTitle.text = "Dinner time"
-        case EmployeeType.employee.rawValue:
+            timeTitle.text = NSLocalizedString("Dinner time", comment: "")
+        case EmployeeType.employees.rawValue:
             workspaceNumber.isHidden = false
             bookkepingType.isHidden = true
-            timeTitle.text = "Dinner time"
+            timeTitle.text = NSLocalizedString("Dinner time", comment: "")
         default:
             return
         }
@@ -189,7 +193,7 @@ class EmployeeViewController: UIViewController {
 
         if name.isEmpty() || sallary.isEmpty() {
             navigationItem.rightBarButtonItem?.isEnabled = false
-        } else if type == .bookKeeping || type == .employee {
+        } else if type == .bookkeepings || type == .employees {
             if !workspaceNumber.isEmpty() {
                 navigationItem.rightBarButtonItem?.isEnabled = true
             }
@@ -200,9 +204,9 @@ class EmployeeViewController: UIViewController {
 
 private func setTitle() {
     if viewType == .adding {
-        title = "Add new"
+        title = NSLocalizedString("Add new", comment: "")
     } else {
-        title = "Change"
+        title = NSLocalizedString("Change", comment: "")
     }
 }
 

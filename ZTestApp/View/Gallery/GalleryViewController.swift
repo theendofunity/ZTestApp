@@ -21,7 +21,7 @@ class GalleryViewController: UIViewController {
 
         scrollView = ImageScrollView(frame: view.bounds)
 
-        title = "Gallery"
+        title = NSLocalizedString("Gallery", comment: "")
         setupLayout()
         setupToolBar()
     }
@@ -43,13 +43,13 @@ class GalleryViewController: UIViewController {
     }
 
     private func setupToolBar() {
-        let nextBtn = UIBarButtonItem(title: "Next",
+        let nextBtn = UIBarButtonItem(title: NSLocalizedString("Next", comment: ""),
                                       style: .plain,
                                       target: self,
                                       action: #selector(nextImage))
         navigationItem.rightBarButtonItem = nextBtn
 
-        let previousBtn = UIBarButtonItem(title: "Previous",
+        let previousBtn = UIBarButtonItem(title: NSLocalizedString("Previous", comment: ""),
                                           style: .plain,
                                           target: self,
                                           action: #selector(previousImage))

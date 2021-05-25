@@ -33,10 +33,10 @@ class DetailedViewViewModel: DetailedViewViewModelType {
         var endTime: Date?
 
         switch employeeType {
-        case .leader:
+        case .leaders:
             beginTime = employeeData?.value(forKeyPath: "workTime.begin") as? Date
             endTime = employeeData?.value(forKeyPath: "workTime.end") as? Date
-        case .bookKeeping, .employee:
+        case .bookkeepings, .employees:
             beginTime = employeeData?.value(forKeyPath: "dinnerTime.begin") as? Date
             endTime = employeeData?.value(forKeyPath: "dinnerTime.end") as? Date
         }
@@ -45,7 +45,7 @@ class DetailedViewViewModel: DetailedViewViewModelType {
     }
 
     func workplaceNumber() -> String? {
-        if employeeType == .bookKeeping || employeeType == .employee {
+        if employeeType == .bookkeepings || employeeType == .employees {
             guard let number = employeeData?.value(forKeyPath: "workplaceNumber") as? Int16 else {
                 return nil
             }
@@ -56,7 +56,7 @@ class DetailedViewViewModel: DetailedViewViewModelType {
     }
 
     func bookkeepingType() -> Int? {
-        if employeeType != .bookKeeping {
+        if employeeType != .bookkeepings {
             return nil
         }
 
@@ -69,17 +69,17 @@ class DetailedViewViewModel: DetailedViewViewModelType {
         self.employeeType = employeeType
 
         switch employeeType {
-        case .leader:
+        case .leaders:
             let data = Leader()
             data.baseInfo = BaseInfo()
             data.workTime = EmployeeTime()
             employeeData = data
-        case .bookKeeping:
+        case .bookkeepings:
             let data = Bookkeeper()
             data.baseInfo = BaseInfo()
             data.dinnerTime = EmployeeTime()
             employeeData = data
-        case .employee:
+        case .employees:
             let data = Employee()
             data.baseInfo = BaseInfo()
             data.dinnerTime = EmployeeTime()
@@ -103,10 +103,10 @@ class DetailedViewViewModel: DetailedViewViewModelType {
 
     func setTime(begin: Date?, end: Date?) {
         RealmManager.write {
-            if employeeType == .leader {
+            if employeeType == .leaders {
                 employeeData?.setValue(begin, forKeyPath: "workTime.begin")
                 employeeData?.setValue(end, forKeyPath: "workTime.end")
-            } else if employeeType == .bookKeeping || employeeType == .employee {
+            } else if employeeType == .bookkeepings || employeeType == .employees {
                 employeeData?.setValue(begin, forKeyPath: "dinnerTime.begin")
                 employeeData?.setValue(end, forKeyPath: "dinnerTime.end")
             }
@@ -115,7 +115,7 @@ class DetailedViewViewModel: DetailedViewViewModelType {
 
     func setWorkplaceNumber(number: String?) {
         RealmManager.write {
-            if employeeType == .bookKeeping || employeeType == .employee {
+            if employeeType == .bookkeepings || employeeType == .employees {
                 employeeData?.setValue(Int(number ?? "0"), forKeyPath: "workplaceNumber")
             }
         }
@@ -123,7 +123,7 @@ class DetailedViewViewModel: DetailedViewViewModelType {
 
     func setBookkeeperType(type: Int?) {
         RealmManager.write {
-            if employeeType == .bookKeeping {
+            if employeeType == .bookkeepings {
                 employeeData?.setValue(type, forKeyPath: "type")
             }
         }
