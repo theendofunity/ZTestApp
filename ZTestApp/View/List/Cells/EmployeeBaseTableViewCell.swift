@@ -16,7 +16,6 @@ class EmployeeBaseTableViewCell: UITableViewCell {
     let photo =  UIImageView()
     let name = UILabel()
     let sallary = UILabel()
-    let timeTitle = UILabel()
     let time = UILabel()
 
 // MARK: - Initializers
@@ -43,11 +42,7 @@ class EmployeeBaseTableViewCell: UITableViewCell {
         let titleStack = UIStackView(arrangedSubviews: [photo, name])
         titleStack.axis = .horizontal
         mainStack.addArrangedSubview(titleStack)
-
-        let timeStack = UIStackView(arrangedSubviews: [timeTitle, time])
-        timeStack.axis = .horizontal
-        timeStack.spacing = 5
-        mainStack.addArrangedSubview(timeStack)
+        mainStack.addArrangedSubview(time)
 
         setupConstraits()
     }

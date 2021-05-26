@@ -18,12 +18,12 @@ class BookkeepingTableViewCell: EmployeeBaseTableViewCell {
             name.text = viewModel.name()
             let sallaryTitle = NSLocalizedString("Sallary", comment: "")
             sallary.text = sallaryTitle + ": " + "\(viewModel.sallary() ?? "")"
-            timeTitle.text = NSLocalizedString("Dinner time", comment: "")
-            time.text = viewModel.dinnerTime()
+            time.text = NSLocalizedString("Dinner time", comment: "") + ": " + "\(viewModel.dinnerTime() ?? "")"
             let workplaceTitle = NSLocalizedString("Workplace number", comment: "")
             workSpaceNumber.text = workplaceTitle + ": " + "\(viewModel.workplaceNumber() ?? "")"
             let typeTitle = NSLocalizedString("Type", comment: "")
-            bookkeepingType.text = typeTitle + ": " + "\(viewModel.type() ?? "")"
+            let typeValue = NSLocalizedString(viewModel.type() ?? "", comment: "")
+            bookkeepingType.text = typeTitle + ": " + typeValue
         }
     }
 

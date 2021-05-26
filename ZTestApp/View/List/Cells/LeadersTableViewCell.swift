@@ -18,8 +18,7 @@ class LeadersTableViewCell: EmployeeBaseTableViewCell {
             name.text = viewModel.name()
             let sallaryTitle = NSLocalizedString("Sallary", comment: "")
             sallary.text = sallaryTitle + ": " + "\(viewModel.sallary() ?? "")"
-            timeTitle.text = NSLocalizedString("Work time", comment: "")
-            time.text = viewModel.workTime()
+            time.text = NSLocalizedString("Work time", comment: "") + ": " + "\(viewModel.workTime() ?? "")"
         }
     }
 
