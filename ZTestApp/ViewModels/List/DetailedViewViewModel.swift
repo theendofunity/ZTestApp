@@ -11,8 +11,9 @@ import RealmSwift
 class DetailedViewViewModel: DetailedViewViewModelType {
     var employeeType: EmployeeType
     var employeeData: Object?
+    var dataCreated = false
 
-    var savingCompletion: ((Object?, EmployeeType) -> Void)?
+    var savingCompletion: ((Object?, EmployeeType, Bool) -> Void)?
 
     init?(employeeType: EmployeeType, data: Object?) {
         self.employeeType = employeeType
@@ -137,12 +138,11 @@ class DetailedViewViewModel: DetailedViewViewModelType {
     }
 
     func save() {
-        guard let data = employeeData else { return }
-        RealmManager.saveObject(object: data)
+        dataCreated = true
     }
 
     func update() {
-        savingCompletion?(employeeData, employeeType)
+        savingCompletion?(employeeData, employeeType, dataCreated)
     }
 
     func delete() {

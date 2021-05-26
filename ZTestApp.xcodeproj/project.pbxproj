@@ -22,6 +22,7 @@
 		D81B59222649903800F3AFB0 /* EmployeesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D81B59212649903800F3AFB0 /* EmployeesTableViewCell.swift */; };
 		D83FC1D0265CDA1800B49E31 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D83FC1D2265CDA1800B49E31 /* Localizable.strings */; };
 		D83FC1D7265CE6B600B49E31 /* String+CapitalizedFirstLetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83FC1D6265CE6B600B49E31 /* String+CapitalizedFirstLetter.swift */; };
+		D83FC1D9265D15A700B49E31 /* SortTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83FC1D8265D15A700B49E31 /* SortTypes.swift */; };
 		D8478E0B264C55A900AC1E1C /* BookkeepingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8478E0A264C55A900AC1E1C /* BookkeepingType.swift */; };
 		D8478E0D264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8478E0C264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift */; };
 		D84BE236265968610035B988 /* Leader.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84BE235265968610035B988 /* Leader.swift */; };
@@ -78,6 +79,7 @@
 		D83FC1D3265CDB1200B49E31 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		D83FC1D4265CDB1200B49E31 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D83FC1D6265CE6B600B49E31 /* String+CapitalizedFirstLetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+CapitalizedFirstLetter.swift"; sourceTree = "<group>"; };
+		D83FC1D8265D15A700B49E31 /* SortTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortTypes.swift; sourceTree = "<group>"; };
 		D8478E0A264C55A900AC1E1C /* BookkeepingType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookkeepingType.swift; sourceTree = "<group>"; };
 		D8478E0C264D830D00AC1E1C /* EmployeeBaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeBaseTableViewCell.swift; sourceTree = "<group>"; };
 		D84BE235265968610035B988 /* Leader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leader.swift; sourceTree = "<group>"; };
@@ -284,11 +286,12 @@
 				D8A3E05A264AD32D003C94E8 /* DetailedViewType.swift */,
 				D8478E0A264C55A900AC1E1C /* BookkeepingType.swift */,
 				D8FD125E265174A20036BAAE /* Company.swift */,
-				D84BE235265968610035B988 /* Leader.swift */,
 				D84BE2372659692F0035B988 /* BaseInfo.swift */,
+				D84BE235265968610035B988 /* Leader.swift */,
 				D84BE239265969BC0035B988 /* EmployeeTime.swift */,
 				D84BE23B26596A980035B988 /* Bookkeeper.swift */,
 				D84BE23D26596B4A0035B988 /* Employee.swift */,
+				D83FC1D8265D15A700B49E31 /* SortTypes.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -544,6 +547,7 @@
 				D8A3E059264ACEC2003C94E8 /* EmployeeType.swift in Sources */,
 				D8478E0B264C55A900AC1E1C /* BookkeepingType.swift in Sources */,
 				D89BFECC265C431600CE7748 /* TextFieldWithTitle.swift in Sources */,
+				D83FC1D9265D15A700B49E31 /* SortTypes.swift in Sources */,
 				D84BE23A265969BC0035B988 /* EmployeeTime.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

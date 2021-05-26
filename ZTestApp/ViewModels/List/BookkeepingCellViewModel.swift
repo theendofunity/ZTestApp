@@ -43,7 +43,7 @@ class BookkeepingCellViewModel: ListCellViewModelType {
         let bookkeepingType = bookkeeper.type
 
         for title in BookkeepingType.allCases where title.rawValue == bookkeepingType {
-            return "\(title)"
+            return String("\(title)").capitalizingFirstLetter()
         }
 
         return nil
