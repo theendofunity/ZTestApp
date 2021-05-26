@@ -61,15 +61,17 @@ class ListViewModel {
     }
 
     func cellViewModel(for indexPath: IndexPath) -> ListCellViewModelType? {
+        let object = company.object(for: indexPath, sorting: sorting)
+
         switch indexPath.section {
         case 0:
-            let leader = company.leaders[indexPath.row]
+            guard let leader = object as? Leader else { return nil }
             return LeaderCellViewModel(leader: leader)
         case 1:
-            let bookkeeping = company.bookkeepings[indexPath.row]
-            return BookkeepingCellViewModel(bookkeeping: bookkeeping)
+            guard let bookkeeper = object as? Bookkeeper else { return nil }
+            return BookkeepingCellViewModel(bookkeeping: bookkeeper)
         case 2:
-            let employee = company.employees[indexPath.row]
+            guard let employee = object as? Employee else { return nil }
             return EmployeeCellViewModel(employee: employee)
         default:
             return nil
@@ -83,7 +85,7 @@ class ListViewModel {
     func detailedViewViewModel() -> DetailedViewViewModelType? {
         guard let indexPath = selectedCell else { return nil }
 
-        guard let object = company.object(for: indexPath) else { return nil }
+        guard let object = company.object(for: indexPath, sorting: sorting) else { return nil }
         guard let type = EmployeeType(rawValue: indexPath.section) else { return nil }
 
         let detailedViewModel = DetailedViewViewModel(employeeType: type, data: object)
@@ -94,7 +96,7 @@ class ListViewModel {
 // MARK: - Data base
 
     func remove(from indexPath: IndexPath) {
-        guard let object = company.object(for: indexPath) else { return }
+        guard let object = company.object(for: indexPath, sorting: sorting) else { return }
         RealmManager.deleteObject(object: object)
     }
 
@@ -117,7 +119,11 @@ class ListViewModel {
     }
 
     func sort() {
-        sorting = .byName
+        if sorting == .byName {
+            sorting = .none
+        } else {
+            sorting = .byName
+        }
     }
 
     func move(from source: IndexPath, to destination: IndexPath) {

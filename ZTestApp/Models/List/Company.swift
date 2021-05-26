@@ -13,14 +13,26 @@ class Company: Object {
     var bookkeepings = List<Bookkeeper>()
     var employees = List<Employee>()
 
-    func object(for indexPath: IndexPath) -> Object? {
+    func object(for indexPath: IndexPath, sorting: SortTypes) -> Object? {
         switch indexPath.section {
         case 0:
-            return leaders[indexPath.row]
+            if sorting == .byName {
+                return sortedLeaders()[indexPath.row]
+            } else {
+                return leaders[indexPath.row]
+            }
         case 1:
-            return bookkeepings[indexPath.row]
+            if sorting == .byName {
+                return sortedBookkeepings()[indexPath.row]
+            } else {
+                return bookkeepings[indexPath.row]
+            }
         case 2:
-            return employees[indexPath.row]
+            if sorting == .byName {
+                return sortedEmployees()[indexPath.row]
+            } else {
+                return employees[indexPath.row]
+            }
         default:
             return nil
         }
