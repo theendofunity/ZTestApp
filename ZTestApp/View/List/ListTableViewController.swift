@@ -158,5 +158,10 @@ class ListTableViewController: UITableViewController {
     @objc private func sort() {
         viewModel.sort()
         tableView.reloadData()
+        if viewModel.sorting == .byName {
+            navigationItem.leftBarButtonItem?.isEnabled = false
+        } else {
+            navigationItem.leftBarButtonItem?.isEnabled = true
+        }
     }
 }

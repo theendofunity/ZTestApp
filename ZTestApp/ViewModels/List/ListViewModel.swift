@@ -138,7 +138,7 @@ class ListViewModel {
             }
         case 2:
             RealmManager.write {
-                company.bookkeepings.move(from: source.row, to: destination.row)
+                company.employees.move(from: source.row, to: destination.row)
             }
         default:
             return
