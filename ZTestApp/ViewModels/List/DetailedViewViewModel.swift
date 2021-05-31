@@ -25,8 +25,7 @@ class DetailedViewViewModel: DetailedViewViewModelType {
     }
 
     func sallary() -> String? {
-        guard let sallaryValue = employeeData?.value(forKeyPath: "baseInfo.sallary") as? Int else { return nil }
-        return String(sallaryValue)
+        return employeeData?.value(forKeyPath: "baseInfo.sallary") as? String
     }
 
     func time() -> (Date?, Date?) {
@@ -98,7 +97,7 @@ class DetailedViewViewModel: DetailedViewViewModelType {
 
     func setSallary(sallary: String?) {
         RealmManager.write {
-            employeeData?.setValue(Int(sallary ?? "0"), forKeyPath: "baseInfo.sallary")
+            employeeData?.setValue(sallary, forKeyPath: "baseInfo.sallary")
         }
     }
 

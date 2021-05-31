@@ -17,7 +17,7 @@ class BookkeepingTableViewCell: EmployeeBaseTableViewCell {
             guard let viewModel = viewModel else { return }
             name.text = viewModel.name()
             let sallaryTitle = NSLocalizedString("Sallary", comment: "")
-            sallary.text = sallaryTitle + ": " + "\(viewModel.sallary() ?? "")"
+            sallary.text = sallaryTitle + ": " + (viewModel.sallary() ?? "")
             time.text = NSLocalizedString("Dinner time", comment: "") + ": " + "\(viewModel.dinnerTime() ?? "")"
             let workplaceTitle = NSLocalizedString("Workplace number", comment: "")
             workSpaceNumber.text = workplaceTitle + ": " + "\(viewModel.workplaceNumber() ?? "")"

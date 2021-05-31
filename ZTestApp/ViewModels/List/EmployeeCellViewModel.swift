@@ -23,7 +23,7 @@ class EmployeeCellViewModel: ListCellViewModelType {
     }
 
     func sallary() -> String? {
-        return "\(employee.baseInfo.sallary)"
+        return employee.baseInfo.sallary
     }
 
     func dinnerTime() -> String? {

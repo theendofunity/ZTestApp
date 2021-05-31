@@ -42,6 +42,7 @@ class EmployeeBaseTableViewCell: UITableViewCell {
         let titleStack = UIStackView(arrangedSubviews: [photo, name])
         titleStack.axis = .horizontal
         mainStack.addArrangedSubview(titleStack)
+        mainStack.addArrangedSubview(sallary)
         mainStack.addArrangedSubview(time)
 
         setupConstraits()

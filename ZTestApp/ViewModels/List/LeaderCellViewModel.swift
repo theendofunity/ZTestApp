@@ -23,7 +23,7 @@ class LeaderCellViewModel: ListCellViewModelType {
     }
 
     func sallary() -> String? {
-        return "\(leader.baseInfo.sallary)"
+        return leader.baseInfo.sallary
     }
 
     func workTime() -> String? {

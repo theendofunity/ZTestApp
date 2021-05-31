@@ -24,7 +24,7 @@ class BookkeepingCellViewModel: ListCellViewModelType {
     }
 
     func sallary() -> String? {
-        return "\(bookkeeper.baseInfo.sallary)"
+        return bookkeeper.baseInfo.sallary
     }
 
     func dinnerTime() -> String? {
