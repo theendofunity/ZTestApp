@@ -109,6 +109,7 @@ class EmployeeViewController: UIViewController {
         name.title = "Name"
         name.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingChanged)
         sallary.title = "Sallary"
+        sallary.textField.keyboardType = .numberPad
         sallary.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingChanged)
         workspaceNumber.title = "Workplace number"
         workspaceNumber.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingChanged)
@@ -202,25 +203,25 @@ class EmployeeViewController: UIViewController {
         }
     }
 
-private func setTitle() {
-    if viewType == .adding {
-        title = NSLocalizedString("Add new", comment: "")
-    } else {
-        title = NSLocalizedString("Change", comment: "")
+    private func setTitle() {
+        if viewType == .adding {
+            title = NSLocalizedString("Add new", comment: "")
+        } else {
+            title = NSLocalizedString("Change", comment: "")
+        }
     }
-}
 
-private func fillView() {
-    guard let viewModel = viewModel else { return }
+    private func fillView() {
+        guard let viewModel = viewModel else { return }
 
-    if viewModel.employeeData != nil {
-        name.text = viewModel.name()
-        sallary.text = viewModel.sallary()
-        workspaceNumber.text = viewModel.workplaceNumber()
-        bookkepingType.selectedSegmentIndex = viewModel.bookkeepingType() ?? 0
-        let time = viewModel.time()
-        timeBegin.date = time.0 ?? Date()
-        timeEnd.date = time.1 ?? Date()
+        if viewModel.employeeData != nil {
+            name.text = viewModel.name()
+            sallary.text = viewModel.sallary()
+            workspaceNumber.text = viewModel.workplaceNumber()
+            bookkepingType.selectedSegmentIndex = viewModel.bookkeepingType() ?? 0
+            let time = viewModel.time()
+            timeBegin.date = time.0 ?? Date()
+            timeEnd.date = time.1 ?? Date()
+        }
     }
-}
 }
