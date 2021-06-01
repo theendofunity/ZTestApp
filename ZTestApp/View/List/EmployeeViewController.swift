@@ -14,6 +14,8 @@ class EmployeeViewController: UIViewController {
     let viewType: DetailedViewType
     var viewModel: DetailedViewViewModel?
 
+    let stackView = UIStackView()
+
     let employeeType = UISegmentedControl()
     let name = TextFieldWithTitle()
     let sallary = TextFieldWithTitle()
@@ -57,7 +59,6 @@ class EmployeeViewController: UIViewController {
     private func setupLayout() {
         view.backgroundColor = .white
 
-        let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .leading
@@ -106,27 +107,39 @@ class EmployeeViewController: UIViewController {
 
         bookkepingType.selectedSegmentIndex = 0
 
-        name.title = "Name"
-        name.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingChanged)
-        sallary.title = "Sallary"
-        sallary.textField.keyboardType = .numberPad
-        sallary.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingChanged)
-        workspaceNumber.title = "Workplace number"
-        workspaceNumber.textField.addTarget(self, action: #selector(changeSaveButtonState), for: .editingChanged)
+        addTextField(with: "Name", textfield: name)
+        addTextField(with: "Sallary", textfield: sallary)
+        addTextField(with: "Workplace number", textfield: workspaceNumber)
+
+        workspaceNumber.textField.keyboardType = .numberPad
 
         timeBegin.datePickerMode = .time
         timeEnd.datePickerMode = .time
     }
 
+    private func addTextField(with title: String, textfield: TextFieldWithTitle) {
+        textfield.title = title
+        textfield.addTarget(self, action: #selector(changeSaveButtonState), for: .editingChanged)
+        stackView.addArrangedSubview(textfield)
+
+        textfield.translatesAutoresizingMaskIntoConstraints = false
+
+        textfield.leftAnchor.constraint(equalTo: stackView.leftAnchor).isActive = true
+        textfield.rightAnchor.constraint(equalTo: stackView.rightAnchor).isActive = true
+    }
+
     private func setupStackViewConstraints(for stackView: UIStackView) {
-        for element in stackView.arrangedSubviews {
-            element.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        }
+//        for element in stackView.arrangedSubviews {
+//            element.heightAnchor.constraint(equalToConstant: 50).isActive = true
+//        }
 
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
+            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            employeeType.centerXAnchor.constraint(equalTo: stackView.centerXAnchor),
+            bookkepingType.centerXAnchor.constraint(equalTo: stackView.centerXAnchor)
+
         ])
         NSLayoutConstraint(item: stackView,
                            attribute: .bottom,

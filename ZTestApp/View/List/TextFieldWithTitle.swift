@@ -51,6 +51,7 @@ class TextFieldWithTitle: UIControl {
     private func setupLayout() {
         textField.layer.borderWidth = 1
         textField.layer.borderColor = UIColor.gray.cgColor
+        textField.layer.cornerRadius = 10
 
         let stackView = UIStackView(arrangedSubviews: [label, textField])
         stackView.axis = .vertical
@@ -67,7 +68,8 @@ class TextFieldWithTitle: UIControl {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             stackView.topAnchor.constraint(equalTo: topAnchor),
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            textField.rightAnchor.constraint(equalTo: stackView.leftAnchor, constant: 200)
+            label.heightAnchor.constraint(equalToConstant: 40),
+            textField.heightAnchor.constraint(equalToConstant: 30)
         ])
 
     }
