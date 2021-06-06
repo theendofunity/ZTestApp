@@ -96,9 +96,9 @@ class EmployeeViewController: UIViewController {
             employeeType.insertSegment(withTitle: localizedTitle, at: num, animated: true)
         }
         employeeType.selectedSegmentIndex = viewModel?.employeeType.rawValue ?? 0
-        name.addTarget(self, action: #selector(changeSaveButtonState), for: .editingChanged)
 
         employeeType.addTarget(self, action: #selector(changeView), for: .valueChanged)
+        employeeType.addTarget(self, action: #selector(changeSaveButtonState), for: .valueChanged)
 
         for (num, bookkeepingTitle) in BookkeepingType.allCases.enumerated() {
             let title = "\(bookkeepingTitle)".capitalizingFirstLetter()
