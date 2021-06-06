@@ -64,9 +64,8 @@ class EmployeeViewController: UIViewController {
         stackView.alignment = .leading
         stackView.distribution = .fillProportionally
         stackView.spacing = 10
-        view.addSubview(stackView)
 
-        setupUiElements()
+        view.addSubview(stackView)
 
         stackView.addArrangedSubview(employeeType)
         stackView.addArrangedSubview(name)
@@ -86,6 +85,7 @@ class EmployeeViewController: UIViewController {
         stackView.addArrangedSubview(bookkepingType)
         setupStackViewConstraints(for: stackView)
 
+        setupUiElements()
         changeView()
     }
 
@@ -96,6 +96,7 @@ class EmployeeViewController: UIViewController {
             employeeType.insertSegment(withTitle: localizedTitle, at: num, animated: true)
         }
         employeeType.selectedSegmentIndex = viewModel?.employeeType.rawValue ?? 0
+        name.addTarget(self, action: #selector(changeSaveButtonState), for: .editingChanged)
 
         employeeType.addTarget(self, action: #selector(changeView), for: .valueChanged)
 
@@ -119,8 +120,9 @@ class EmployeeViewController: UIViewController {
 
     private func addTextField(with title: String, textfield: TextFieldWithTitle) {
         textfield.title = title
-        textfield.addTarget(self, action: #selector(changeSaveButtonState), for: .editingChanged)
-        stackView.addArrangedSubview(textfield)
+        textfield.textField.addTarget(self,
+                                      action: #selector(changeSaveButtonState),
+                                      for: UIControl.Event.editingChanged)
 
         textfield.translatesAutoresizingMaskIntoConstraints = false
 
@@ -129,10 +131,6 @@ class EmployeeViewController: UIViewController {
     }
 
     private func setupStackViewConstraints(for stackView: UIStackView) {
-//        for element in stackView.arrangedSubviews {
-//            element.heightAnchor.constraint(equalToConstant: 50).isActive = true
-//        }
-
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
@@ -201,6 +199,8 @@ class EmployeeViewController: UIViewController {
     }
 
     @objc private func changeSaveButtonState() {
+
+        print("change")
         navigationItem.rightBarButtonItem?.isEnabled = false
 
         guard let type = EmployeeType(rawValue: employeeType.selectedSegmentIndex) else { return }
